@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DirtToKeys — Build Your Own Home</title>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Outfit',sans-serif;background:#0a0d08;color:#e8e0d0;min-height:100vh;}
+  ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:#0e1117}::-webkit-scrollbar-thumb{background:#8B6914;border-radius:2px}
+  input,button,textarea{font-family:'Outfit',sans-serif;}
+  a{text-decoration:none;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  .au{animation:fadeUp 0.4s ease forwards;}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .spinning{animation:spin 1s linear infinite;display:inline-block;}
+  .tab-btn{background:none;border:none;cursor:pointer;transition:all 0.2s;width:100%;}
+  .tab-btn:hover{background:rgba(139,105,20,0.08)!important;}
+  .row:hover{background:rgba(139,105,20,0.04)!important;cursor:pointer;}
+  .phase-card{transition:border-color 0.2s;cursor:pointer;}
+  .phase-card:hover{border-color:rgba(139,105,20,0.5)!important;}
+  .btn-primary{background:#8B6914;color:#fff;border:none;border-radius:6px;padding:13px 28px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;transition:opacity 0.2s;}
+  .btn-primary:hover{opacity:0.88;}
+  .btn-secondary{background:none;color:#8B6914;border:1px solid #3a3020;border-radius:6px;padding:13px 28px;font-size:14px;cursor:pointer;font-family:'Outfit',sans-serif;}
+  .input{width:100%;background:#0e1117;border:1px solid #1e2830;border-radius:6px;padding:11px 14px;font-size:14px;color:#e8e0d0;outline:none;font-family:'Outfit',sans-serif;}
+  .input:focus{border-color:#8B6914;}
+  .card{background:#12161a;border:1px solid #1e2830;border-radius:8px;}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+
+const { useState, useEffect } = React;
+const SUPA_URL = 'https://pnhnncmvmqwubpbmixtt.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBuaG5uY212bXF3dWJwYm1peHR0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MzMxODcsImV4cCI6MjA4ODQwOTE4N30.WVNnLbdAj1Afh12IY4vEvVrpz8gTJz0nu8wW8S9tWi4';
+const supabase = supabase_js.createClient(SUPA_URL, SUPA_KEY);
+
+const fmt = n => '$' + Number(n).toLocaleString();
+const pct = (a,b) => b===0?0:Math.round((a/b)*100);
+
+const budgetGroups = [
+  {group:'Preliminary',icon:'📋',items:[
+    {category:'Plans',budgeted:21000,spent:21000,paid:true},
+    {category:'Permits',budgeted:7790,spent:7790,paid:true},
+  ]},
+  {group:'Preparation',icon:'🗺️',items:[
+    {category:'Sitework',budgeted:4200,spent:4200,paid:true},
+    {category:'Foundation',budgeted:121300,spent:121300,paid:true},
+  ]},
+  {group:'Rough Structure',icon:'🪵',items:[
+    {category:'Framing Material',budgeted:130260,spent:130260,paid:true},
+    {category:'Framing Labor',budgeted:40560,spent:40560,paid:true},
+    {category:'Windows & Exterior Doors',budgeted:35000,spent:0,paid:false},
+    {category:'Front Door',budgeted:7000,spent:0,paid:false},
+    {category:'Garage Doors',budgeted:5000,spent:0,paid:false},
+    {category:'Fireplace',budgeted:7000,spent:0,paid:false},
+    {category:'Roofing',budgeted:73440,spent:0,paid:false},
+    {category:'Masonry',budgeted:95468,spent:0,paid:false},
+    {category:'Utility Connections',budgeted:15000,spent:0,paid:false},
+  ]},
+  {group:'Full Enclosure',icon:'⚡',items:[
+    {category:'Plumbing',budgeted:41500,spent:0,paid:false},
+    {category:'AC / HVAC',budgeted:45000,spent:0,paid:false},
+    {category:'Electrical',budgeted:37825,spent:0,paid:false},
+    {category:'Security',budgeted:3000,spent:0,paid:false},
+    {category:'Insulation',budgeted:17000,spent:0,paid:false},
+    {category:'Drywall',budgeted:13978,spent:0,paid:false},
+  ]},
+  {group:'Interior Finish',icon:'🎨',items:[
+    {category:'Interior Trim & Doors',budgeted:34656,spent:0,paid:false},
+    {category:'Tape, Float & Texture',budgeted:10000,spent:0,paid:false},
+    {category:'Painting',budgeted:40560,spent:0,paid:false},
+    {category:'Cabinets',budgeted:45000,spent:0,paid:false},
+    {category:'Countertops',budgeted:20000,spent:0,paid:false},
+    {category:'Tile',budgeted:30000,spent:0,paid:false},
+    {category:'Shower Doors & Mirrors',budgeted:5100,spent:0,paid:false},
+    {category:'Hardware',budgeted:5000,spent:0,paid:false},
+    {category:'Appliances',budgeted:42000,spent:0,paid:false},
+    {category:'Electrical Fixtures',budgeted:10000,spent:0,paid:false},
+    {category:'Flooring',budgeted:62000,spent:0,paid:false},
+  ]},
+  {group:'Completion',icon:'🏁',items:[
+    {category:'Flatwork',budgeted:30000,spent:0,paid:false},
+    {category:'Common Labor & Clean',budgeted:13880,spent:0,paid:false},
+  ]},
+];
+
+const scheduleItems = [
+  {month:'Jan 2026',task:'Foundation',status:'done',phase:'Structure'},
+  {month:'Feb 2026',task:'Framing',status:'done',phase:'Structure'},
+  {month:'Mar 2026',task:'Install Windows',status:'active',phase:'Exterior & Rough'},
+  {month:'Mar 2026',task:'Install Front Door',status:'active',phase:'Exterior & Rough'},
+  {month:'Mar–Apr 2026',task:'FMEP Rough-In',status:'active',phase:'Exterior & Rough'},
+  {month:'Apr 2026',task:'Fireplace',status:'upcoming',phase:'Exterior & Rough'},
+  {month:'Apr 2026',task:'Exterior Paint',status:'upcoming',phase:'Exterior & Rough'},
+  {month:'Apr 2026',task:'Rock & Stucco',status:'upcoming',phase:'Exterior & Rough'},
+  {month:'Apr–May 2026',task:'Clean Lot',status:'upcoming',phase:'Exterior Finish'},
+  {month:'May 2026',task:'Flatwork',status:'upcoming',phase:'Exterior Finish'},
+  {month:'May 2026',task:'Top Soil & Grade',status:'upcoming',phase:'Exterior Finish'},
+  {month:'Jun 2026',task:'Fence',status:'upcoming',phase:'Exterior Finish'},
+  {month:'Jun 2026',task:'Irrigation & Landscaping',status:'upcoming',phase:'Exterior Finish'},
+  {month:'Apr 2026',task:'Insulation',status:'upcoming',phase:'Interior Rough'},
+  {month:'Apr 2026',task:'Sheetrock',status:'upcoming',phase:'Interior Rough'},
+  {month:'Apr–May 2026',task:'Tape, Float & Texture',status:'upcoming',phase:'Interior Rough'},
+  {month:'May 2026',task:'Install Garage Door',status:'upcoming',phase:'Interior Rough'},
+  {month:'May 2026',task:'Cabinets',status:'upcoming',phase:'Interior Finish'},
+  {month:'May 2026',task:'Doors & Trim',status:'upcoming',phase:'Interior Finish'},
+  {month:'May 2026',task:'Interior Paint',status:'upcoming',phase:'Interior Finish'},
+  {month:'May 2026',task:'Countertops',status:'upcoming',phase:'Interior Finish'},
+  {month:'May–Jun 2026',task:'Tile',status:'upcoming',phase:'Interior Finish'},
+  {month:'Jun 2026',task:'Plumbing Set Out',status:'upcoming',phase:'Interior Finish'},
+  {month:'Jun 2026',task:'Electrical Trim Out',status:'upcoming',phase:'Interior Finish'},
+  {month:'Jun 2026',task:'HVAC Trim Out',status:'upcoming',phase:'Interior Finish'},
+  {month:'Jun 2026',task:'Flooring',status:'upcoming',phase:'Final'},
+  {month:'Jun 2026',task:'Install Appliances',status:'upcoming',phase:'Final'},
+  {month:'Jun–Jul 2026',task:'Final Paint',status:'upcoming',phase:'Final'},
+  {month:'Jul 2026',task:'Punch List',status:'upcoming',phase:'Final'},
+  {month:'Jul 2026',task:'Final Clean',status:'upcoming',phase:'Final'},
+  {month:'Jul 2026',task:'Close',status:'upcoming',phase:'Final'},
+];
+
+const phases = [
+  {id:1,name:'Land & Prep',icon:'🗺️',status:'complete',progress:100},
+  {id:2,name:'Permits',icon:'📋',status:'complete',progress:100},
+  {id:3,name:'Foundation',icon:'🏗️',status:'complete',progress:100},
+  {id:4,name:'Framing',icon:'🪵',status:'complete',progress:100},
+  {id:5,name:'Exterior & Rough',icon:'🔨',status:'active',progress:35},
+  {id:6,name:'Full Enclosure',icon:'⚡',status:'upcoming',progress:0},
+  {id:7,name:'Interior Finish',icon:'🎨',status:'upcoming',progress:0},
+  {id:8,name:'Final & Close',icon:'🏠',status:'upcoming',progress:0},
+];
+
+// ── LOGO ────────────────────────────────────────────────────────────────────
+function Logo({size=24}) {
+  return (
+    <div style={{display:'flex',alignItems:'center',gap:8}}>
+      <svg viewBox="0 0 54 54" fill="none" width={size} height={size}>
+        <path d="M27 6L5 22V48H22V34H32V48H49V22L27 6Z" fill="#1a2010" stroke="#8B6914" strokeWidth="2" strokeLinejoin="round"/>
+        <path d="M27 6L5 22H49L27 6Z" fill="#8B6914" fillOpacity="0.2"/>
+        <rect x="22" y="34" width="10" height="14" rx="5" fill="#8B6914" fillOpacity="0.7"/>
+        <circle cx="27" cy="40" r="2.5" fill="#8B6914"/>
+        <rect x="26" y="42" width="2" height="4" rx="1" fill="#8B6914"/>
+        <line x1="5" y1="48" x2="49" y2="48" stroke="#8B6914" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+      <span style={{fontFamily:"'Cormorant Garamond',serif",fontSize:size*0.9,fontWeight:700,color:'#e8e0d0'}}>
+        <span style={{color:'#8B6914'}}>Dirt</span>to<span>Keys</span>
+      </span>
+    </div>
+  );
+}
+
+// ── LANDING PAGE ─────────────────────────────────────────────────────────────
+function Landing({onNav}) {
+  return (
+    <div style={{background:'#0a0d08',minHeight:'100vh',color:'#e8e0d0'}}>
+      <nav style={{padding:'0 48px',height:64,display:'flex',alignItems:'center',justifyContent:'space-between',borderBottom:'1px solid #1a2010',position:'sticky',top:0,background:'rgba(10,13,8,0.96)',backdropFilter:'blur(12px)',zIndex:100}}>
+        <Logo size={28}/>
+        <div style={{display:'flex',gap:10,alignItems:'center'}}>
+          <button onClick={()=>onNav('login')} style={{fontSize:13,color:'#667',background:'none',border:'none',cursor:'pointer',padding:'8px 16px'}}>Sign In</button>
+          <button onClick={()=>onNav('signup')} className="btn-primary" style={{padding:'9px 22px',fontSize:13}}>Get Started</button>
+        </div>
+      </nav>
+
+      <section style={{padding:'110px 48px 90px',maxWidth:860,margin:'0 auto',textAlign:'center'}} className="au">
+        <div style={{fontSize:11,letterSpacing:4,color:'#8B6914',marginBottom:22,textTransform:'uppercase'}}>Owner-Builder Platform</div>
+        <h1 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:'clamp(44px,8vw,82px)',fontWeight:700,lineHeight:1.05,marginBottom:26,color:'#f0ebe0'}}>
+          From <span style={{color:'#8B6914'}}>Dirt</span> to <span style={{color:'#8B6914'}}>Keys</span>.<br/>On Your Terms.
+        </h1>
+        <p style={{fontSize:17,color:'#667',lineHeight:1.7,maxWidth:540,margin:'0 auto 44px',fontWeight:300}}>
+          The complete platform for people building their own home on their own land. Budget tracking, construction schedules, phase guidance, and AI-powered material takeoffs — all in one place.
+        </p>
+        <div style={{display:'flex',gap:12,justifyContent:'center',flexWrap:'wrap'}}>
+          <button onClick={()=>onNav('signup')} className="btn-primary" style={{fontSize:14,padding:'14px 36px'}}>Start Building Free →</button>
+          <button onClick={()=>onNav('login')} className="btn-secondary" style={{fontSize:14,padding:'14px 36px'}}>Sign In</button>
+        </div>
+        <div style={{marginTop:18,fontSize:12,color:'#334'}}>No credit card required · Free 14-day trial</div>
+      </section>
+
+      <section style={{padding:'70px 48px',borderTop:'1px solid #1a2010'}}>
+        <div style={{maxWidth:1000,margin:'0 auto'}}>
+          <div style={{textAlign:'center',marginBottom:52}}>
+            <div style={{fontSize:10,letterSpacing:4,color:'#8B6914',marginBottom:10,textTransform:'uppercase'}}>Everything You Need</div>
+            <h2 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:38,fontWeight:700,color:'#f0ebe0'}}>Built by a homebuilder.<br/>Designed for you.</h2>
+          </div>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(260px,1fr))',gap:16}}>
+            {[
+              {icon:'◈',title:'Phase-by-Phase Tracker',desc:"Follow your build from land prep to certificate of occupancy. Never wonder what comes next."},
+              {icon:'◎',title:'Budget Manager',desc:"Track every dollar across 30+ line items. Built from a real homebuilder's estimate sheet."},
+              {icon:'▦',title:'Build Schedule',desc:"Your full construction timeline organized by phase — based on real CoConstruct data."},
+              {icon:'❑',title:'Document Vault',desc:"Store permits, contracts, inspection checklists, and house plans in one place."},
+              {icon:'✦',title:'AI Plan Takeoff',desc:"Upload your house plans and AI generates a full material quantity list automatically."},
+              {icon:'⌂',title:'Build Dashboard',desc:"Your entire project at a glance. Progress, budget, schedule, and next actions in one view."},
+            ].map((f,i)=>(
+              <div key={i} className="card" style={{padding:'24px 20px'}}>
+                <div style={{fontSize:20,marginBottom:12,color:'#8B6914'}}>{f.icon}</div>
+                <div style={{fontSize:14,fontWeight:600,color:'#e8e0d0',marginBottom:6}}>{f.title}</div>
+                <div style={{fontSize:12,color:'#445',lineHeight:1.6}}>{f.desc}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section style={{padding:'70px 48px',borderTop:'1px solid #1a2010'}}>
+        <div style={{maxWidth:580,margin:'0 auto',textAlign:'center'}}>
+          <div style={{fontSize:10,letterSpacing:4,color:'#8B6914',marginBottom:10,textTransform:'uppercase'}}>Simple Pricing</div>
+          <h2 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:38,fontWeight:700,color:'#f0ebe0',marginBottom:40}}>One plan. Everything included.</h2>
+          <div className="card" style={{padding:'44px 36px',borderColor:'rgba(139,105,20,0.35)'}}>
+            <div style={{fontSize:11,letterSpacing:3,color:'#8B6914',marginBottom:14,textTransform:'uppercase'}}>Builder Plan</div>
+            <div style={{display:'flex',alignItems:'flex-end',justifyContent:'center',gap:4,marginBottom:6}}>
+              <span style={{fontFamily:"'Cormorant Garamond',serif",fontSize:68,fontWeight:700,color:'#f0ebe0',lineHeight:1}}>$197</span>
+              <span style={{fontSize:13,color:'#445',marginBottom:10}}>/month</span>
+            </div>
+            <div style={{fontSize:12,color:'#445',marginBottom:28}}>Cancel anytime · 14-day free trial</div>
+            <div style={{display:'flex',flexDirection:'column',gap:10,marginBottom:32,textAlign:'left'}}>
+              {['Full build dashboard & phase tracker','Budget manager with 30+ line items','Construction schedule builder','Document vault — unlimited uploads','AI-powered plan takeoff','Subcontractor checklist templates','Lien waiver & contract templates','Unlimited projects'].map((f,i)=>(
+                <div key={i} style={{display:'flex',alignItems:'center',gap:10,fontSize:13,color:'#aaa'}}>
+                  <span style={{color:'#8B6914'}}>✓</span>{f}
+                </div>
+              ))}
+            </div>
+            <button onClick={()=>onNav('signup')} className="btn-primary" style={{width:'100%',padding:14,fontSize:14}}>Start Free Trial →</button>
+          </div>
+        </div>
+      </section>
+
+      <footer style={{padding:'32px 48px',borderTop:'1px solid #1a2010',display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:12}}>
+        <Logo size={20}/>
+        <span style={{fontSize:11,color:'#223'}}>© 2026 DirtToKeys. Built for owner-builders.</span>
+      </footer>
+    </div>
+  );
+}
+
+// ── AUTH PAGES ────────────────────────────────────────────────────────────────
+function AuthPage({mode, onNav, onSuccess}) {
+  const [email,setEmail]=useState('');
+  const [password,setPassword]=useState('');
+  const [name,setName]=useState('');
+  const [project,setProject]=useState('');
+  const [error,setError]=useState('');
+  const [loading,setLoading]=useState(false);
+
+  const handle = async () => {
+    setLoading(true); setError('');
+    if(mode==='login') {
+      const {error:e} = await supabase.auth.signInWithPassword({email,password});
+      if(e){setError(e.message);setLoading(false);}
+      else onSuccess();
+    } else {
+      const {data,error:e} = await supabase.auth.signUp({email,password,options:{data:{full_name:name,project_name:project}}});
+      if(e){setError(e.message);setLoading(false);}
+      else {
+        if(data.user) await supabase.from('projects').insert({user_id:data.user.id,name:project||'My Build',status:'active'});
+        onSuccess();
+      }
+    }
+  };
+
+  return (
+    <div style={{background:'#0a0d08',minHeight:'100vh',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',padding:24}}>
+      <button onClick={()=>onNav('landing')} style={{background:'none',border:'none',cursor:'pointer',marginBottom:36}}><Logo size={26}/></button>
+      <div className="card" style={{padding:'38px 34px',width:'100%',maxWidth:400,borderRadius:10}}>
+        <h1 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:28,fontWeight:700,color:'#f0ebe0',marginBottom:4}}>{mode==='login'?'Welcome back':'Start building'}</h1>
+        <p style={{fontSize:12,color:'#445',marginBottom:28}}>{mode==='login'?'Sign in to your build dashboard':'Free 14-day trial · No credit card required'}</p>
+        {error && <div style={{background:'rgba(232,124,90,0.1)',border:'1px solid rgba(232,124,90,0.3)',borderRadius:6,padding:'9px 13px',fontSize:12,color:'#e87c5a',marginBottom:18}}>{error}</div>}
+        {mode==='signup' && <>
+          <label style={{fontSize:10,letterSpacing:2,color:'#445',display:'block',marginBottom:5}}>YOUR NAME</label>
+          <input className="input" value={name} onChange={e=>setName(e.target.value)} placeholder="John Smith" style={{marginBottom:14}}/>
+          <label style={{fontSize:10,letterSpacing:2,color:'#445',display:'block',marginBottom:5}}>YOUR BUILD NAME</label>
+          <input className="input" value={project} onChange={e=>setProject(e.target.value)} placeholder="The Smith Build — Austin, TX" style={{marginBottom:14}}/>
+        </>}
+        <label style={{fontSize:10,letterSpacing:2,color:'#445',display:'block',marginBottom:5}}>EMAIL</label>
+        <input className="input" type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="you@email.com" style={{marginBottom:14}}/>
+        <label style={{fontSize:10,letterSpacing:2,color:'#445',display:'block',marginBottom:5}}>PASSWORD</label>
+        <input className="input" type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="••••••••" style={{marginBottom:24}}/>
+        <button className="btn-primary" onClick={handle} disabled={loading} style={{width:'100%',padding:13,opacity:loading?0.7:1}}>
+          {loading?(mode==='login'?'Signing in...':'Creating account...'):(mode==='login'?'Sign In →':'Start Free Trial →')}
+        </button>
+        <div style={{textAlign:'center',marginTop:20,fontSize:12,color:'#334'}}>
+          {mode==='login'?<>No account? <button onClick={()=>onNav('signup')} style={{background:'none',border:'none',color:'#8B6914',cursor:'pointer',fontSize:12}}>Start free trial</button></>
+          :<>Already have an account? <button onClick={()=>onNav('login')} style={{background:'none',border:'none',color:'#8B6914',cursor:'pointer',fontSize:12}}>Sign in</button></>}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── DASHBOARD ─────────────────────────────────────────────────────────────────
+function Dashboard({user, onSignOut}) {
+  const [tab,setTab]=useState('dashboard');
+  const [expandedPhase,setExpandedPhase]=useState(5);
+  const [aiDone,setAiDone]=useState(false);
+  const [aiAnalyzing,setAiAnalyzing]=useState(false);
+
+  const totalBudget = budgetGroups.flatMap(g=>g.items).reduce((s,i)=>s+i.budgeted,0);
+  const totalSpent  = budgetGroups.flatMap(g=>g.items).reduce((s,i)=>s+i.spent,0);
+
+  const tabs=[
+    {id:'dashboard',label:'Dashboard',icon:'⌂'},
+    {id:'phases',label:'Phases',icon:'◈'},
+    {id:'budget',label:'Budget',icon:'◎'},
+    {id:'schedule',label:'Schedule',icon:'▦'},
+    {id:'documents',label:'Documents',icon:'❑'},
+    {id:'ai-takeoff',label:'AI Takeoff',icon:'✦'},
+  ];
+
+  const phaseColors={'Structure':'#7bc47f','Exterior & Rough':'#8B6914','Exterior Finish':'#7ab8c8','Interior Rough':'#c87a7a','Interior Finish':'#a87ac8','Final':'#8B6914'};
+
+  return (
+    <div style={{fontFamily:"'Outfit',sans-serif",background:'#0e1117',minHeight:'100vh',color:'#e8e0d0'}}>
+      {/* Header */}
+      <div style={{background:'#080b08',borderBottom:'1px solid #1a2010',padding:'0 24px',height:56,display:'flex',alignItems:'center',justifyContent:'space-between',position:'sticky',top:0,zIndex:50}}>
+        <Logo size={26}/>
+        <div style={{display:'flex',alignItems:'center',gap:14}}>
+          <span style={{fontSize:11,color:'#445'}}>{user?.user_metadata?.project_name||'My Build'}</span>
+          <button onClick={onSignOut} style={{fontSize:11,color:'#445',background:'none',border:'1px solid #1e2830',borderRadius:5,padding:'6px 13px',cursor:'pointer'}}>Sign Out</button>
+        </div>
+      </div>
+
+      <div style={{display:'flex'}}>
+        {/* Sidebar */}
+        <div style={{width:188,background:'#080b08',borderRight:'1px solid #1a2010',minHeight:'calc(100vh - 56px)',padding:'18px 0',flexShrink:0,position:'sticky',top:56,height:'calc(100vh - 56px)',overflowY:'auto'}}>
+          {tabs.map(t=>(
+            <button key={t.id} className="tab-btn" onClick={()=>setTab(t.id)} style={{padding:'10px 20px',display:'flex',alignItems:'center',gap:10,color:tab===t.id?'#8B6914':'#445',background:tab===t.id?'rgba(139,105,20,0.1)':'none',borderLeft:tab===t.id?'2px solid #8B6914':'2px solid transparent',fontSize:11,letterSpacing:1,textAlign:'left'}}>
+              <span style={{fontSize:14}}>{t.icon}</span>
+              {t.label.toUpperCase()}
+              {t.id==='ai-takeoff'&&<span style={{marginLeft:'auto',fontSize:8,background:'#8B6914',color:'#fff',padding:'2px 4px',borderRadius:2,fontWeight:700}}>AI</span>}
+            </button>
+          ))}
+          <div style={{margin:'24px 12px 0',padding:14,background:'rgba(139,105,20,0.06)',border:'1px solid rgba(139,105,20,0.15)',borderRadius:6}}>
+            <div style={{fontSize:9,color:'#8B6914',letterSpacing:2,marginBottom:6}}>OVERALL PROGRESS</div>
+            <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:30,lineHeight:1}}>33%</div>
+            <div style={{marginTop:6,height:3,background:'#1e2830',borderRadius:2}}>
+              <div style={{width:'33%',height:'100%',background:'#8B6914',borderRadius:2}}/>
+            </div>
+            <div style={{fontSize:9,color:'#334',marginTop:6}}>Exterior & Rough active</div>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div style={{flex:1,padding:'24px 28px',overflowY:'auto',maxHeight:'calc(100vh - 56px)'}}>
+
+          {/* DASHBOARD TAB */}
+          {tab==='dashboard'&&(
+            <div className="au">
+              <div style={{marginBottom:24}}>
+                <div style={{fontSize:9,letterSpacing:3,color:'#556',textTransform:'uppercase'}}>Overview</div>
+                <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:36,fontWeight:700,lineHeight:1,marginTop:4}}>Build Dashboard</div>
+              </div>
+              <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:12,marginBottom:24}}>
+                {[
+                  {label:'Total Budget',value:fmt(totalBudget),sub:'$234/sf · 4,560 sf',c:'#e8e0d0'},
+                  {label:'Spent to Date',value:fmt(totalSpent),sub:`${pct(totalSpent,totalBudget)}% of budget`,c:'#8B6914'},
+                  {label:'Remaining',value:fmt(totalBudget-totalSpent),sub:'uncommitted funds',c:'#7bc47f'},
+                  {label:'Est. Completion',value:'Jul 2026',sub:'Per schedule',c:'#e8e0d0'},
+                ].map((s,i)=>(
+                  <div key={i} className="card" style={{padding:'16px 18px'}}>
+                    <div style={{fontSize:9,letterSpacing:2,color:'#445',textTransform:'uppercase',marginBottom:6}}>{s.label}</div>
+                    <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:24,color:s.c,lineHeight:1}}>{s.value}</div>
+                    <div style={{fontSize:10,color:'#334',marginTop:4}}>{s.sub}</div>
+                  </div>
+                ))}
+              </div>
+              <div className="card" style={{padding:'18px 20px',marginBottom:18}}>
+                <div style={{fontSize:9,letterSpacing:2,color:'#445',textTransform:'uppercase',marginBottom:14}}>Construction Phases</div>
+                <div style={{display:'flex',gap:2}}>
+                  {phases.map((p,i)=>(
+                    <div key={p.id} style={{flex:1}}>
+                      <div style={{height:5,background:p.status==='complete'?'#8B6914':p.status==='active'?`linear-gradient(to right,#8B6914 ${p.progress}%,#1e2830 ${p.progress}%)`:'#1e2830',borderRadius:i===0?'3px 0 0 3px':i===phases.length-1?'0 3px 3px 0':0}}/>
+                      <div style={{textAlign:'center',marginTop:5,fontSize:11}}>{p.icon}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:14}}>
+                <div className="card" style={{padding:20,borderColor:'rgba(139,105,20,0.3)'}}>
+                  <div style={{fontSize:9,color:'#8B6914',letterSpacing:2,textTransform:'uppercase',marginBottom:10}}>Active Phase</div>
+                  <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:20,marginBottom:10}}>🔨 Exterior & Rough</div>
+                  <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:12}}>
+                    <div style={{flex:1,height:3,background:'#1e2830',borderRadius:2}}><div style={{width:'35%',height:'100%',background:'#8B6914',borderRadius:2}}/></div>
+                    <span style={{fontSize:11,color:'#8B6914'}}>35%</span>
+                  </div>
+                  {['✓ Foundation complete','✓ Framing complete','→ Install Windows','→ Install Front Door','→ FMEP Rough-In','◦ Rock & Stucco pending'].map((t,i)=>(
+                    <div key={i} style={{fontSize:11,color:t.startsWith('✓')?'#445':t.startsWith('→')?'#8B6914':'#223',padding:'4px 0',borderBottom:'1px solid #141820'}}>{t}</div>
+                  ))}
+                </div>
+                <div className="card" style={{padding:20}}>
+                  <div style={{fontSize:9,color:'#445',letterSpacing:2,textTransform:'uppercase',marginBottom:12}}>Upcoming Actions</div>
+                  {[
+                    {action:'Confirm window delivery schedule',urgent:true},
+                    {action:'Schedule FMEP rough-in inspections',urgent:true},
+                    {action:'Get masonry / stucco sub bids',urgent:true},
+                    {action:'Order fireplace unit',urgent:false},
+                    {action:'Confirm roofing sub timeline',urgent:false},
+                  ].map((a,i)=>(
+                    <div key={i} style={{display:'flex',alignItems:'center',gap:10,padding:'7px 0',borderBottom:'1px solid #141820'}}>
+                      <div style={{width:6,height:6,borderRadius:'50%',background:a.urgent?'#e87c5a':'#223',flexShrink:0}}/>
+                      <span style={{fontSize:11,color:a.urgent?'#ccc':'#334'}}>{a.action}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* PHASES TAB */}
+          {tab==='phases'&&(
+            <div className="au">
+              <div style={{marginBottom:24}}>
+                <div style={{fontSize:9,letterSpacing:3,color:'#556',textTransform:'uppercase'}}>Construction</div>
+                <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:36,fontWeight:700,lineHeight:1,marginTop:4}}>Phase Tracker</div>
+              </div>
+              {phases.map(p=>(
+                <div key={p.id} className="phase-card card" onClick={()=>setExpandedPhase(expandedPhase===p.id?null:p.id)}
+                  style={{marginBottom:10,borderColor:expandedPhase===p.id?'rgba(139,105,20,0.4)':'#1e2830',overflow:'hidden'}}>
+                  <div style={{padding:'13px 18px',display:'flex',alignItems:'center',gap:12}}>
+                    <span style={{fontSize:18}}>{p.icon}</span>
+                    <div style={{flex:1}}>
+                      <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:5}}>
+                        <span style={{fontFamily:"'Cormorant Garamond',serif",fontSize:16,fontWeight:700}}>{p.name}</span>
+                        <span style={{fontSize:9,padding:'2px 7px',borderRadius:2,letterSpacing:1,
+                          background:p.status==='complete'?'rgba(123,196,127,0.15)':p.status==='active'?'rgba(139,105,20,0.15)':'rgba(30,40,50,0.5)',
+                          color:p.status==='complete'?'#7bc47f':p.status==='active'?'#8B6914':'#334'
+                        }}>{p.status.toUpperCase()}</span>
+                      </div>
+                      <div style={{display:'flex',alignItems:'center',gap:8}}>
+                        <div style={{width:150,height:3,background:'#1e2830',borderRadius:2}}>
+                          <div style={{width:`${p.progress}%`,height:'100%',background:p.status==='complete'?'#7bc47f':'#8B6914',borderRadius:2}}/>
+                        </div>
+                        <span style={{fontSize:10,color:'#334'}}>{p.progress}%</span>
+                      </div>
+                    </div>
+                    <span style={{color:'#223',fontSize:10}}>{expandedPhase===p.id?'▲':'▼'}</span>
+                  </div>
+                  {expandedPhase===p.id&&(
+                    <div style={{padding:'0 18px 14px',borderTop:'1px solid #141820',fontSize:11,color:'#445',lineHeight:1.8,marginTop:4}}>
+                      {p.status==='complete'&&'✓ This phase is complete and signed off.'}
+                      {p.status==='active'&&'→ This phase is currently in progress. Track your tasks in the Schedule tab.'}
+                      {p.status==='upcoming'&&'◦ This phase has not started yet.'}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* BUDGET TAB */}
+          {tab==='budget'&&(
+            <div className="au">
+              <div style={{marginBottom:24}}>
+                <div style={{fontSize:9,letterSpacing:3,color:'#556',textTransform:'uppercase'}}>Financials</div>
+                <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:36,fontWeight:700,lineHeight:1,marginTop:4}}>Budget Manager</div>
+              </div>
+              <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:12,marginBottom:24}}>
+                {[{l:'Total Budget',v:fmt(totalBudget),c:'#e8e0d0'},{l:'Spent / Committed',v:fmt(totalSpent),c:'#8B6914'},{l:'Remaining',v:fmt(totalBudget-totalSpent),c:'#7bc47f'}].map((s,i)=>(
+                  <div key={i} className="card" style={{padding:'16px 20px'}}>
+                    <div style={{fontSize:9,letterSpacing:2,color:'#445',textTransform:'uppercase',marginBottom:6}}>{s.l}</div>
+                    <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:28,color:s.c}}>{s.v}</div>
+                  </div>
+                ))}
+              </div>
+              {budgetGroups.map(group=>{
+                const gt=group.items.reduce((s,i)=>s+i.budgeted,0);
+                const gs=group.items.reduce((s,i)=>s+i.spent,0);
+                const items=group.items.filter(i=>i.budgeted>0);
+                return (
+                  <div key={group.group} style={{marginBottom:16}}>
+                    <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:6}}>
+                      <div style={{display:'flex',alignItems:'center',gap:7}}>
+                        <span>{group.icon}</span>
+                        <span style={{fontSize:10,color:'#8B6914',letterSpacing:2}}>{group.group.toUpperCase()}</span>
+                      </div>
+                      <span style={{fontSize:10,color:'#334',fontFamily:"'DM Mono',monospace"}}>Budget: {fmt(gt)} · Spent: {gs>0?fmt(gs):'—'}</span>
+                    </div>
+                    <div className="card" style={{overflow:'hidden'}}>
+                      <div style={{display:'grid',gridTemplateColumns:'2fr 1fr 1fr 80px',padding:'7px 16px',borderBottom:'1px solid #1e2830',fontSize:8,color:'#223',letterSpacing:2}}>
+                        <span>LINE ITEM</span><span>BUDGETED</span><span>REMAINING</span><span>STATUS</span>
+                      </div>
+                      {items.map((item,i)=>{
+                        const rem=item.budgeted-item.spent;
+                        return(
+                          <div key={i} className="row" style={{display:'grid',gridTemplateColumns:'2fr 1fr 1fr 80px',padding:'9px 16px',borderBottom:i<items.length-1?'1px solid #141820':'none',fontSize:11,alignItems:'center'}}>
+                            <span style={{color:'#aaa'}}>{item.category}</span>
+                            <span style={{fontFamily:"'DM Mono',monospace",color:'#e8e0d0'}}>{fmt(item.budgeted)}</span>
+                            <span style={{fontFamily:"'DM Mono',monospace",color:rem===item.budgeted?'#223':'#7bc47f'}}>{fmt(rem)}</span>
+                            <span style={{fontSize:9,padding:'2px 6px',borderRadius:2,textAlign:'center',
+                              background:item.paid?'rgba(123,196,127,0.1)':'rgba(30,40,48,0.8)',
+                              color:item.paid?'#7bc47f':'#223'
+                            }}>{item.paid?'PAID':'PENDING'}</span>
+                          </div>
+                        );
+                      })}
+                      <div style={{display:'grid',gridTemplateColumns:'2fr 1fr 1fr 80px',padding:'9px 16px',background:'rgba(139,105,20,0.04)',borderTop:'1px solid rgba(139,105,20,0.12)',fontSize:11}}>
+                        <span style={{color:'#8B6914',fontSize:9,letterSpacing:1}}>SUBTOTAL</span>
+                        <span style={{fontFamily:"'DM Mono',monospace",color:'#e8e0d0',fontWeight:600}}>{fmt(gt)}</span>
+                        <span style={{fontFamily:"'DM Mono',monospace",color:'#7bc47f'}}>{fmt(gt-gs)}</span>
+                        <span/>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+              <div className="card" style={{display:'grid',gridTemplateColumns:'2fr 1fr 1fr 80px',padding:'14px 16px',borderColor:'rgba(139,105,20,0.3)',fontSize:12,alignItems:'center',marginTop:4}}>
+                <span style={{fontFamily:"'Cormorant Garamond',serif",fontSize:14,color:'#8B6914',fontWeight:700}}>TOTAL CONSTRUCTION COST</span>
+                <span style={{fontFamily:"'DM Mono',monospace",color:'#e8e0d0',fontWeight:600}}>{fmt(totalBudget)}</span>
+                <span style={{fontFamily:"'DM Mono',monospace",color:'#7bc47f'}}>{fmt(totalBudget-totalSpent)}</span>
+                <span style={{fontSize:10,color:'#8B6914'}}>{pct(totalSpent,totalBudget)}% spent</span>
+              </div>
+            </div>
+          )}
+
+          {/* SCHEDULE TAB */}
+          {tab==='schedule'&&(
+            <div className="au">
+              <div style={{marginBottom:22}}>
+                <div style={{fontSize:9,letterSpacing:3,color:'#556',textTransform:'uppercase'}}>Timeline</div>
+                <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:36,fontWeight:700,lineHeight:1,marginTop:4}}>Build Schedule</div>
+                <div style={{fontSize:11,color:'#334',marginTop:6}}>Jan 2026 — Jul 2026 · Based on CoConstruct</div>
+              </div>
+              <div style={{display:'grid',gridTemplateColumns:'repeat(7,1fr)',gap:2,marginBottom:22}}>
+                {['Jan','Feb','Mar','Apr','May','Jun','Jul'].map((m,i)=>(
+                  <div key={m} style={{textAlign:'center',padding:'6px 2px',background:i<2?'rgba(123,196,127,0.08)':i===2?'rgba(139,105,20,0.12)':'#12161a',border:`1px solid ${i<2?'rgba(123,196,127,0.2)':i===2?'rgba(139,105,20,0.3)':'#1e2830'}`,borderRadius:4}}>
+                    <div style={{fontSize:9,color:i<2?'#7bc47f':i===2?'#8B6914':'#223'}}>{m}</div>
+                    <div style={{fontSize:8,color:'#1a2010',marginTop:1}}>2026</div>
+                  </div>
+                ))}
+              </div>
+              {['Structure','Exterior & Rough','Exterior Finish','Interior Rough','Interior Finish','Final'].map(phase=>{
+                const tasks=scheduleItems.filter(s=>s.phase===phase);
+                const c=phaseColors[phase];
+                return(
+                  <div key={phase} style={{marginBottom:16}}>
+                    <div style={{display:'flex',alignItems:'center',gap:7,marginBottom:7}}>
+                      <div style={{width:3,height:13,background:c,borderRadius:2}}/>
+                      <span style={{fontSize:9,color:c,letterSpacing:2}}>{phase.toUpperCase()}</span>
+                      <span style={{fontSize:9,color:'#223'}}>{tasks.length} tasks</span>
+                    </div>
+                    <div className="card" style={{overflow:'hidden'}}>
+                      {tasks.map((s,i)=>(
+                        <div key={i} className="row" style={{display:'flex',alignItems:'center',padding:'9px 16px',borderBottom:i<tasks.length-1?'1px solid #141820':'none',gap:10}}>
+                          <div style={{width:8,height:8,borderRadius:'50%',flexShrink:0,background:s.status==='done'?'#7bc47f':s.status==='active'?'#8B6914':'#1e2830',border:`2px solid ${s.status==='done'?'#7bc47f':s.status==='active'?'#8B6914':'#223'}`}}/>
+                          <span style={{flex:1,fontSize:12,color:s.status==='done'?'#334':'#bbb',textDecoration:s.status==='done'?'line-through':'none'}}>{s.task}</span>
+                          <span style={{fontSize:10,color:'#223',minWidth:76,textAlign:'right'}}>{s.month}</span>
+                          <span style={{fontSize:9,padding:'2px 7px',borderRadius:2,minWidth:55,textAlign:'center',
+                            background:s.status==='done'?'rgba(123,196,127,0.1)':s.status==='active'?'rgba(139,105,20,0.15)':'rgba(20,24,30,0.8)',
+                            color:s.status==='done'?'#7bc47f':s.status==='active'?'#8B6914':'#223'
+                          }}>{s.status==='done'?'DONE':s.status==='active'?'ACTIVE':'PENDING'}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {/* DOCUMENTS TAB */}
+          {tab==='documents'&&(
+            <div className="au">
+              <div style={{marginBottom:24}}>
+                <div style={{fontSize:9,letterSpacing:3,color:'#556',textTransform:'uppercase'}}>Files & Forms</div>
+                <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:36,fontWeight:700,lineHeight:1,marginTop:4}}>Document Vault</div>
+              </div>
+              <div className="card" style={{border:'2px dashed #1e2830',padding:28,textAlign:'center',marginBottom:20,cursor:'pointer',borderRadius:8}}>
+                <div style={{fontSize:28,marginBottom:6}}>↑</div>
+                <div style={{fontSize:13,color:'#556',marginBottom:4}}>Drop files here or click to upload</div>
+                <div style={{fontSize:11,color:'#223'}}>Permits, contracts, plans, photos</div>
+              </div>
+              {[
+                {cat:'Permits',docs:[{name:'Building Permit',date:'Jan 12, 2026',status:'approved'},{name:'Electrical Permit',date:'Jan 15, 2026',status:'approved'},{name:'Plumbing Permit',date:'Jan 15, 2026',status:'approved'}]},
+                {cat:'Inspections',docs:[{name:'Foundation Inspection Checklist',date:'—',status:'ready'},{name:'Framing Inspection Checklist',date:'—',status:'ready'}]},
+                {cat:'Contracts',docs:[{name:'Subcontractor Agreement Template',date:'—',status:'template'},{name:'Lien Waiver Template',date:'—',status:'template'}]},
+                {cat:'Templates',docs:[{name:'Draw Schedule Agreement',date:'—',status:'template'},{name:'Owner-Builder Affidavit',date:'—',status:'template'}]},
+              ].map(({cat,docs})=>(
+                <div key={cat} style={{marginBottom:16}}>
+                  <div style={{fontSize:9,color:'#334',letterSpacing:2,marginBottom:7}}>{cat.toUpperCase()}</div>
+                  <div className="card" style={{overflow:'hidden'}}>
+                    {docs.map((d,i)=>(
+                      <div key={i} className="row" style={{display:'flex',alignItems:'center',padding:'11px 16px',borderBottom:i<docs.length-1?'1px solid #141820':'none',gap:12,cursor:'pointer'}}>
+                        <span style={{fontSize:15}}>{cat==='Permits'?'✅':'📄'}</span>
+                        <div style={{flex:1}}>
+                          <div style={{fontSize:12,color:'#bbb'}}>{d.name}</div>
+                          <div style={{fontSize:10,color:'#223',marginTop:2}}>{d.date}</div>
+                        </div>
+                        <span style={{fontSize:9,padding:'2px 7px',borderRadius:2,
+                          background:d.status==='approved'?'rgba(123,196,127,0.1)':'rgba(20,24,30,0.8)',
+                          color:d.status==='approved'?'#7bc47f':'#334'
+                        }}>{d.status.toUpperCase()}</span>
+                        <span style={{fontSize:11,color:'#223'}}>↓</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* AI TAKEOFF TAB */}
+          {tab==='ai-takeoff'&&(
+            <div className="au">
+              <div style={{marginBottom:24}}>
+                <div style={{fontSize:9,letterSpacing:3,color:'#556',textTransform:'uppercase'}}>Powered by AI</div>
+                <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:36,fontWeight:700,lineHeight:1,marginTop:4}}>Plan Takeoff</div>
+                <div style={{fontSize:13,color:'#334',marginTop:8,maxWidth:480}}>Upload your house plans and AI will generate a full material quantity list automatically.</div>
+              </div>
+              {!aiDone?(
+                <div>
+                  <div className="card" onClick={()=>{setAiAnalyzing(true);setTimeout(()=>{setAiAnalyzing(false);setAiDone(true)},3200)}}
+                    style={{border:`2px dashed ${aiAnalyzing?'#8B6914':'#1e2830'}`,padding:'52px 36px',textAlign:'center',cursor:'pointer',borderRadius:8}}>
+                    {aiAnalyzing?(
+                      <div>
+                        <span className="spinning" style={{fontSize:32,color:'#8B6914'}}>✦</span>
+                        <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:20,color:'#8B6914',letterSpacing:2,marginTop:14}}>ANALYZING PLANS...</div>
+                        <div style={{fontSize:11,color:'#334',marginTop:6}}>Reading dimensions · Counting materials · Calculating quantities</div>
+                      </div>
+                    ):(
+                      <div>
+                        <div style={{fontSize:36,marginBottom:12}}>📐</div>
+                        <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:20,color:'#e8e0d0',letterSpacing:1,marginBottom:6}}>Upload Your Plans</div>
+                        <div style={{fontSize:11,color:'#334',marginBottom:18}}>PDF, DWG, or image files accepted</div>
+                        <div style={{display:'inline-block',padding:'9px 24px',background:'#8B6914',color:'#fff',fontSize:11,letterSpacing:2,borderRadius:6,fontWeight:600}}>SELECT FILE →</div>
+                      </div>
+                    )}
+                  </div>
+                  <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:8,marginTop:16}}>
+                    {['Lumber & Framing','Concrete & Masonry','Drywall & Insulation','Windows & Doors','Roofing Materials','Fasteners & Hardware'].map((f,i)=>(
+                      <div key={i} className="card" style={{padding:'10px 14px',fontSize:11,color:'#334',display:'flex',gap:7,alignItems:'center'}}>
+                        <span style={{color:'#223'}}>◦</span>{f}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ):(
+                <div className="au">
+                  <div style={{display:'flex',alignItems:'center',gap:10,padding:'11px 16px',background:'rgba(123,196,127,0.07)',border:'1px solid rgba(123,196,127,0.2)',borderRadius:6,marginBottom:20}}>
+                    <span style={{color:'#7bc47f'}}>✓</span>
+                    <div>
+                      <div style={{fontSize:12,color:'#7bc47f'}}>Analysis complete — HousePlans_Main.pdf</div>
+                      <div style={{fontSize:10,color:'#334'}}>2,400 sq ft · 3 bed / 2 bath · Single story · Gable roof</div>
+                    </div>
+                  </div>
+                  {[
+                    {cat:'Lumber & Framing',icon:'🪵',items:[
+                      {name:'2×6 exterior wall studs (16" OC)',qty:'486 pcs',unit:'8ft lengths'},
+                      {name:'2×4 interior wall studs',qty:'312 pcs',unit:'8ft lengths'},
+                      {name:'LVL ridge beam',qty:'48 LF',unit:'linear feet'},
+                      {name:'OSB sheathing (wall)',qty:'94 sheets',unit:'4×8 sheets'},
+                      {name:'OSB sheathing (roof)',qty:'78 sheets',unit:'4×8 sheets'},
+                    ]},
+                    {cat:'Concrete',icon:'🏗️',items:[
+                      {name:'Slab (4" monolithic)',qty:'29.6 cy',unit:'cubic yards'},
+                      {name:'Footing concrete',qty:'8.2 cy',unit:'cubic yards'},
+                      {name:'Rebar (#4)',qty:'1,840 LF',unit:'linear feet'},
+                    ]},
+                    {cat:'Drywall',icon:'🧱',items:[
+                      {name:'5/8" Type X (ceiling)',qty:'188 sheets',unit:'4×8 sheets'},
+                      {name:'1/2" standard (walls)',qty:'244 sheets',unit:'4×8 sheets'},
+                      {name:'Moisture resistant (wet areas)',qty:'28 sheets',unit:'4×8 sheets'},
+                    ]},
+                  ].map((section,si)=>(
+                    <div key={si} style={{marginBottom:16}}>
+                      <div style={{fontSize:10,color:'#8B6914',letterSpacing:2,marginBottom:7}}>{section.icon} {section.cat.toUpperCase()}</div>
+                      <div className="card" style={{overflow:'hidden'}}>
+                        {section.items.map((item,ii)=>(
+                          <div key={ii} style={{display:'grid',gridTemplateColumns:'1fr 90px 100px',padding:'9px 16px',borderBottom:'1px solid #141820',fontSize:11,alignItems:'center'}}>
+                            <span style={{color:'#aaa'}}>{item.name}</span>
+                            <span style={{color:'#8B6914',fontFamily:"'DM Mono',monospace"}}>{item.qty}</span>
+                            <span style={{color:'#223',fontSize:10}}>{item.unit}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                  <div style={{display:'flex',gap:10,marginTop:4}}>
+                    <button className="btn-primary" style={{padding:'10px 20px',fontSize:11,letterSpacing:1}}>EXPORT TO BUDGET →</button>
+                    <button onClick={()=>setAiDone(false)} style={{padding:'10px 20px',background:'none',color:'#334',border:'1px solid #1e2830',borderRadius:6,fontSize:11,cursor:'pointer'}}>UPLOAD NEW PLANS</button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── APP ROOT ──────────────────────────────────────────────────────────────────
+function App() {
+  const [page,setPage]=useState('landing');
+  const [user,setUser]=useState(null);
+  const [checking,setChecking]=useState(true);
+
+  useEffect(()=>{
+    supabase.auth.getSession().then(({data:{session}})=>{
+      if(session){setUser(session.user);setPage('dashboard');}
+      setChecking(false);
+    });
+    const {data:{subscription}} = supabase.auth.onAuthStateChange((_,session)=>{
+      if(session){setUser(session.user);setPage('dashboard');}
+      else{setUser(null);setPage('landing');}
+    });
+    return ()=>subscription.unsubscribe();
+  },[]);
+
+  const signOut = async()=>{
+    await supabase.auth.signOut();
+    setUser(null); setPage('landing');
+  };
+
+  if(checking) return <div style={{background:'#0a0d08',minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center',color:'#8B6914',fontSize:12,letterSpacing:3}}>LOADING...</div>;
+
+  if(page==='dashboard'&&user) return <Dashboard user={user} onSignOut={signOut}/>;
+  if(page==='login') return <AuthPage mode="login" onNav={setPage} onSuccess={()=>setPage('dashboard')}/>;
+  if(page==='signup') return <AuthPage mode="signup" onNav={setPage} onSuccess={()=>setPage('dashboard')}/>;
+  return <Landing onNav={setPage}/>;
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
