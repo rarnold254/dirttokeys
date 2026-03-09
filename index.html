@@ -56,7 +56,8 @@ button,input{font-family:'Outfit',sans-serif;}
 .toggle-paid{font-size:9px;padding:3px 8px;border-radius:3px;cursor:pointer;border:none;font-family:'Outfit',sans-serif;font-weight:600;letter-spacing:1px;}
 .is-paid{background:rgba(123,196,127,0.12);color:#7bc47f;}
 .is-pending{background:rgba(30,40,48,0.9);color:#445;}
-.sched-row{display:grid;grid-template-columns:1.8fr 100px 60px 90px 80px;align-items:center;padding:9px 14px;border-bottom:1px solid #0e1117;gap:8px;font-size:12px;}
+/* Schedule */
+.sched-row{display:grid;grid-template-columns:30px 1.6fr 90px 55px 110px 80px 60px;align-items:center;padding:8px 12px;border-bottom:1px solid #0e1117;gap:6px;font-size:12px;}
 .sched-row:hover{background:rgba(139,105,20,0.03);}
 .sched-input{background:none;border:none;color:#aaa;font-family:'Outfit',sans-serif;font-size:12px;width:100%;padding:2px 4px;border-radius:3px;}
 .sched-input:focus{background:#1a2010;outline:1px solid #8B6914;color:#fff;}
@@ -64,6 +65,9 @@ button,input{font-family:'Outfit',sans-serif;}
 .date-input:focus{background:#1a2010;outline:1px solid #8B6914;color:#fff;}
 .dur-input{background:none;border:none;color:#8B6914;font-family:'DM Mono',monospace;font-size:11px;width:100%;padding:2px 4px;border-radius:3px;text-align:center;}
 .dur-input:focus{background:#1a2010;outline:1px solid #8B6914;color:#fff;}
+.pred-input{background:none;border:none;color:#7ba4c4;font-family:'DM Mono',monospace;font-size:10px;width:100%;padding:2px 4px;border-radius:3px;text-align:center;}
+.pred-input:focus{background:#0e1a2a;outline:1px solid #7ba4c4;color:#fff;}
+/* Gantt */
 .gantt-wrap{overflow-x:auto;margin-top:8px;}
 .gantt-table{min-width:900px;width:100%;}
 .gantt-label{font-size:11px;color:#aaa;padding:8px 12px;white-space:nowrap;min-width:180px;max-width:220px;overflow:hidden;text-overflow:ellipsis;border-bottom:1px solid #0e1117;vertical-align:middle;}
@@ -72,9 +76,12 @@ button,input{font-family:'Outfit',sans-serif;}
 .gantt-header-cell{font-size:9px;letter-spacing:2px;color:#334;text-transform:uppercase;text-align:center;padding:8px 2px;border-bottom:2px solid #1e2830;}
 .sched-view-btn{padding:7px 16px;font-size:11px;border-radius:5px;cursor:pointer;border:1px solid #1e2830;background:none;color:#445;font-weight:600;}
 .sched-view-btn.active{background:rgba(139,105,20,0.15);border-color:rgba(139,105,20,0.3);color:#8B6914;}
+.pred-tooltip{font-size:9px;color:#445;margin-top:2px;}
 </style>
 </head>
 <body>
+
+<!-- LANDING PAGE -->
 <div id="pg-land" class="page active">
   <nav style="background:#080b08;border-bottom:1px solid #1a2010;padding:0 48px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;">
     <div style="display:flex;align-items:center;gap:10px;"><svg viewBox="0 0 54 54" fill="none" width="28" height="28"><path d="M27 6L5 22V48H22V34H32V48H49V22L27 6Z" fill="#1a2010" stroke="#8B6914" stroke-width="2" stroke-linejoin="round"/><path d="M27 6L5 22H49L27 6Z" fill="#8B6914" fill-opacity="0.2"/><rect x="22" y="34" width="10" height="14" rx="5" fill="#8B6914" fill-opacity="0.7"/><circle cx="27" cy="40" r="2.5" fill="#8B6914"/><rect x="26" y="42" width="2" height="4" rx="1" fill="#8B6914"/><line x1="5" y1="48" x2="49" y2="48" stroke="#8B6914" stroke-width="2" stroke-linecap="round"/></svg><span class="logo"><span class="gold">Dirt</span>toKeys</span></div>
@@ -87,10 +94,12 @@ button,input{font-family:'Outfit',sans-serif;}
     <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;"><button class="btn btn-gold" style="font-size:14px;padding:14px 36px;" onclick="go('signup')">Start Building Free →</button><button class="btn btn-outline" style="font-size:14px;padding:14px 36px;" onclick="go('login')">Sign In</button></div>
     <div style="margin-top:18px;font-size:12px;color:#334;">No credit card required · Free 14-day trial</div>
   </div>
-  <div style="padding:70px 48px;border-top:1px solid #1a2010;"><div style="max-width:1000px;margin:0 auto;"><div style="text-align:center;margin-bottom:52px;"><div style="font-size:10px;letter-spacing:4px;color:#8B6914;margin-bottom:10px;text-transform:uppercase;">Everything You Need</div><h2 class="serif" style="font-size:38px;font-weight:700;color:#f0ebe0;">Built by a homebuilder.<br>Designed for you.</h2></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;"><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">◈</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">Phase-by-Phase Tracker</div><div style="font-size:12px;color:#445;line-height:1.6;">Follow your build from land prep to certificate of occupancy.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">◎</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">Budget Manager</div><div style="font-size:12px;color:#445;line-height:1.6;">Track every dollar. Edit amounts. Toggle paid/pending instantly.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">▦</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">Gantt Schedule</div><div style="font-size:12px;color:#445;line-height:1.6;">Visual Gantt chart with editable tasks, dates, and durations.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">❑</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">Document Vault</div><div style="font-size:12px;color:#445;line-height:1.6;">Store permits, contracts, and plans in one place.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">✦</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">AI Plan Takeoff</div><div style="font-size:12px;color:#445;line-height:1.6;">Upload plans and AI generates a material quantity list.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">⌂</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">Build Dashboard</div><div style="font-size:12px;color:#445;line-height:1.6;">Your entire project at a glance.</div></div></div></div></div>
-  <div style="padding:70px 48px;border-top:1px solid #1a2010;"><div style="max-width:520px;margin:0 auto;text-align:center;"><h2 class="serif" style="font-size:38px;font-weight:700;color:#f0ebe0;margin-bottom:40px;">One plan. Everything included.</h2><div class="card" style="padding:44px 36px;border-color:rgba(139,105,20,0.35);"><div style="font-size:11px;letter-spacing:3px;color:#8B6914;margin-bottom:14px;">BUILDER PLAN</div><div style="display:flex;align-items:flex-end;justify-content:center;gap:4px;margin-bottom:6px;"><span class="serif" style="font-size:68px;font-weight:700;color:#f0ebe0;line-height:1;">$197</span><span style="font-size:13px;color:#445;margin-bottom:10px;">/month</span></div><div style="font-size:12px;color:#445;margin-bottom:28px;">Cancel anytime · 14-day free trial</div><div style="display:flex;flex-direction:column;gap:10px;margin-bottom:32px;text-align:left;"><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#aaa;"><span class="gold">✓</span> Full build dashboard & phase tracker</div><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#aaa;"><span class="gold">✓</span> Editable budget with paid/pending toggle</div><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#aaa;"><span class="gold">✓</span> Gantt chart schedule with durations</div><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#aaa;"><span class="gold">✓</span> Document vault — unlimited uploads</div><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#aaa;"><span class="gold">✓</span> AI-powered plan takeoff</div></div><button class="btn btn-gold" style="width:100%;padding:14px;font-size:14px;" onclick="go('signup')">Start Free Trial →</button></div></div></div>
+  <div style="padding:70px 48px;border-top:1px solid #1a2010;"><div style="max-width:1000px;margin:0 auto;"><div style="text-align:center;margin-bottom:52px;"><div style="font-size:10px;letter-spacing:4px;color:#8B6914;margin-bottom:10px;text-transform:uppercase;">Everything You Need</div><h2 class="serif" style="font-size:38px;font-weight:700;color:#f0ebe0;">Built by a homebuilder.<br>Designed for you.</h2></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;"><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">◈</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">Phase-by-Phase Tracker</div><div style="font-size:12px;color:#445;line-height:1.6;">Follow your build from land prep to certificate of occupancy.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">◎</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">Budget Manager</div><div style="font-size:12px;color:#445;line-height:1.6;">Track every dollar. Edit amounts. Toggle paid/pending instantly.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">▦</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">Gantt Schedule</div><div style="font-size:12px;color:#445;line-height:1.6;">Visual Gantt chart with predecessors, editable tasks and durations.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">❑</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">Document Vault</div><div style="font-size:12px;color:#445;line-height:1.6;">Store permits, contracts, and plans in one place.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">✦</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">AI Plan Takeoff</div><div style="font-size:12px;color:#445;line-height:1.6;">Upload plans and AI generates a material quantity list.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">⌂</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">Build Dashboard</div><div style="font-size:12px;color:#445;line-height:1.6;">Your entire project at a glance.</div></div></div></div></div>
+  <div style="padding:70px 48px;border-top:1px solid #1a2010;"><div style="max-width:520px;margin:0 auto;text-align:center;"><h2 class="serif" style="font-size:38px;font-weight:700;color:#f0ebe0;margin-bottom:40px;">One plan. Everything included.</h2><div class="card" style="padding:44px 36px;border-color:rgba(139,105,20,0.35);"><div style="font-size:11px;letter-spacing:3px;color:#8B6914;margin-bottom:14px;">BUILDER PLAN</div><div style="display:flex;align-items:flex-end;justify-content:center;gap:4px;margin-bottom:6px;"><span class="serif" style="font-size:68px;font-weight:700;color:#f0ebe0;line-height:1;">$197</span><span style="font-size:13px;color:#445;margin-bottom:10px;">/month</span></div><div style="font-size:12px;color:#445;margin-bottom:28px;">Cancel anytime · 14-day free trial</div><div style="display:flex;flex-direction:column;gap:10px;margin-bottom:32px;text-align:left;"><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#aaa;"><span class="gold">✓</span> Full build dashboard & phase tracker</div><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#aaa;"><span class="gold">✓</span> Editable budget with paid/pending toggle</div><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#aaa;"><span class="gold">✓</span> Gantt chart with predecessor scheduling</div><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#aaa;"><span class="gold">✓</span> Document vault — unlimited uploads</div><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#aaa;"><span class="gold">✓</span> AI-powered plan takeoff</div></div><button class="btn btn-gold" style="width:100%;padding:14px;font-size:14px;" onclick="go('signup')">Start Free Trial →</button></div></div></div>
   <footer style="padding:32px 48px;border-top:1px solid #1a2010;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;"><span class="logo" style="font-size:18px;"><span class="gold">Dirt</span>toKeys</span><span style="font-size:11px;color:#223;">© 2026 DirtToKeys. Built for owner-builders.</span></footer>
 </div>
+
+<!-- LOGIN -->
 <div id="pg-login" class="page">
   <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;">
     <button onclick="go('land')" style="background:none;border:none;cursor:pointer;margin-bottom:36px;"><span class="logo" style="font-size:24px;"><span class="gold">Dirt</span>toKeys</span></button>
@@ -105,6 +114,8 @@ button,input{font-family:'Outfit',sans-serif;}
     </div>
   </div>
 </div>
+
+<!-- SIGNUP -->
 <div id="pg-signup" class="page">
   <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;">
     <button onclick="go('land')" style="background:none;border:none;cursor:pointer;margin-bottom:36px;"><span class="logo" style="font-size:24px;"><span class="gold">Dirt</span>toKeys</span></button>
@@ -121,6 +132,8 @@ button,input{font-family:'Outfit',sans-serif;}
     </div>
   </div>
 </div>
+
+<!-- DASHBOARD -->
 <div id="pg-dash" class="page" style="background:#0e1117;">
   <div style="background:#080b08;border-bottom:1px solid #1a2010;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;">
     <div style="display:flex;align-items:center;gap:10px;"><svg viewBox="0 0 54 54" fill="none" width="26" height="26"><path d="M27 6L5 22V48H22V34H32V48H49V22L27 6Z" fill="#1a2010" stroke="#8B6914" stroke-width="2" stroke-linejoin="round"/><path d="M27 6L5 22H49L27 6Z" fill="#8B6914" fill-opacity="0.2"/><rect x="22" y="34" width="10" height="14" rx="5" fill="#8B6914" fill-opacity="0.7"/><circle cx="27" cy="40" r="2.5" fill="#8B6914"/><rect x="26" y="42" width="2" height="4" rx="1" fill="#8B6914"/><line x1="5" y1="48" x2="49" y2="48" stroke="#8B6914" stroke-width="2" stroke-linecap="round"/></svg><span class="logo" style="font-size:20px;"><span class="gold">Dirt</span>toKeys</span></div>
@@ -142,6 +155,8 @@ button,input{font-family:'Outfit',sans-serif;}
       </div>
     </div>
     <div style="flex:1;padding:24px 28px;overflow-y:auto;max-height:calc(100vh - 56px);">
+
+      <!-- HOME TAB -->
       <div id="tc-home" class="tab-content active au">
         <div style="margin-bottom:24px;"><div style="font-size:9px;letter-spacing:3px;color:#556;text-transform:uppercase;">Overview</div><div class="serif" style="font-size:36px;font-weight:700;line-height:1;margin-top:4px;">Build Dashboard</div></div>
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;">
@@ -155,6 +170,8 @@ button,input{font-family:'Outfit',sans-serif;}
           <div class="card" style="padding:20px;"><div style="font-size:9px;color:#445;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">Upcoming Actions</div><div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid #141820;"><div style="width:6px;height:6px;border-radius:50%;background:#e87c5a;flex-shrink:0;"></div><span style="font-size:11px;color:#ccc;">Confirm window delivery schedule</span></div><div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid #141820;"><div style="width:6px;height:6px;border-radius:50%;background:#e87c5a;flex-shrink:0;"></div><span style="font-size:11px;color:#ccc;">Schedule FMEP rough-in inspections</span></div><div style="display:flex;align-items:center;gap:10px;padding:7px 0;"><div style="width:6px;height:6px;border-radius:50%;background:#e87c5a;flex-shrink:0;"></div><span style="font-size:11px;color:#ccc;">Get masonry / stucco sub bids</span></div></div>
         </div>
       </div>
+
+      <!-- PHASES TAB -->
       <div id="tc-phases" class="tab-content au">
         <div style="margin-bottom:24px;"><div style="font-size:9px;letter-spacing:3px;color:#556;text-transform:uppercase;">Construction</div><div class="serif" style="font-size:36px;font-weight:700;line-height:1;margin-top:4px;">Phase Tracker</div></div>
         <div class="card" style="margin-bottom:10px;overflow:hidden;" id="ph1"><div style="padding:13px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;" onclick="tp('ph1')"><span style="font-size:18px;">📋</span><div style="flex:1;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;"><span class="serif" style="font-size:16px;font-weight:700;">Preliminary</span><span class="badge bp">COMPLETE</span></div><div style="display:flex;align-items:center;gap:8px;"><div class="pbar" style="width:150px;"><div class="pfill pgreen" style="width:100%;"></div></div><span style="font-size:10px;color:#334;">100%</span></div></div><span class="arr" style="color:#223;font-size:10px;">▼</span></div><div class="pb" style="display:none;padding:0 18px 14px;border-top:1px solid #141820;font-size:11px;color:#445;margin-top:4px;">✓ Plans and permits complete.</div></div>
@@ -164,15 +181,25 @@ button,input{font-family:'Outfit',sans-serif;}
         <div class="card" style="margin-bottom:10px;overflow:hidden;" id="ph5"><div style="padding:13px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;" onclick="tp('ph5')"><span style="font-size:18px;">🎨</span><div style="flex:1;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;"><span class="serif" style="font-size:16px;font-weight:700;">Interior Finish</span><span class="badge bn">UPCOMING</span></div><div style="display:flex;align-items:center;gap:8px;"><div class="pbar" style="width:150px;"><div class="pfill" style="width:0%;"></div></div><span style="font-size:10px;color:#334;">0%</span></div></div><span class="arr" style="color:#223;font-size:10px;">▼</span></div><div class="pb" style="display:none;padding:0 18px 14px;border-top:1px solid #141820;font-size:11px;color:#445;margin-top:4px;">◦ Trim, paint, cabinets, flooring, appliances.</div></div>
         <div class="card" style="margin-bottom:10px;overflow:hidden;" id="ph6"><div style="padding:13px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;" onclick="tp('ph6')"><span style="font-size:18px;">🏠</span><div style="flex:1;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;"><span class="serif" style="font-size:16px;font-weight:700;">Completion</span><span class="badge bn">UPCOMING</span></div><div style="display:flex;align-items:center;gap:8px;"><div class="pbar" style="width:150px;"><div class="pfill" style="width:0%;"></div></div><span style="font-size:10px;color:#334;">0%</span></div></div><span class="arr" style="color:#223;font-size:10px;">▼</span></div><div class="pb" style="display:none;padding:0 18px 14px;border-top:1px solid #141820;font-size:11px;color:#445;margin-top:4px;">◦ Fencing, flatwork, landscaping, final clean.</div></div>
       </div>
+
+      <!-- BUDGET TAB -->
       <div id="tc-budget" class="tab-content au">
-        <div style="margin-bottom:20px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:10px;"><div><div style="font-size:9px;letter-spacing:3px;color:#556;text-transform:uppercase;">Financials</div><div class="serif" style="font-size:36px;font-weight:700;line-height:1;margin-top:4px;">Budget Manager</div></div><div style="font-size:11px;color:#445;">Click amount to edit · Click status to toggle</div></div>
+        <div style="margin-bottom:20px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+          <div><div style="font-size:9px;letter-spacing:3px;color:#556;text-transform:uppercase;">Financials</div><div class="serif" style="font-size:36px;font-weight:700;line-height:1;margin-top:4px;">Budget Manager</div></div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <div style="font-size:11px;color:#445;">Click amount to edit · Click status to toggle</div>
+            <button onclick="addBudgetItem()" style="padding:7px 14px;background:rgba(139,105,20,0.15);border:1px solid rgba(139,105,20,0.3);border-radius:5px;color:#8B6914;font-size:11px;cursor:pointer;font-weight:600;">+ Add Line Item</button>
+          </div>
+        </div>
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px;">
           <div class="card" style="padding:16px 20px;"><div style="font-size:9px;letter-spacing:2px;color:#445;text-transform:uppercase;margin-bottom:6px;">Total Budget</div><div class="serif" style="font-size:26px;" id="b-total">$1,069,518</div></div>
           <div class="card" style="padding:16px 20px;"><div style="font-size:9px;letter-spacing:2px;color:#445;text-transform:uppercase;margin-bottom:6px;">Paid to Date</div><div class="serif gold" style="font-size:26px;" id="b-paid">$0</div></div>
           <div class="card" style="padding:16px 20px;"><div style="font-size:9px;letter-spacing:2px;color:#445;text-transform:uppercase;margin-bottom:6px;">Remaining</div><div class="serif green" style="font-size:26px;" id="b-remain">$1,069,518</div></div>
         </div>
-        <div class="card" style="overflow:hidden;"><table class="btable"><thead><tr><th>Line Item</th><th>Budgeted</th><th>Status</th></tr></thead><tbody id="budget-body"></tbody></table></div>
+        <div class="card" style="overflow:hidden;"><table class="btable"><thead><tr><th>Line Item</th><th>Budgeted</th><th>Status</th><th style="text-align:center;width:40px;">Del</th></tr></thead><tbody id="budget-body"></tbody></table></div>
       </div>
+
+      <!-- SCHEDULE TAB -->
       <div id="tc-sched" class="tab-content au">
         <div style="margin-bottom:20px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:10px;">
           <div><div style="font-size:9px;letter-spacing:3px;color:#556;text-transform:uppercase;">Timeline</div><div class="serif" style="font-size:36px;font-weight:700;line-height:1;margin-top:4px;">Build Schedule</div></div>
@@ -182,21 +209,34 @@ button,input{font-family:'Outfit',sans-serif;}
             <button onclick="addSchedRow()" style="padding:7px 14px;background:rgba(139,105,20,0.15);border:1px solid rgba(139,105,20,0.3);border-radius:5px;color:#8B6914;font-size:11px;cursor:pointer;font-weight:600;">+ Add Task</button>
           </div>
         </div>
+
+        <!-- LIST VIEW -->
         <div id="sched-list-view" class="card" style="overflow:hidden;">
-          <div style="display:grid;grid-template-columns:1.8fr 100px 60px 90px 80px;padding:8px 14px;border-bottom:1px solid #1e2830;font-size:9px;color:#334;letter-spacing:2px;text-transform:uppercase;gap:8px;">
-            <span>Task</span><span style="text-align:center;">Start Date</span><span style="text-align:center;">Days</span><span style="text-align:center;">Status</span><span style="text-align:center;">Del</span>
+          <div style="display:grid;grid-template-columns:30px 1.6fr 90px 55px 110px 80px 60px;padding:8px 12px;border-bottom:1px solid #1e2830;font-size:9px;color:#334;letter-spacing:1.5px;text-transform:uppercase;gap:6px;align-items:center;">
+            <span style="text-align:center;">#</span>
+            <span>Task</span>
+            <span style="text-align:center;">Start Date</span>
+            <span style="text-align:center;">Days</span>
+            <span style="text-align:center;">Predecessor<br><span style="font-size:8px;color:#223;letter-spacing:0;">e.g. 5S+3, 4F-2</span></span>
+            <span style="text-align:center;">Status</span>
+            <span style="text-align:center;">Del</span>
           </div>
           <div id="sched-body"></div>
         </div>
+
+        <!-- GANTT VIEW -->
         <div id="sched-gantt-view" style="display:none;">
           <div class="card" style="overflow:hidden;"><div class="gantt-wrap"><table class="gantt-table" style="border-collapse:collapse;"><thead id="gantt-head"></thead><tbody id="gantt-body"></tbody></table></div></div>
           <div style="margin-top:12px;display:flex;gap:18px;flex-wrap:wrap;">
             <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#445;"><div style="width:14px;height:8px;background:#7bc47f;border-radius:2px;"></div>Done</div>
             <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#445;"><div style="width:14px;height:8px;background:#8B6914;border-radius:2px;"></div>Active</div>
             <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#445;"><div style="width:14px;height:8px;background:#1e3a5f;border-radius:2px;"></div>Pending</div>
+            <div style="font-size:10px;color:#334;margin-left:8px;">Predecessor offsets shown as dashed lines in Gantt</div>
           </div>
         </div>
       </div>
+
+      <!-- DOCUMENTS TAB -->
       <div id="tc-docs" class="tab-content au">
         <div style="margin-bottom:24px;"><div style="font-size:9px;letter-spacing:3px;color:#556;text-transform:uppercase;">Files & Forms</div><div class="serif" style="font-size:36px;font-weight:700;line-height:1;margin-top:4px;">Document Vault</div></div>
         <div class="card" style="border:2px dashed #1e2830;padding:28px;text-align:center;margin-bottom:20px;cursor:pointer;border-radius:8px;"><div style="font-size:28px;margin-bottom:6px;">↑</div><div style="font-size:13px;color:#556;margin-bottom:4px;">Drop files here or click to upload</div><div style="font-size:11px;color:#223;">Permits, contracts, plans, photos</div></div>
@@ -205,18 +245,23 @@ button,input{font-family:'Outfit',sans-serif;}
         <div style="font-size:9px;color:#334;letter-spacing:2px;margin-bottom:7px;">TEMPLATES</div>
         <div class="card" style="overflow:hidden;"><div class="srow"><span>📄</span><div style="flex:1;font-size:12px;color:#bbb;">Subcontractor Agreement</div><span class="badge bn">TEMPLATE</span></div><div class="srow"><span>📄</span><div style="flex:1;font-size:12px;color:#bbb;">Lien Waiver</div><span class="badge bn">TEMPLATE</span></div><div class="srow" style="border-bottom:none;"><span>📄</span><div style="flex:1;font-size:12px;color:#bbb;">Owner-Builder Affidavit</div><span class="badge bn">TEMPLATE</span></div></div>
       </div>
+
+      <!-- AI TAB -->
       <div id="tc-ai" class="tab-content au">
         <div style="margin-bottom:24px;"><div style="font-size:9px;letter-spacing:3px;color:#556;text-transform:uppercase;">Powered by AI</div><div class="serif" style="font-size:36px;font-weight:700;line-height:1;margin-top:4px;">Plan Takeoff</div></div>
         <div id="tai-up" class="card" style="border:2px dashed #1e2830;padding:52px 36px;text-align:center;cursor:pointer;" onclick="doTakeoff()"><div style="font-size:36px;margin-bottom:12px;">📐</div><div class="serif" style="font-size:20px;color:#e8e0d0;margin-bottom:6px;">Upload Your Plans</div><div style="font-size:11px;color:#334;margin-bottom:18px;">PDF, DWG, or image files accepted</div><div style="display:inline-block;padding:9px 24px;background:#8B6914;color:#fff;font-size:11px;letter-spacing:2px;border-radius:6px;font-weight:600;">SELECT FILE →</div></div>
         <div id="tai-an" style="display:none;text-align:center;padding:52px 36px;" class="card"><span class="spin" style="font-size:32px;color:#8B6914;">✦</span><div class="serif" style="font-size:20px;color:#8B6914;margin-top:14px;">ANALYZING PLANS...</div></div>
         <div id="tai-res" style="display:none;"><div style="padding:11px 16px;background:rgba(123,196,127,0.07);border:1px solid rgba(123,196,127,0.2);border-radius:6px;margin-bottom:20px;font-size:12px;color:#7bc47f;">✓ Analysis complete — 4,560 sq ft · 4 bed / 3.5 bath</div><div class="card" style="overflow:hidden;margin-bottom:16px;"><div style="display:grid;grid-template-columns:1fr 90px 100px;padding:9px 16px;border-bottom:1px solid #141820;font-size:11px;"><span style="color:#aaa;">2x6 exterior wall studs</span><span class="mono gold">486 pcs</span><span style="color:#223;font-size:10px;">8ft lengths</span></div><div style="display:grid;grid-template-columns:1fr 90px 100px;padding:9px 16px;border-bottom:1px solid #141820;font-size:11px;"><span style="color:#aaa;">2x4 interior studs</span><span class="mono gold">312 pcs</span><span style="color:#223;font-size:10px;">8ft lengths</span></div><div style="display:grid;grid-template-columns:1fr 90px 100px;padding:9px 16px;font-size:11px;"><span style="color:#aaa;">OSB sheathing</span><span class="mono gold">172 sheets</span><span style="color:#223;font-size:10px;">4x8 sheets</span></div></div><div style="display:flex;gap:10px;"><button class="btn btn-gold" style="padding:10px 20px;font-size:11px;">EXPORT TO BUDGET →</button><button onclick="resetTakeoff()" style="padding:10px 20px;background:none;color:#334;border:1px solid #1e2830;border-radius:6px;font-size:11px;cursor:pointer;">UPLOAD NEW PLANS</button></div></div>
       </div>
+
     </div>
   </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
 const SB=supabase.createClient('https://pnhnncmvmqwubpbmixtt.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBuaG5uY212bXF3dWJwYm1peHR0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MzMxODcsImV4cCI6MjA4ODQwOTE4N30.WVNnLbdAj1Afh12IY4vEvVrpz8gTJz0nu8wW8S9tWi4');
+
 const BUDGET=[
   {phase:'Preliminary',items:[{name:'Plans/Design',amt:21000,paid:true},{name:'Permits/Soft Costs',amt:7790,paid:true}]},
   {phase:'Preparation',items:[{name:'Sitework',amt:4200,paid:true},{name:'Foundation',amt:121300,paid:true}]},
@@ -225,66 +270,103 @@ const BUDGET=[
   {phase:'Interior Finish',items:[{name:'Interior Trim & Doors',amt:34656,paid:false},{name:'Tape, Float, & Texture',amt:10000,paid:false},{name:'Painting',amt:40560,paid:false},{name:'Cabinets',amt:45000,paid:false},{name:'Countertops',amt:20000,paid:false},{name:'Tile',amt:30000,paid:false},{name:'Shower Doors, Mirrors',amt:5100,paid:false},{name:'Hardware',amt:5000,paid:false},{name:'Appliances',amt:42000,paid:false},{name:'Electrical Fixtures',amt:10000,paid:false},{name:'Flooring',amt:62000,paid:false},{name:'Carpet',amt:0,paid:false}]},
   {phase:'Completion',items:[{name:'Fencing',amt:0,paid:false},{name:'Flatwork',amt:30000,paid:false},{name:'Landscaping',amt:0,paid:false},{name:'Common Labor and Clean',amt:13880,paid:false}]}
 ];
+
+// pred format: "5S+3" = row 5 Start + 3 days, "4F-2" = row 4 Finish - 2 days
+// startDay is the computed/manual start; pred overrides it when set
 const SCHEDULE=[
-  {task:'Plans/Design',date:'Jan 2026',startDay:0,dur:14,status:'done'},
-  {task:'Permits/Soft Costs',date:'Jan 2026',startDay:7,dur:21,status:'done'},
-  {task:'Sitework',date:'Jan 2026',startDay:14,dur:10,status:'done'},
-  {task:'Foundation',date:'Jan-Feb 2026',startDay:24,dur:28,status:'done'},
-  {task:'Steel',date:'Feb 2026',startDay:45,dur:7,status:'done'},
-  {task:'Framing Material',date:'Feb 2026',startDay:45,dur:14,status:'done'},
-  {task:'Framing Labor',date:'Feb-Mar 2026',startDay:52,dur:28,status:'done'},
-  {task:'Windows & Exterior Doors',date:'Mar 2026',startDay:80,dur:14,status:'active'},
-  {task:'Front Door',date:'Mar 2026',startDay:80,dur:7,status:'active'},
-  {task:'Garage Doors',date:'Mar 2026',startDay:80,dur:7,status:'active'},
-  {task:'Fireplace',date:'Apr 2026',startDay:100,dur:7,status:'pending'},
-  {task:'Roofing',date:'Apr 2026',startDay:95,dur:21,status:'pending'},
-  {task:'Masonry',date:'Apr-May 2026',startDay:100,dur:35,status:'pending'},
-  {task:'Utility Connections',date:'May 2026',startDay:130,dur:14,status:'pending'},
-  {task:'Plumbing',date:'May 2026',startDay:130,dur:21,status:'pending'},
-  {task:'AC',date:'May 2026',startDay:130,dur:21,status:'pending'},
-  {task:'Electrical',date:'May 2026',startDay:130,dur:21,status:'pending'},
-  {task:'Security',date:'May 2026',startDay:144,dur:7,status:'pending'},
-  {task:'Insulation',date:'Jun 2026',startDay:155,dur:10,status:'pending'},
-  {task:'Drywall',date:'Jun 2026',startDay:162,dur:14,status:'pending'},
-  {task:'Interior Trim & Doors',date:'Jun 2026',startDay:170,dur:14,status:'pending'},
-  {task:'Tape, Float, & Texture',date:'Jun 2026',startDay:176,dur:10,status:'pending'},
-  {task:'Painting',date:'Jun 2026',startDay:183,dur:14,status:'pending'},
-  {task:'Cabinets',date:'Jun 2026',startDay:183,dur:14,status:'pending'},
-  {task:'Countertops',date:'Jun-Jul 2026',startDay:197,dur:10,status:'pending'},
-  {task:'Tile',date:'Jun-Jul 2026',startDay:190,dur:21,status:'pending'},
-  {task:'Shower Doors, Mirrors',date:'Jul 2026',startDay:204,dur:7,status:'pending'},
-  {task:'Hardware',date:'Jul 2026',startDay:204,dur:7,status:'pending'},
-  {task:'Appliances',date:'Jul 2026',startDay:204,dur:7,status:'pending'},
-  {task:'Electrical Fixtures',date:'Jul 2026',startDay:204,dur:7,status:'pending'},
-  {task:'Flooring',date:'Jul 2026',startDay:197,dur:14,status:'pending'},
-  {task:'Fencing',date:'Jul 2026',startDay:204,dur:14,status:'pending'},
-  {task:'Flatwork',date:'Jul 2026',startDay:197,dur:14,status:'pending'},
-  {task:'Landscaping',date:'Jul 2026',startDay:204,dur:14,status:'pending'},
-  {task:'Common Labor and Clean',date:'Jul 2026',startDay:211,dur:7,status:'pending'},
+  {task:'Plans/Design',date:'Jan 2026',startDay:0,dur:14,status:'done',pred:''},
+  {task:'Permits/Soft Costs',date:'Jan 2026',startDay:7,dur:21,status:'done',pred:''},
+  {task:'Sitework',date:'Jan 2026',startDay:14,dur:10,status:'done',pred:''},
+  {task:'Foundation',date:'Jan-Feb 2026',startDay:24,dur:28,status:'done',pred:''},
+  {task:'Steel',date:'Feb 2026',startDay:45,dur:7,status:'done',pred:''},
+  {task:'Framing Material',date:'Feb 2026',startDay:45,dur:14,status:'done',pred:''},
+  {task:'Framing Labor',date:'Feb-Mar 2026',startDay:52,dur:28,status:'done',pred:''},
+  {task:'Windows & Exterior Doors',date:'Mar 2026',startDay:80,dur:14,status:'active',pred:'7F+0'},
+  {task:'Front Door',date:'Mar 2026',startDay:80,dur:7,status:'active',pred:'7F+0'},
+  {task:'Garage Doors',date:'Mar 2026',startDay:80,dur:7,status:'active',pred:'7F+0'},
+  {task:'Fireplace',date:'Apr 2026',startDay:100,dur:7,status:'pending',pred:'7F+20'},
+  {task:'Roofing',date:'Apr 2026',startDay:95,dur:21,status:'pending',pred:'7F+15'},
+  {task:'Masonry',date:'Apr-May 2026',startDay:100,dur:35,status:'pending',pred:'7F+20'},
+  {task:'Utility Connections',date:'May 2026',startDay:130,dur:14,status:'pending',pred:'12F+15'},
+  {task:'Plumbing',date:'May 2026',startDay:130,dur:21,status:'pending',pred:'13F+0'},
+  {task:'AC',date:'May 2026',startDay:130,dur:21,status:'pending',pred:'13F+0'},
+  {task:'Electrical',date:'May 2026',startDay:130,dur:21,status:'pending',pred:'13F+0'},
+  {task:'Security',date:'May 2026',startDay:144,dur:7,status:'pending',pred:'16S+14'},
+  {task:'Insulation',date:'Jun 2026',startDay:155,dur:10,status:'pending',pred:'15F+4'},
+  {task:'Drywall',date:'Jun 2026',startDay:162,dur:14,status:'pending',pred:'19F+0'},
+  {task:'Interior Trim & Doors',date:'Jun 2026',startDay:170,dur:14,status:'pending',pred:'20F+0'},
+  {task:'Tape, Float, & Texture',date:'Jun 2026',startDay:176,dur:10,status:'pending',pred:'21S+6'},
+  {task:'Painting',date:'Jun 2026',startDay:183,dur:14,status:'pending',pred:'22F+0'},
+  {task:'Cabinets',date:'Jun 2026',startDay:183,dur:14,status:'pending',pred:'22F+0'},
+  {task:'Countertops',date:'Jun-Jul 2026',startDay:197,dur:10,status:'pending',pred:'24F+0'},
+  {task:'Tile',date:'Jun-Jul 2026',startDay:190,dur:21,status:'pending',pred:'22F+0'},
+  {task:'Shower Doors, Mirrors',date:'Jul 2026',startDay:204,dur:7,status:'pending',pred:'26F+0'},
+  {task:'Hardware',date:'Jul 2026',startDay:204,dur:7,status:'pending',pred:'25F+0'},
+  {task:'Appliances',date:'Jul 2026',startDay:204,dur:7,status:'pending',pred:'25F+0'},
+  {task:'Electrical Fixtures',date:'Jul 2026',startDay:204,dur:7,status:'pending',pred:'23F+0'},
+  {task:'Flooring',date:'Jul 2026',startDay:197,dur:14,status:'pending',pred:'22F+0'},
+  {task:'Fencing',date:'Jul 2026',startDay:204,dur:14,status:'pending',pred:''},
+  {task:'Flatwork',date:'Jul 2026',startDay:197,dur:14,status:'pending',pred:''},
+  {task:'Landscaping',date:'Jul 2026',startDay:204,dur:14,status:'pending',pred:'33F+0'},
+  {task:'Common Labor and Clean',date:'Jul 2026',startDay:211,dur:7,status:'pending',pred:''},
 ];
-const TOTAL_DAYS=212;
+
 const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul'];
 let currentView='list';
+
+// Parse predecessor: "5S+3" -> {row:4(0-indexed), type:'S', offset:3}
+// "4F-2" -> {row:3, type:'F', offset:-2}
+function parsePred(pred){
+  if(!pred||!pred.trim()) return null;
+  const m=pred.trim().match(/^(\d+)([SF])([\+\-]\d+)$/i);
+  if(!m) return null;
+  return {row:parseInt(m[1])-1, type:m[2].toUpperCase(), offset:parseInt(m[3])};
+}
+
+// Compute effective startDay for a row, considering predecessor
+function effectiveStart(i){
+  const row=SCHEDULE[i];
+  const p=parsePred(row.pred);
+  if(!p || p.row<0 || p.row>=SCHEDULE.length || p.row===i) return row.startDay;
+  const ref=SCHEDULE[p.row];
+  const refStart=effectiveStart(p.row); // recursive, handles chains
+  if(p.type==='S') return refStart + p.offset;
+  if(p.type==='F') return refStart + ref.dur + p.offset;
+  return row.startDay;
+}
+
+function computeMaxDay(){
+  let max=0;
+  SCHEDULE.forEach((_,i)=>{const s=effectiveStart(i);const e=s+SCHEDULE[i].dur;if(e>max)max=e;});
+  return Math.max(max,212);
+}
+
 function fmt(n){return '$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+
+// ── BUDGET ──────────────────────────────────────────────
 function renderBudget(){
   const tbody=document.getElementById('budget-body');tbody.innerHTML='';
   let gt=0,gp=0;
   BUDGET.forEach((sec,si)=>{
     let pt=0,pp=0;
     const hr=document.createElement('tr');hr.className='phase-header';
-    hr.innerHTML=`<td colspan="3">${sec.phase}</td>`;tbody.appendChild(hr);
+    hr.innerHTML=`<td colspan="4">${sec.phase}</td>`;tbody.appendChild(hr);
     sec.items.forEach((item,ii)=>{
       pt+=item.amt;if(item.paid)pp+=item.amt;gt+=item.amt;if(item.paid)gp+=item.amt;
       const tr=document.createElement('tr');tr.className='btr';
-      tr.innerHTML=`<td style="color:#aaa;">${item.name}</td><td><input class="amt-input" value="${item.amt===0?'—':fmt(item.amt)}" onchange="updateAmt(${si},${ii},this.value)" onblur="renderBudget()" style="color:${item.amt===0?'#334':'#e8e0d0'}"></td><td style="text-align:right;"><button class="toggle-paid ${item.paid?'is-paid':'is-pending'}" onclick="togglePaid(${si},${ii})">${item.paid?'PAID':'PENDING'}</button></td>`;
+      tr.innerHTML=`
+        <td style="color:#aaa;"><input style="background:none;border:none;color:#aaa;font-family:'Outfit',sans-serif;font-size:12px;width:100%;padding:1px 2px;" value="${item.name}" onchange="BUDGET[${si}].items[${ii}].name=this.value"></td>
+        <td><input class="amt-input" value="${item.amt===0?'—':fmt(item.amt)}" onchange="updateAmt(${si},${ii},this.value)" onblur="renderBudget()" style="color:${item.amt===0?'#334':'#e8e0d0'}"></td>
+        <td style="text-align:right;"><button class="toggle-paid ${item.paid?'is-paid':'is-pending'}" onclick="togglePaid(${si},${ii})">${item.paid?'PAID':'PENDING'}</button></td>
+        <td style="text-align:center;"><button onclick="deleteBudgetItem(${si},${ii})" style="background:none;border:none;color:#223;cursor:pointer;font-size:13px;padding:2px 6px;">✕</button></td>`;
       tbody.appendChild(tr);
     });
     const sr=document.createElement('tr');sr.className='phase-total';
-    sr.innerHTML=`<td style="color:#8B6914;font-size:9px;letter-spacing:1px;">SUBTOTAL — ${sec.phase}</td><td style="text-align:right;color:#e8e0d0;">${fmt(pt)}</td><td style="text-align:right;color:#7bc47f;font-size:10px;">${fmt(pp)} paid</td>`;
+    sr.innerHTML=`<td style="color:#8B6914;font-size:9px;letter-spacing:1px;">SUBTOTAL — ${sec.phase}</td><td style="text-align:right;color:#e8e0d0;">${fmt(pt)}</td><td style="text-align:right;color:#7bc47f;font-size:10px;">${fmt(pp)} paid</td><td></td>`;
     tbody.appendChild(sr);
   });
   const gr=document.createElement('tr');gr.className='grand-total';
-  gr.innerHTML=`<td style="color:#8B6914;">CONSTRUCTION COSTS</td><td style="text-align:right;color:#f0ebe0;">${fmt(gt)}</td><td style="text-align:right;color:#7bc47f;">${fmt(gp)} paid</td>`;
+  gr.innerHTML=`<td style="color:#8B6914;">CONSTRUCTION COSTS</td><td style="text-align:right;color:#f0ebe0;">${fmt(gt)}</td><td style="text-align:right;color:#7bc47f;">${fmt(gp)} paid</td><td></td>`;
   tbody.appendChild(gr);
   const rem=gt-gp;
   ['b-total','dash-total'].forEach(id=>document.getElementById(id).textContent=fmt(gt));
@@ -294,33 +376,91 @@ function renderBudget(){
 }
 function updateAmt(si,ii,val){const n=parseFloat(val.replace(/[$,\s—]/g,''));BUDGET[si].items[ii].amt=isNaN(n)?0:n;}
 function togglePaid(si,ii){BUDGET[si].items[ii].paid=!BUDGET[si].items[ii].paid;renderBudget();}
+function deleteBudgetItem(si,ii){BUDGET[si].items.splice(ii,1);renderBudget();}
+function addBudgetItem(){
+  // Show a small modal to pick phase
+  const phases=BUDGET.map((s,i)=>`<option value="${i}">${s.phase}</option>`).join('');
+  const html=`<div id="bmodal" style="position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:999;display:flex;align-items:center;justify-content:center;">
+    <div class="card" style="padding:28px;width:380px;border-radius:10px;">
+      <div class="serif" style="font-size:20px;margin-bottom:16px;">Add Budget Line Item</div>
+      <label class="lbl">Phase</label>
+      <select id="bm-phase" style="width:100%;background:#0e1117;border:1px solid #1e2830;border-radius:6px;padding:9px 12px;font-size:13px;color:#e8e0d0;margin-bottom:12px;">${phases}</select>
+      <label class="lbl">Item Name</label>
+      <input id="bm-name" class="input" placeholder="e.g. Gutters" style="margin-bottom:12px;">
+      <label class="lbl">Amount ($)</label>
+      <input id="bm-amt" class="input" type="number" placeholder="0" style="margin-bottom:16px;">
+      <div style="display:flex;gap:10px;">
+        <button class="btn btn-gold" style="flex:1;padding:10px;" onclick="confirmAddBudget()">Add Item</button>
+        <button onclick="document.getElementById('bmodal').remove()" style="flex:1;padding:10px;background:none;border:1px solid #1e2830;border-radius:6px;color:#445;cursor:pointer;">Cancel</button>
+      </div>
+    </div>
+  </div>`;
+  document.body.insertAdjacentHTML('beforeend',html);
+  document.getElementById('bm-name').focus();
+}
+function confirmAddBudget(){
+  const si=parseInt(document.getElementById('bm-phase').value);
+  const name=document.getElementById('bm-name').value||'New Item';
+  const amt=parseFloat(document.getElementById('bm-amt').value)||0;
+  BUDGET[si].items.push({name,amt,paid:false});
+  document.getElementById('bmodal').remove();
+  renderBudget();
+}
+
+// ── SCHEDULE ─────────────────────────────────────────────
 function renderSched(){
   const body=document.getElementById('sched-body');body.innerHTML='';
   const sColors={done:'#7bc47f',active:'#8B6914',pending:'#556'};
   const sLabels={done:'DONE',active:'ACTIVE',pending:'PENDING'};
   const sBg={done:'rgba(123,196,127,0.1)',active:'rgba(139,105,20,0.15)',pending:'rgba(30,40,48,0.8)'};
   SCHEDULE.forEach((row,i)=>{
+    const effStart=effectiveStart(i);
+    const predOk=!row.pred||parsePred(row.pred);
+    const predColor=row.pred?(predOk?'#7ba4c4':'#e87c5a'):'#223';
     const div=document.createElement('div');div.className='sched-row';
-    div.innerHTML=`<input class="sched-input" value="${row.task}" onchange="SCHEDULE[${i}].task=this.value;if(currentView==='gantt')renderGantt();" style="color:${row.status==='done'?'#334':'#bbb'};text-decoration:${row.status==='done'?'line-through':'none'}"><input class="date-input" value="${row.date}" onchange="SCHEDULE[${i}].date=this.value"><input class="dur-input" value="${row.dur}" title="Duration in days" onchange="SCHEDULE[${i}].dur=parseInt(this.value)||1;if(currentView==='gantt')renderGantt();"><div style="text-align:center;"><button onclick="cycleStatus(${i})" style="font-size:9px;padding:3px 8px;border-radius:3px;cursor:pointer;border:none;font-weight:600;letter-spacing:1px;background:${sBg[row.status]};color:${sColors[row.status]}">${sLabels[row.status]}</button></div><div style="text-align:center;"><button onclick="deleteSchedRow(${i})" style="background:none;border:none;color:#223;cursor:pointer;font-size:14px;padding:2px 6px;">✕</button></div>`;
+    div.innerHTML=`
+      <span style="font-size:10px;color:#334;text-align:center;">${i+1}</span>
+      <input class="sched-input" value="${row.task}" onchange="SCHEDULE[${i}].task=this.value;if(currentView==='gantt')renderGantt();" style="color:${row.status==='done'?'#334':'#bbb'};text-decoration:${row.status==='done'?'line-through':'none'}">
+      <input class="date-input" value="${row.date}" onchange="SCHEDULE[${i}].date=this.value">
+      <input class="dur-input" value="${row.dur}" title="Duration in days" onchange="SCHEDULE[${i}].dur=parseInt(this.value)||1;renderSched();if(currentView==='gantt')renderGantt();">
+      <div><input class="pred-input" value="${row.pred}" placeholder="e.g. 5S+3" title="Predecessor: [row#][S/F][+/-days]&#10;S=Start, F=Finish&#10;e.g. 5S+3 = 3 days after start of row 5&#10;e.g. 4F-2 = 2 days before finish of row 4" style="color:${predColor}" onchange="SCHEDULE[${i}].pred=this.value.trim();renderSched();if(currentView==='gantt')renderGantt();">
+      ${row.pred&&effStart!==row.startDay?`<div class="pred-tooltip">→ day ${effStart}</div>`:''}
+      </div>
+      <div style="text-align:center;"><button onclick="cycleStatus(${i})" style="font-size:9px;padding:3px 8px;border-radius:3px;cursor:pointer;border:none;font-weight:600;letter-spacing:1px;background:${sBg[row.status]};color:${sColors[row.status]}">${sLabels[row.status]}</button></div>
+      <div style="text-align:center;"><button onclick="deleteSchedRow(${i})" style="background:none;border:none;color:#223;cursor:pointer;font-size:14px;padding:2px 6px;">✕</button></div>`;
     body.appendChild(div);
   });
 }
+
 function renderGantt(){
   const head=document.getElementById('gantt-head');
   const body=document.getElementById('gantt-body');
-  let headHtml='<tr><th style="min-width:180px;padding:8px 12px;text-align:left;font-size:9px;color:#334;letter-spacing:2px;border-bottom:2px solid #1e2830;">TASK</th>';
+  const totalDays=computeMaxDay();
+  let headHtml='<tr><th style="min-width:190px;padding:8px 12px;text-align:left;font-size:9px;color:#334;letter-spacing:2px;border-bottom:2px solid #1e2830;">TASK</th>';
   MONTHS.forEach(m=>{headHtml+=`<th class="gantt-header-cell" style="width:${100/MONTHS.length}%;">${m}</th>`;});
   headHtml+='</tr>';head.innerHTML=headHtml;
   let bodyHtml='';
-  SCHEDULE.forEach(row=>{
+  SCHEDULE.forEach((row,i)=>{
     const labelClass=row.status==='done'?'done':row.status==='active'?'active':'';
     const barColor=row.status==='done'?'#7bc47f':row.status==='active'?'#8B6914':'#1e3a5f';
-    const leftPct=(row.startDay/TOTAL_DAYS)*100;
-    const widthPct=(row.dur/TOTAL_DAYS)*100;
-    bodyHtml+=`<tr><td class="gantt-label ${labelClass}">${row.task}<span style="color:#445;font-size:9px;margin-left:6px;">${row.dur}d</span></td><td colspan="${MONTHS.length}" style="padding:6px 8px;border-bottom:1px solid #0e1117;"><div style="position:relative;height:22px;background:rgba(30,40,48,0.3);border-radius:3px;"><div style="position:absolute;left:${leftPct}%;width:${widthPct}%;height:16px;top:3px;background:${barColor};border-radius:3px;opacity:0.85;min-width:4px;" title="${row.task}: ${row.dur} days"></div></div></td></tr>`;
+    const effStart=effectiveStart(i);
+    const leftPct=(effStart/totalDays)*100;
+    const widthPct=(row.dur/totalDays)*100;
+    // Show predecessor offset as a small label
+    const predParsed=parsePred(row.pred);
+    const predLabel=predParsed?`<span style="font-size:8px;color:#7ba4c4;margin-left:4px;">←${row.pred}</span>`:'';
+    bodyHtml+=`<tr>
+      <td class="gantt-label ${labelClass}"><span style="color:#334;font-size:9px;margin-right:4px;">${i+1}</span>${row.task}${predLabel}<span style="color:#445;font-size:9px;margin-left:4px;">${row.dur}d</span></td>
+      <td colspan="${MONTHS.length}" style="padding:5px 8px;border-bottom:1px solid #0e1117;">
+        <div style="position:relative;height:22px;background:rgba(30,40,48,0.3);border-radius:3px;">
+          <div style="position:absolute;left:${leftPct}%;width:${widthPct}%;height:16px;top:3px;background:${barColor};border-radius:3px;opacity:0.85;min-width:4px;" title="${row.task}: day ${effStart}–${effStart+row.dur} (${row.dur}d)${row.pred?' | pred: '+row.pred:''}"></div>
+        </div>
+      </td>
+    </tr>`;
   });
   body.innerHTML=bodyHtml;
 }
+
 function setView(v){
   currentView=v;
   document.getElementById('sched-list-view').style.display=v==='list'?'block':'none';
@@ -331,15 +471,24 @@ function setView(v){
 }
 function cycleStatus(i){const o=['pending','active','done'];SCHEDULE[i].status=o[(o.indexOf(SCHEDULE[i].status)+1)%3];renderSched();if(currentView==='gantt')renderGantt();}
 function deleteSchedRow(i){SCHEDULE.splice(i,1);renderSched();if(currentView==='gantt')renderGantt();}
-function addSchedRow(){SCHEDULE.push({task:'New Task',date:'',startDay:180,dur:14,status:'pending'});renderSched();if(currentView==='gantt')renderGantt();document.getElementById('sched-body').lastChild.querySelector('input').focus();}
+function addSchedRow(){
+  SCHEDULE.push({task:'New Task',date:'',startDay:200,dur:14,status:'pending',pred:''});
+  renderSched();if(currentView==='gantt')renderGantt();
+  document.getElementById('sched-body').lastChild.querySelectorAll('input')[1].focus();
+}
+
+// ── NAV ──────────────────────────────────────────────────
 function go(p){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById('pg-'+p).classList.add('active');window.scrollTo(0,0);}
 function st(t){document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tab-content').forEach(x=>x.classList.remove('active'));document.getElementById('tb-'+t).classList.add('active');document.getElementById('tc-'+t).classList.add('active');}
 function tp(id){const el=document.getElementById(id);const pb=el.querySelector('.pb');const ar=el.querySelector('.arr');if(pb.style.display==='block'){pb.style.display='none';ar.textContent='▼';}else{pb.style.display='block';ar.textContent='▲';}}
+
+// ── AUTH ─────────────────────────────────────────────────
 async function doLogin(){const e=document.getElementById('lem').value,p=document.getElementById('lpw').value,err=document.getElementById('lerr');err.style.display='none';const{error}=await SB.auth.signInWithPassword({email:e,password:p});if(error){err.textContent=error.message;err.style.display='block';}else{renderBudget();renderSched();go('dash');}}
 async function doSignup(){const btn=document.getElementById('signup-btn');btn.disabled=true;btn.textContent='Creating account...';const n=document.getElementById('snm').value,pr=document.getElementById('spr').value;const e=document.getElementById('sem').value,p=document.getElementById('spw').value;const err=document.getElementById('serr');err.style.display='none';const{data,error}=await SB.auth.signUp({email:e,password:p,options:{data:{full_name:n,project_name:pr}}});btn.disabled=false;btn.textContent='Start Free Trial →';if(error){err.textContent=error.message;err.style.display='block';}else{if(data.user)await SB.from('projects').insert({user_id:data.user.id,name:pr||'My Build',status:'active'}).select();if(pr)document.getElementById('dpn').textContent=pr;renderBudget();renderSched();go('dash');}}
 async function doSignOut(){await SB.auth.signOut();go('land');}
 function doTakeoff(){document.getElementById('tai-up').style.display='none';document.getElementById('tai-an').style.display='block';setTimeout(()=>{document.getElementById('tai-an').style.display='none';document.getElementById('tai-res').style.display='block';},3000);}
 function resetTakeoff(){document.getElementById('tai-res').style.display='none';document.getElementById('tai-up').style.display='block';}
+
 renderBudget();renderSched();
 SB.auth.getSession().then(({data:{session}})=>{if(session){const pn=session.user?.user_metadata?.project_name;if(pn)document.getElementById('dpn').textContent=pn;go('dash');}});
 </script>
