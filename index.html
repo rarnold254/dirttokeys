@@ -7,172 +7,176 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Outfit',sans-serif;background:#0a0d08;color:#e8e0d0;min-height:100vh;}
-::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:#0e1117}::-webkit-scrollbar-thumb{background:#8B6914;border-radius:2px}
+body{font-family:'Outfit',sans-serif;background:#f5f0e8;color:#2a2018;min-height:100vh;}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:#e8e0d0}::-webkit-scrollbar-thumb{background:#8B6914;border-radius:2px}
 button,input,select,textarea{font-family:'Outfit',sans-serif;}
 .page{display:none;min-height:100vh;}
 .page.active{display:block;}
 .serif{font-family:'Cormorant Garamond',serif;}
 .mono{font-family:'DM Mono',monospace;}
-.gold{color:#8B6914;}
-.green{color:#7bc47f;}
-.card{background:#12161a;border:1px solid #1e2830;border-radius:8px;}
+.gold{color:#7a5c0f;}
+.green{color:#3a7a3f;}
+.card{background:#fff;border:1px solid #ddd3c0;border-radius:8px;box-shadow:0 1px 4px rgba(139,105,20,0.06);}
 .btn{border:none;border-radius:6px;padding:12px 28px;font-size:14px;font-weight:600;cursor:pointer;}
 .btn-gold{background:#8B6914;color:#fff;}
-.btn-outline{background:none;color:#8B6914;border:1px solid #3a3020;}
-.input{width:100%;background:#0e1117;border:1px solid #1e2830;border-radius:6px;padding:11px 14px;font-size:14px;color:#e8e0d0;outline:none;display:block;margin-bottom:14px;}
-.input:focus{border-color:#8B6914;}
-.lbl{font-size:10px;letter-spacing:2px;color:#445;display:block;margin-bottom:5px;text-transform:uppercase;}
+.btn-gold:hover{background:#7a5c0f;}
+.btn-outline{background:none;color:#8B6914;border:1px solid #c9a84c;}
+.input{width:100%;background:#faf7f2;border:1px solid #ddd3c0;border-radius:6px;padding:11px 14px;font-size:14px;color:#2a2018;outline:none;display:block;margin-bottom:14px;}
+.input:focus{border-color:#8B6914;background:#fff;}
+.lbl{font-size:10px;letter-spacing:2px;color:#8a7a60;display:block;margin-bottom:5px;text-transform:uppercase;}
 .logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;}
-.tab-btn{width:100%;padding:10px 20px;display:flex;align-items:center;gap:10px;background:none;border:none;border-left:2px solid transparent;font-size:11px;letter-spacing:1px;color:#445;cursor:pointer;text-align:left;text-transform:uppercase;}
-.tab-btn.active,.tab-btn:hover{color:#8B6914;background:rgba(139,105,20,0.1);border-left-color:#8B6914;}
+.tab-btn{width:100%;padding:10px 20px;display:flex;align-items:center;gap:10px;background:none;border:none;border-left:2px solid transparent;font-size:11px;letter-spacing:1px;color:#8a7a60;cursor:pointer;text-align:left;text-transform:uppercase;transition:all 0.15s;}
+.tab-btn.active,.tab-btn:hover{color:#7a5c0f;background:rgba(139,105,20,0.07);border-left-color:#8B6914;}
 .tab-content{display:none;}
 .tab-content.active{display:block;}
-.srow{display:flex;align-items:center;padding:9px 16px;border-bottom:1px solid #141820;gap:10px;font-size:12px;}
+.srow{display:flex;align-items:center;padding:9px 16px;border-bottom:1px solid #ede5d8;gap:10px;font-size:12px;}
 .badge{font-size:9px;padding:2px 7px;border-radius:2px;text-align:center;cursor:pointer;border:none;}
-.bp{background:rgba(123,196,127,0.1);color:#7bc47f;}
-.bn{background:rgba(30,40,48,0.8);color:#556;}
-.ba{background:rgba(139,105,20,0.15);color:#8B6914;}
-.pbar{height:3px;background:#1e2830;border-radius:2px;overflow:hidden;}
+.bp{background:rgba(58,122,63,0.1);color:#3a7a3f;}
+.bn{background:rgba(180,165,140,0.2);color:#8a7a60;}
+.ba{background:rgba(139,105,20,0.12);color:#7a5c0f;}
+.pbar{height:3px;background:#ede5d8;border-radius:2px;overflow:hidden;}
 .pfill{height:100%;background:#8B6914;border-radius:2px;}
-.pgreen{background:#7bc47f;}
-.err{background:rgba(232,124,90,0.1);border:1px solid rgba(232,124,90,0.3);border-radius:6px;padding:9px 13px;font-size:12px;color:#e87c5a;margin-bottom:18px;display:none;}
+.pgreen{background:#3a7a3f;}
+.err{background:rgba(180,60,40,0.08);border:1px solid rgba(180,60,40,0.25);border-radius:6px;padding:9px 13px;font-size:12px;color:#b03020;margin-bottom:18px;display:none;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .au{animation:fadeUp 0.4s ease forwards;}
 .btable{width:100%;border-collapse:collapse;}
-.btable th{font-size:9px;letter-spacing:2px;color:#334;text-transform:uppercase;padding:8px 12px;text-align:left;border-bottom:1px solid #1e2830;}
+.btable th{font-size:9px;letter-spacing:2px;color:#8a7a60;text-transform:uppercase;padding:8px 12px;text-align:left;border-bottom:1px solid #ddd3c0;background:#faf7f2;}
 .btable th:not(:first-child){text-align:right;}
-.btr{border-bottom:1px solid #0e1117;}
+.btr{border-bottom:1px solid #f0e8d8;}
 .btr:hover{background:rgba(139,105,20,0.03);}
 .btr td{padding:8px 12px;font-size:12px;vertical-align:middle;}
 .btr td:not(:first-child){text-align:right;}
-.phase-header td{background:#0e1117;font-size:10px;letter-spacing:2px;color:#8B6914;text-transform:uppercase;padding:10px 12px;font-weight:600;}
-.phase-total td{background:rgba(139,105,20,0.05);font-size:11px;font-weight:600;border-top:1px solid rgba(139,105,20,0.15);padding:14px 12px;}
-.grand-total td{background:rgba(139,105,20,0.1);font-size:13px;font-weight:700;border-top:2px solid rgba(139,105,20,0.3);padding:14px 12px;}
-.amt-input{background:none;border:none;color:#e8e0d0;font-family:'DM Mono',monospace;font-size:12px;text-align:right;width:90px;padding:2px 4px;border-radius:3px;}
-.amt-input:focus{background:#1a2010;outline:1px solid #8B6914;color:#fff;}
+.phase-header td{background:#faf7f2;font-size:10px;letter-spacing:2px;color:#8B6914;text-transform:uppercase;padding:10px 12px;font-weight:600;border-bottom:1px solid #ede5d8;}
+.phase-total td{background:rgba(139,105,20,0.04);font-size:11px;font-weight:600;border-top:1px solid rgba(139,105,20,0.15);padding:14px 12px;}
+.grand-total td{background:rgba(139,105,20,0.08);font-size:13px;font-weight:700;border-top:2px solid rgba(139,105,20,0.25);padding:14px 12px;}
+.amt-input{background:none;border:none;color:#2a2018;font-family:'DM Mono',monospace;font-size:12px;text-align:right;width:90px;padding:2px 4px;border-radius:3px;}
+.amt-input:focus{background:#faf7f2;outline:1px solid #8B6914;color:#2a2018;}
 .toggle-paid{font-size:9px;padding:3px 8px;border-radius:3px;cursor:pointer;border:none;font-weight:600;letter-spacing:1px;}
-.is-paid{background:rgba(123,196,127,0.12);color:#7bc47f;}
-.is-pending{background:rgba(30,40,48,0.9);color:#445;}
-.sched-row{display:grid;grid-template-columns:24px 20px 1.6fr 90px 52px 108px 78px 52px;align-items:center;padding:7px 10px;border-bottom:1px solid #0e1117;gap:5px;font-size:12px;}
+.is-paid{background:rgba(58,122,63,0.1);color:#3a7a3f;}
+.is-pending{background:rgba(180,165,140,0.2);color:#8a7a60;}
+.sched-row{display:grid;grid-template-columns:24px 20px 1.6fr 90px 52px 108px 78px 52px;align-items:center;padding:7px 10px;border-bottom:1px solid #f0e8d8;gap:5px;font-size:12px;}
 .sched-row:hover{background:rgba(139,105,20,0.03);}
-.sched-input{background:none;border:none;color:#aaa;font-size:12px;width:100%;padding:2px 4px;border-radius:3px;}
-.sched-input:focus{background:#1a2010;outline:1px solid #8B6914;color:#fff;}
-.date-input{background:none;border:none;color:#556;font-size:11px;width:100%;padding:2px 4px;border-radius:3px;text-align:center;}
-.date-input:focus{background:#1a2010;outline:1px solid #8B6914;color:#fff;}
-.dur-input{background:none;border:none;color:#8B6914;font-family:'DM Mono',monospace;font-size:11px;width:100%;padding:2px 4px;border-radius:3px;text-align:center;}
-.dur-input:focus{background:#1a2010;outline:1px solid #8B6914;color:#fff;}
-.pred-input{background:none;border:none;color:#7ba4c4;font-family:'DM Mono',monospace;font-size:10px;width:100%;padding:2px 4px;border-radius:3px;text-align:center;}
-.pred-input:focus{background:#0e1a2a;outline:1px solid #7ba4c4;color:#fff;}
-.move-btn{background:none;border:none;color:#334;cursor:pointer;padding:1px 3px;font-size:11px;line-height:1;display:block;width:100%;text-align:center;}
+.sched-input{background:none;border:none;color:#4a3a28;font-size:12px;width:100%;padding:2px 4px;border-radius:3px;}
+.sched-input:focus{background:#faf7f2;outline:1px solid #8B6914;color:#2a2018;}
+.date-input{background:none;border:none;color:#8a7a60;font-size:11px;width:100%;padding:2px 4px;border-radius:3px;text-align:center;}
+.date-input:focus{background:#faf7f2;outline:1px solid #8B6914;color:#2a2018;}
+.dur-input{background:none;border:none;color:#7a5c0f;font-family:'DM Mono',monospace;font-size:11px;width:100%;padding:2px 4px;border-radius:3px;text-align:center;}
+.dur-input:focus{background:#faf7f2;outline:1px solid #8B6914;}
+.pred-input{background:none;border:none;color:#4a6a8a;font-family:'DM Mono',monospace;font-size:10px;width:100%;padding:2px 4px;border-radius:3px;text-align:center;}
+.pred-input:focus{background:#f0f5fa;outline:1px solid #4a6a8a;}
+.move-btn{background:none;border:none;color:#c0b090;cursor:pointer;padding:1px 3px;font-size:11px;line-height:1;display:block;width:100%;text-align:center;}
 .move-btn:hover{color:#8B6914;}
 .gantt-wrap{overflow-x:auto;margin-top:8px;}
 .gantt-table{min-width:900px;width:100%;}
-.gantt-label{font-size:11px;color:#aaa;padding:6px 10px;white-space:nowrap;min-width:180px;max-width:220px;overflow:hidden;text-overflow:ellipsis;border-bottom:1px solid #0e1117;vertical-align:middle;}
-.gantt-label.done{color:#334;text-decoration:line-through;}
-.gantt-label.active{color:#e8e0d0;}
-.gantt-header-cell{font-size:9px;letter-spacing:2px;color:#334;text-transform:uppercase;text-align:center;padding:8px 2px;border-bottom:2px solid #1e2830;}
-.sched-view-btn{padding:7px 16px;font-size:11px;border-radius:5px;cursor:pointer;border:1px solid #1e2830;background:none;color:#445;font-weight:600;}
-.sched-view-btn.active{background:rgba(139,105,20,0.15);border-color:rgba(139,105,20,0.3);color:#8B6914;}
-.bid-section{border:1px solid #1e2830;border-radius:8px;margin-bottom:14px;overflow:hidden;}
-.bid-section-header{background:#0e1117;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;}
-.bid-row{display:grid;grid-template-columns:28px 1fr 110px 130px 1fr 36px;align-items:center;padding:8px 14px;border-top:1px solid #0e1117;gap:8px;font-size:12px;transition:background 0.15s;}
-.bid-row.selected{background:rgba(139,105,20,0.08);border-left:3px solid #8B6914;}
+.gantt-label{font-size:11px;color:#4a3a28;padding:6px 10px;white-space:nowrap;min-width:180px;max-width:220px;overflow:hidden;text-overflow:ellipsis;border-bottom:1px solid #f0e8d8;vertical-align:middle;}
+.gantt-label.done{color:#b0a090;text-decoration:line-through;}
+.gantt-label.active{color:#2a2018;font-weight:500;}
+.gantt-header-cell{font-size:9px;letter-spacing:2px;color:#8a7a60;text-transform:uppercase;text-align:center;padding:8px 2px;border-bottom:2px solid #ddd3c0;background:#faf7f2;}
+.sched-view-btn{padding:7px 16px;font-size:11px;border-radius:5px;cursor:pointer;border:1px solid #ddd3c0;background:#fff;color:#8a7a60;font-weight:600;}
+.sched-view-btn.active{background:rgba(139,105,20,0.1);border-color:rgba(139,105,20,0.3);color:#7a5c0f;}
+.bid-section{border:1px solid #ddd3c0;border-radius:8px;margin-bottom:14px;overflow:hidden;background:#fff;}
+.bid-section-header{background:#faf7f2;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;border-bottom:1px solid #ede5d8;}
+.bid-row{display:grid;grid-template-columns:28px 1fr 110px 130px 1fr 36px;align-items:center;padding:8px 14px;border-top:1px solid #f0e8d8;gap:8px;font-size:12px;transition:background 0.15s;}
+.bid-row.selected{background:rgba(139,105,20,0.06);border-left:3px solid #8B6914;}
 .bid-row:not(.selected){border-left:3px solid transparent;}
-.star-btn{background:none;border:none;cursor:pointer;font-size:16px;padding:0;line-height:1;color:#334;transition:color 0.15s;}
+.star-btn{background:none;border:none;cursor:pointer;font-size:16px;padding:0;line-height:1;color:#c0b090;transition:color 0.15s;}
 .star-btn.selected{color:#8B6914;}
-.bid-input{background:none;border:none;color:#aaa;font-size:12px;width:100%;padding:2px 4px;border-radius:3px;}
-.bid-input:focus{background:#1a2010;outline:1px solid #8B6914;color:#fff;}
-.bid-amt-input{background:none;border:none;color:#7bc47f;font-family:'DM Mono',monospace;font-size:12px;width:100%;padding:2px 4px;border-radius:3px;text-align:right;}
-.bid-amt-input:focus{background:#1a2010;outline:1px solid #8B6914;color:#fff;}
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:999;display:flex;align-items:center;justify-content:center;}
+.bid-input{background:none;border:none;color:#4a3a28;font-size:12px;width:100%;padding:2px 4px;border-radius:3px;}
+.bid-input:focus{background:#faf7f2;outline:1px solid #8B6914;}
+.bid-amt-input{background:none;border:none;color:#3a7a3f;font-family:'DM Mono',monospace;font-size:12px;width:100%;padding:2px 4px;border-radius:3px;text-align:right;}
+.bid-amt-input:focus{background:#faf7f2;outline:1px solid #8B6914;}
+.modal-overlay{position:fixed;inset:0;background:rgba(42,32,24,0.5);z-index:999;display:flex;align-items:center;justify-content:center;}
 .job-name-display{display:flex;align-items:center;gap:6px;cursor:pointer;}
 .job-name-display:hover .edit-icon{opacity:1;}
 .edit-icon{opacity:0;font-size:10px;color:#8B6914;transition:opacity 0.15s;}
-.job-name-input{background:#0e1117;border:1px solid #8B6914;border-radius:5px;color:#e8e0d0;font-size:13px;padding:4px 8px;outline:none;font-family:'Outfit',sans-serif;width:200px;}
-/* Chat styles */
+.job-name-input{background:#fff;border:1px solid #8B6914;border-radius:5px;color:#2a2018;font-size:13px;padding:4px 8px;outline:none;font-family:'Outfit',sans-serif;width:200px;}
 .chat-msg{display:flex;gap:10px;margin-bottom:14px;align-items:flex-end;}
 .chat-msg.mine{flex-direction:row-reverse;}
 .chat-bubble{max-width:62%;padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.5;}
-.chat-bubble.other{background:#12161a;border:1px solid #1e2830;color:#ccc;border-bottom-left-radius:3px;}
+.chat-bubble.other{background:#f0e8d8;border:1px solid #ddd3c0;color:#2a2018;border-bottom-left-radius:3px;}
 .chat-bubble.mine{background:#8B6914;color:#fff;border-bottom-right-radius:3px;}
 .chat-avatar{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;}
-.chat-time{font-size:10px;color:#334;margin-top:3px;text-align:right;}
+.chat-time{font-size:10px;color:#b0a090;margin-top:3px;text-align:right;}
 .chat-time.other{text-align:left;}
-.chat-tab-btn{padding:8px 20px;font-size:11px;font-weight:600;border:none;background:none;cursor:pointer;letter-spacing:1px;border-bottom:2px solid transparent;color:#445;transition:all 0.15s;}
-.chat-tab-btn.active{color:#8B6914;border-bottom-color:#8B6914;}
-.online-dot{width:7px;height:7px;border-radius:50%;background:#7bc47f;display:inline-block;margin-right:4px;}
+.chat-tab-btn{padding:8px 20px;font-size:11px;font-weight:600;border:none;background:none;cursor:pointer;letter-spacing:1px;border-bottom:2px solid transparent;color:#8a7a60;transition:all 0.15s;}
+.chat-tab-btn.active{color:#7a5c0f;border-bottom-color:#8B6914;}
+.online-dot{width:7px;height:7px;border-radius:50%;background:#3a7a3f;display:inline-block;margin-right:4px;}
+/* Nav & sidebar */
+.dash-nav{background:#fff;border-bottom:1px solid #ddd3c0;box-shadow:0 1px 6px rgba(139,105,20,0.08);}
+.dash-sidebar{background:#fff;border-right:1px solid #ddd3c0;}
+.land-nav{background:#fff;border-bottom:1px solid #ddd3c0;box-shadow:0 1px 6px rgba(139,105,20,0.06);}
 </style>
 </head>
 <body>
 
 <!-- LANDING PAGE -->
 <div id="pg-land" class="page active">
-  <nav style="background:#080b08;border-bottom:1px solid #1a2010;padding:0 48px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;">
-    <div style="display:flex;align-items:center;gap:10px;"><svg viewBox="0 0 54 54" fill="none" width="28" height="28"><path d="M27 6L5 22V48H22V34H32V48H49V22L27 6Z" fill="#1a2010" stroke="#8B6914" stroke-width="2" stroke-linejoin="round"/><path d="M27 6L5 22H49L27 6Z" fill="#8B6914" fill-opacity="0.2"/><rect x="22" y="34" width="10" height="14" rx="5" fill="#8B6914" fill-opacity="0.7"/><circle cx="27" cy="40" r="2.5" fill="#8B6914"/><rect x="26" y="42" width="2" height="4" rx="1" fill="#8B6914"/><line x1="5" y1="48" x2="49" y2="48" stroke="#8B6914" stroke-width="2" stroke-linecap="round"/></svg><span class="logo"><span class="gold">Dirt</span>toKeys</span></div>
-    <div style="display:flex;gap:10px;"><button class="btn" style="background:none;color:#667;" onclick="go('login')">Sign In</button><button class="btn btn-gold" onclick="go('signup')">Get Started</button></div>
+  <nav class="land-nav" style="padding:0 48px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;">
+    <div style="display:flex;align-items:center;gap:10px;"><svg viewBox="0 0 54 54" fill="none" width="28" height="28"><path d="M27 6L5 22V48H22V34H32V48H49V22L27 6Z" fill="#f5f0e8" stroke="#8B6914" stroke-width="2" stroke-linejoin="round"/><path d="M27 6L5 22H49L27 6Z" fill="#8B6914" fill-opacity="0.25"/><rect x="22" y="34" width="10" height="14" rx="5" fill="#8B6914" fill-opacity="0.7"/><circle cx="27" cy="40" r="2.5" fill="#8B6914"/><rect x="26" y="42" width="2" height="4" rx="1" fill="#8B6914"/><line x1="5" y1="48" x2="49" y2="48" stroke="#8B6914" stroke-width="2" stroke-linecap="round"/></svg><span class="logo"><span class="gold">Dirt</span>toKeys</span></div>
+    <div style="display:flex;gap:10px;"><button class="btn" style="background:none;color:#8a7a60;border:1px solid #ddd3c0;" onclick="go('login')">Sign In</button><button class="btn btn-gold" onclick="go('signup')">Get Started</button></div>
   </nav>
   <div style="padding:110px 48px 80px;max-width:860px;margin:0 auto;text-align:center;" class="au">
     <div style="font-size:11px;letter-spacing:4px;color:#8B6914;margin-bottom:22px;text-transform:uppercase;">Builder Platform</div>
-    <h1 class="serif" style="font-size:clamp(44px,8vw,80px);font-weight:700;line-height:1.05;margin-bottom:26px;color:#f0ebe0;">From <span class="gold">Dirt</span> to <span class="gold">Keys</span>.<br>On Your Terms.</h1>
-    <p style="font-size:17px;color:#667;line-height:1.7;max-width:580px;margin:0 auto 44px;font-weight:300;">The complete platform for Homebuilders. Budget tracking, schedules, bidding, and communication made easy.</p>
+    <h1 class="serif" style="font-size:clamp(44px,8vw,80px);font-weight:700;line-height:1.05;margin-bottom:26px;color:#1a1208;">From <span class="gold">Dirt</span> to <span class="gold">Keys</span>.<br>On Your Terms.</h1>
+    <p style="font-size:17px;color:#6a5a48;line-height:1.7;max-width:580px;margin:0 auto 44px;font-weight:300;">The complete platform for Homebuilders. Budget tracking, schedules, bidding, and communication made easy.</p>
     <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;"><button class="btn btn-gold" style="font-size:14px;padding:14px 36px;" onclick="go('signup')">Start Building Free →</button><button class="btn btn-outline" style="font-size:14px;padding:14px 36px;" onclick="go('login')">Sign In</button></div>
-    <div style="margin-top:18px;font-size:12px;color:#334;">No credit card required · Free 14-day trial</div>
+    <div style="margin-top:18px;font-size:12px;color:#b0a090;">No credit card required · Free 14-day trial</div>
   </div>
-  <div style="padding:70px 48px;border-top:1px solid #1a2010;"><div style="max-width:1000px;margin:0 auto;"><div style="text-align:center;margin-bottom:52px;"><div style="font-size:10px;letter-spacing:4px;color:#8B6914;margin-bottom:10px;text-transform:uppercase;">Everything You Need</div><h2 class="serif" style="font-size:38px;font-weight:700;color:#f0ebe0;">Built for builders.<br>Designed for results.</h2></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;"><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">◈</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">Phase-by-Phase Tracker</div><div style="font-size:12px;color:#445;line-height:1.6;">Follow your build from land prep to certificate of occupancy.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">◎</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">Budget Manager</div><div style="font-size:12px;color:#445;line-height:1.6;">Track every dollar. Edit amounts. Toggle paid/pending instantly.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">▦</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">Gantt Schedule</div><div style="font-size:12px;color:#445;line-height:1.6;">Visual Gantt chart with predecessors and reorderable tasks.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">❑</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">Bid Manager</div><div style="font-size:12px;color:#445;line-height:1.6;">Track bids per line item. Star to select — price flows to budget.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">💬</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">Team & Client Chat</div><div style="font-size:12px;color:#445;line-height:1.6;">Separate channels for your team and your clients. All in one place.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">⌂</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">Build Dashboard</div><div style="font-size:12px;color:#445;line-height:1.6;">Your entire project at a glance.</div></div></div></div></div>
-  <div style="padding:70px 48px;border-top:1px solid #1a2010;"><div style="max-width:520px;margin:0 auto;text-align:center;"><h2 class="serif" style="font-size:38px;font-weight:700;color:#f0ebe0;margin-bottom:40px;">One plan. Everything included.</h2><div class="card" style="padding:44px 36px;border-color:rgba(139,105,20,0.35);"><div style="font-size:11px;letter-spacing:3px;color:#8B6914;margin-bottom:14px;">BUILDER PLAN</div><div style="display:flex;align-items:flex-end;justify-content:center;gap:4px;margin-bottom:6px;"><span class="serif" style="font-size:68px;font-weight:700;color:#f0ebe0;line-height:1;">$197</span><span style="font-size:13px;color:#445;margin-bottom:10px;">/month</span></div><div style="font-size:12px;color:#445;margin-bottom:28px;">Cancel anytime · 14-day free trial</div><div style="display:flex;flex-direction:column;gap:10px;margin-bottom:32px;text-align:left;"><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#aaa;"><span class="gold">✓</span> Full build dashboard & phase tracker</div><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#aaa;"><span class="gold">✓</span> Editable budget with paid/pending toggle</div><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#aaa;"><span class="gold">✓</span> Gantt chart with predecessor scheduling</div><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#aaa;"><span class="gold">✓</span> Bid manager — star to push price to budget</div><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#aaa;"><span class="gold">✓</span> Team & Client chat channels</div></div><button class="btn btn-gold" style="width:100%;padding:14px;font-size:14px;" onclick="go('signup')">Start Free Trial →</button></div></div></div>
-  <footer style="padding:32px 48px;border-top:1px solid #1a2010;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;"><span class="logo" style="font-size:18px;"><span class="gold">Dirt</span>toKeys</span><span style="font-size:11px;color:#223;">© 2026 DirtToKeys. Built for builders.</span></footer>
+  <div style="padding:70px 48px;border-top:1px solid #ddd3c0;background:#faf7f2;"><div style="max-width:1000px;margin:0 auto;"><div style="text-align:center;margin-bottom:52px;"><div style="font-size:10px;letter-spacing:4px;color:#8B6914;margin-bottom:10px;text-transform:uppercase;">Everything You Need</div><h2 class="serif" style="font-size:38px;font-weight:700;color:#1a1208;">Built for builders.<br>Designed for results.</h2></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;"><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">◈</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;color:#2a2018;">Phase-by-Phase Tracker</div><div style="font-size:12px;color:#8a7a60;line-height:1.6;">Follow your build from land prep to certificate of occupancy.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">◎</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;color:#2a2018;">Budget Manager</div><div style="font-size:12px;color:#8a7a60;line-height:1.6;">Track every dollar. Edit amounts. Toggle paid/pending instantly.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">▦</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;color:#2a2018;">Gantt Schedule</div><div style="font-size:12px;color:#8a7a60;line-height:1.6;">Visual Gantt chart with predecessors and reorderable tasks.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">❑</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;color:#2a2018;">Bid Manager</div><div style="font-size:12px;color:#8a7a60;line-height:1.6;">Track bids per line item. Star to select — price flows to budget.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">💬</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;color:#2a2018;">Team & Client Chat</div><div style="font-size:12px;color:#8a7a60;line-height:1.6;">Separate channels for your team and your clients. All in one place.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">⌂</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;color:#2a2018;">Build Dashboard</div><div style="font-size:12px;color:#8a7a60;line-height:1.6;">Your entire project at a glance.</div></div></div></div></div>
+  <div style="padding:70px 48px;border-top:1px solid #ddd3c0;"><div style="max-width:520px;margin:0 auto;text-align:center;"><h2 class="serif" style="font-size:38px;font-weight:700;color:#1a1208;margin-bottom:40px;">One plan. Everything included.</h2><div class="card" style="padding:44px 36px;border-color:rgba(139,105,20,0.35);"><div style="font-size:11px;letter-spacing:3px;color:#8B6914;margin-bottom:14px;">BUILDER PLAN</div><div style="display:flex;align-items:flex-end;justify-content:center;gap:4px;margin-bottom:6px;"><span class="serif" style="font-size:68px;font-weight:700;color:#1a1208;line-height:1;">$197</span><span style="font-size:13px;color:#8a7a60;margin-bottom:10px;">/month</span></div><div style="font-size:12px;color:#8a7a60;margin-bottom:28px;">Cancel anytime · 14-day free trial</div><div style="display:flex;flex-direction:column;gap:10px;margin-bottom:32px;text-align:left;"><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#4a3a28;"><span class="gold">✓</span> Full build dashboard & phase tracker</div><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#4a3a28;"><span class="gold">✓</span> Editable budget with paid/pending toggle</div><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#4a3a28;"><span class="gold">✓</span> Gantt chart with predecessor scheduling</div><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#4a3a28;"><span class="gold">✓</span> Bid manager — star to push price to budget</div><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#4a3a28;"><span class="gold">✓</span> Team & Client chat channels</div></div><button class="btn btn-gold" style="width:100%;padding:14px;font-size:14px;" onclick="go('signup')">Start Free Trial →</button></div></div></div>
+  <footer style="padding:32px 48px;border-top:1px solid #ddd3c0;background:#faf7f2;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;"><span class="logo" style="font-size:18px;"><span class="gold">Dirt</span>toKeys</span><span style="font-size:11px;color:#b0a090;">© 2026 DirtToKeys. Built for builders.</span></footer>
 </div>
 
 <!-- LOGIN -->
-<div id="pg-login" class="page">
+<div id="pg-login" class="page" style="background:#f5f0e8;">
   <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;">
     <button onclick="go('land')" style="background:none;border:none;cursor:pointer;margin-bottom:36px;"><span class="logo" style="font-size:24px;"><span class="gold">Dirt</span>toKeys</span></button>
     <div class="card" style="padding:38px 34px;width:100%;max-width:400px;border-radius:10px;">
-      <h1 class="serif" style="font-size:28px;font-weight:700;color:#f0ebe0;margin-bottom:4px;">Welcome back</h1>
-      <p style="font-size:12px;color:#445;margin-bottom:28px;">Sign in to your build dashboard</p>
+      <h1 class="serif" style="font-size:28px;font-weight:700;color:#1a1208;margin-bottom:4px;">Welcome back</h1>
+      <p style="font-size:12px;color:#8a7a60;margin-bottom:28px;">Sign in to your build dashboard</p>
       <div id="lerr" class="err"></div>
       <label class="lbl">Email</label><input class="input" type="email" id="lem" placeholder="you@email.com" autocomplete="email">
       <label class="lbl">Password</label><input class="input" type="password" id="lpw" placeholder="••••••••" autocomplete="current-password">
       <button class="btn btn-gold" style="width:100%;padding:13px;font-size:14px;margin-top:10px;" onclick="doLogin()">Sign In →</button>
-      <div style="text-align:center;margin-top:20px;font-size:12px;color:#334;">No account? <button onclick="go('signup')" style="background:none;border:none;color:#8B6914;cursor:pointer;font-size:12px;">Start free trial</button></div>
+      <div style="text-align:center;margin-top:20px;font-size:12px;color:#8a7a60;">No account? <button onclick="go('signup')" style="background:none;border:none;color:#8B6914;cursor:pointer;font-size:12px;font-weight:600;">Start free trial</button></div>
     </div>
   </div>
 </div>
 
 <!-- SIGNUP -->
-<div id="pg-signup" class="page">
+<div id="pg-signup" class="page" style="background:#f5f0e8;">
   <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;">
     <button onclick="go('land')" style="background:none;border:none;cursor:pointer;margin-bottom:36px;"><span class="logo" style="font-size:24px;"><span class="gold">Dirt</span>toKeys</span></button>
     <div class="card" style="padding:38px 34px;width:100%;max-width:400px;border-radius:10px;">
-      <h1 class="serif" style="font-size:28px;font-weight:700;color:#f0ebe0;margin-bottom:4px;">Start building</h1>
-      <p style="font-size:12px;color:#445;margin-bottom:28px;">Free 14-day trial · No credit card required</p>
+      <h1 class="serif" style="font-size:28px;font-weight:700;color:#1a1208;margin-bottom:4px;">Start building</h1>
+      <p style="font-size:12px;color:#8a7a60;margin-bottom:28px;">Free 14-day trial · No credit card required</p>
       <div id="serr" class="err"></div>
       <label class="lbl">Your Name</label><input class="input" type="text" id="snm" placeholder="John Smith" autocomplete="off">
       <label class="lbl">Your Build Name</label><input class="input" type="text" id="spr" placeholder="The Smith Build" autocomplete="off">
       <label class="lbl">Email</label><input class="input" type="email" id="sem" placeholder="you@email.com" autocomplete="email">
       <label class="lbl">Password</label><input class="input" type="password" id="spw" placeholder="Min 6 characters" autocomplete="new-password">
       <button class="btn btn-gold" style="width:100%;padding:13px;font-size:14px;margin-top:10px;" id="signup-btn" onclick="doSignup()">Start Free Trial →</button>
-      <div style="text-align:center;margin-top:20px;font-size:12px;color:#334;">Have an account? <button onclick="go('login')" style="background:none;border:none;color:#8B6914;cursor:pointer;font-size:12px;">Sign in</button></div>
+      <div style="text-align:center;margin-top:20px;font-size:12px;color:#8a7a60;">Have an account? <button onclick="go('login')" style="background:none;border:none;color:#8B6914;cursor:pointer;font-size:12px;font-weight:600;">Sign in</button></div>
     </div>
   </div>
 </div>
 
 <!-- DASHBOARD -->
-<div id="pg-dash" class="page" style="background:#0e1117;">
-  <div style="background:#080b08;border-bottom:1px solid #1a2010;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;">
-    <div style="display:flex;align-items:center;gap:10px;"><svg viewBox="0 0 54 54" fill="none" width="26" height="26"><path d="M27 6L5 22V48H22V34H32V48H49V22L27 6Z" fill="#1a2010" stroke="#8B6914" stroke-width="2" stroke-linejoin="round"/><path d="M27 6L5 22H49L27 6Z" fill="#8B6914" fill-opacity="0.2"/><rect x="22" y="34" width="10" height="14" rx="5" fill="#8B6914" fill-opacity="0.7"/><circle cx="27" cy="40" r="2.5" fill="#8B6914"/><rect x="26" y="42" width="2" height="4" rx="1" fill="#8B6914"/><line x1="5" y1="48" x2="49" y2="48" stroke="#8B6914" stroke-width="2" stroke-linecap="round"/></svg><span class="logo" style="font-size:20px;"><span class="gold">Dirt</span>toKeys</span></div>
+<div id="pg-dash" class="page" style="background:#f5f0e8;">
+  <div class="dash-nav" style="padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;">
+    <div style="display:flex;align-items:center;gap:10px;"><svg viewBox="0 0 54 54" fill="none" width="26" height="26"><path d="M27 6L5 22V48H22V34H32V48H49V22L27 6Z" fill="#f5f0e8" stroke="#8B6914" stroke-width="2" stroke-linejoin="round"/><path d="M27 6L5 22H49L27 6Z" fill="#8B6914" fill-opacity="0.25"/><rect x="22" y="34" width="10" height="14" rx="5" fill="#8B6914" fill-opacity="0.7"/><circle cx="27" cy="40" r="2.5" fill="#8B6914"/><rect x="26" y="42" width="2" height="4" rx="1" fill="#8B6914"/><line x1="5" y1="48" x2="49" y2="48" stroke="#8B6914" stroke-width="2" stroke-linecap="round"/></svg><span class="logo" style="font-size:20px;"><span class="gold">Dirt</span>toKeys</span></div>
     <div style="display:flex;align-items:center;gap:14px;">
       <div id="job-name-display" class="job-name-display" onclick="startEditJobName()" title="Click to rename">
-        <span id="dpn" style="font-size:13px;color:#aaa;font-weight:500;">My Build</span>
+        <span id="dpn" style="font-size:13px;color:#4a3a28;font-weight:500;">My Build</span>
         <span class="edit-icon">✎</span>
       </div>
       <input id="job-name-input" class="job-name-input" style="display:none;" onblur="saveJobName()" onkeydown="if(event.key==='Enter')saveJobName();if(event.key==='Escape')cancelEditJobName();">
-      <button onclick="doSignOut()" style="font-size:11px;color:#445;background:none;border:1px solid #1e2830;border-radius:5px;padding:6px 13px;cursor:pointer;">Sign Out</button>
+      <button onclick="doSignOut()" style="font-size:11px;color:#8a7a60;background:none;border:1px solid #ddd3c0;border-radius:5px;padding:6px 13px;cursor:pointer;">Sign Out</button>
     </div>
   </div>
   <div style="display:flex;">
-    <div style="width:192px;background:#080b08;border-right:1px solid #1a2010;min-height:calc(100vh - 56px);padding:18px 0;flex-shrink:0;position:sticky;top:56px;height:calc(100vh - 56px);overflow-y:auto;">
+    <div class="dash-sidebar" style="width:192px;min-height:calc(100vh - 56px);padding:18px 0;flex-shrink:0;position:sticky;top:56px;height:calc(100vh - 56px);overflow-y:auto;">
       <button class="tab-btn active" onclick="st('home')" id="tb-home"><span style="font-size:14px;">⌂</span>Dashboard</button>
       <button class="tab-btn" onclick="st('phases')" id="tb-phases"><span style="font-size:14px;">◈</span>Phases</button>
       <button class="tab-btn" onclick="st('budget')" id="tb-budget"><span style="font-size:14px;">◎</span>Budget</button>
@@ -181,12 +185,12 @@ button,input,select,textarea{font-family:'Outfit',sans-serif;}
       <button class="tab-btn" onclick="st('chat')" id="tb-chat"><span style="font-size:14px;">💬</span>Chat</button>
       <div style="margin:24px 12px 0;padding:14px;background:rgba(139,105,20,0.06);border:1px solid rgba(139,105,20,0.15);border-radius:6px;">
         <div style="font-size:9px;color:#8B6914;letter-spacing:2px;margin-bottom:6px;">OVERALL PROGRESS</div>
-        <div class="serif" style="font-size:30px;line-height:1;">33%</div>
+        <div class="serif" style="font-size:30px;line-height:1;color:#1a1208;">33%</div>
         <div class="pbar" style="margin-top:6px;"><div class="pfill" style="width:33%;"></div></div>
-        <div style="font-size:9px;color:#334;margin-top:6px;">Rough Structure active</div>
+        <div style="font-size:9px;color:#b0a090;margin-top:6px;">Rough Structure active</div>
       </div>
-      <div style="margin:16px 12px 0;padding:10px 12px;border:1px solid #1a2010;border-radius:6px;">
-        <div style="font-size:9px;color:#334;letter-spacing:2px;margin-bottom:4px;">PROJECT</div>
+      <div style="margin:16px 12px 0;padding:10px 12px;border:1px solid #ddd3c0;border-radius:6px;background:#faf7f2;">
+        <div style="font-size:9px;color:#b0a090;letter-spacing:2px;margin-bottom:4px;">PROJECT</div>
         <div id="sidebar-job-name" style="font-size:12px;color:#8B6914;font-weight:500;cursor:pointer;" onclick="startEditJobName()" title="Click to rename">Jones Build ✎</div>
       </div>
     </div>
@@ -195,46 +199,46 @@ button,input,select,textarea{font-family:'Outfit',sans-serif;}
       <!-- HOME TAB -->
       <div id="tc-home" class="tab-content active au">
         <div style="margin-bottom:24px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:10px;">
-          <div><div style="font-size:9px;letter-spacing:3px;color:#556;text-transform:uppercase;">Overview</div><div class="serif" style="font-size:36px;font-weight:700;line-height:1;margin-top:4px;">Build Dashboard</div></div>
-          <button onclick="startEditJobName()" style="display:flex;align-items:center;gap:6px;padding:7px 14px;background:rgba(139,105,20,0.1);border:1px solid rgba(139,105,20,0.2);border-radius:6px;color:#8B6914;font-size:11px;cursor:pointer;font-weight:600;">✎ Rename Job</button>
+          <div><div style="font-size:9px;letter-spacing:3px;color:#8a7a60;text-transform:uppercase;">Overview</div><div class="serif" style="font-size:36px;font-weight:700;line-height:1;margin-top:4px;color:#1a1208;">Build Dashboard</div></div>
+          <button onclick="startEditJobName()" style="display:flex;align-items:center;gap:6px;padding:7px 14px;background:rgba(139,105,20,0.08);border:1px solid rgba(139,105,20,0.2);border-radius:6px;color:#7a5c0f;font-size:11px;cursor:pointer;font-weight:600;">✎ Rename Job</button>
         </div>
         <div class="card" style="padding:16px 20px;margin-bottom:20px;border-color:rgba(139,105,20,0.2);display:flex;align-items:center;justify-content:space-between;">
-          <div><div style="font-size:9px;letter-spacing:2px;color:#445;text-transform:uppercase;margin-bottom:4px;">Current Project</div><div id="home-job-name" class="serif" style="font-size:28px;font-weight:700;color:#f0ebe0;">Jones Build</div></div>
-          <button onclick="startEditJobName()" style="padding:8px 16px;background:rgba(139,105,20,0.12);border:1px solid rgba(139,105,20,0.25);border-radius:6px;color:#8B6914;font-size:11px;cursor:pointer;font-weight:600;">✎ Rename</button>
+          <div><div style="font-size:9px;letter-spacing:2px;color:#8a7a60;text-transform:uppercase;margin-bottom:4px;">Current Project</div><div id="home-job-name" class="serif" style="font-size:28px;font-weight:700;color:#1a1208;">Jones Build</div></div>
+          <button onclick="startEditJobName()" style="padding:8px 16px;background:rgba(139,105,20,0.08);border:1px solid rgba(139,105,20,0.2);border-radius:6px;color:#7a5c0f;font-size:11px;cursor:pointer;font-weight:600;">✎ Rename</button>
         </div>
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;">
-          <div class="card" style="padding:16px 18px;"><div style="font-size:9px;letter-spacing:2px;color:#445;text-transform:uppercase;margin-bottom:6px;">Total Budget</div><div class="serif" style="font-size:22px;line-height:1;" id="dash-total">$1,069,518</div><div style="font-size:10px;color:#334;margin-top:4px;">$234/sf · 4,560 sf</div></div>
-          <div class="card" style="padding:16px 18px;"><div style="font-size:9px;letter-spacing:2px;color:#445;text-transform:uppercase;margin-bottom:6px;">Paid to Date</div><div class="serif gold" style="font-size:22px;line-height:1;" id="dash-spent">$0</div><div style="font-size:10px;color:#334;margin-top:4px;" id="dash-pct">0% of budget</div></div>
-          <div class="card" style="padding:16px 18px;"><div style="font-size:9px;letter-spacing:2px;color:#445;text-transform:uppercase;margin-bottom:6px;">Remaining</div><div class="serif green" style="font-size:22px;line-height:1;" id="dash-remain">$1,069,518</div><div style="font-size:10px;color:#334;margin-top:4px;">uncommitted funds</div></div>
-          <div class="card" style="padding:16px 18px;"><div style="font-size:9px;letter-spacing:2px;color:#445;text-transform:uppercase;margin-bottom:6px;">Est. Completion</div><div class="serif" style="font-size:22px;line-height:1;">Jul 2026</div><div style="font-size:10px;color:#334;margin-top:4px;">Per schedule</div></div>
+          <div class="card" style="padding:16px 18px;"><div style="font-size:9px;letter-spacing:2px;color:#8a7a60;text-transform:uppercase;margin-bottom:6px;">Total Budget</div><div class="serif" style="font-size:22px;line-height:1;color:#1a1208;" id="dash-total">$1,069,518</div><div style="font-size:10px;color:#b0a090;margin-top:4px;">$234/sf · 4,560 sf</div></div>
+          <div class="card" style="padding:16px 18px;"><div style="font-size:9px;letter-spacing:2px;color:#8a7a60;text-transform:uppercase;margin-bottom:6px;">Paid to Date</div><div class="serif" style="font-size:22px;line-height:1;color:#7a5c0f;" id="dash-spent">$0</div><div style="font-size:10px;color:#b0a090;margin-top:4px;" id="dash-pct">0% of budget</div></div>
+          <div class="card" style="padding:16px 18px;"><div style="font-size:9px;letter-spacing:2px;color:#8a7a60;text-transform:uppercase;margin-bottom:6px;">Remaining</div><div class="serif" style="font-size:22px;line-height:1;color:#3a7a3f;" id="dash-remain">$1,069,518</div><div style="font-size:10px;color:#b0a090;margin-top:4px;">uncommitted funds</div></div>
+          <div class="card" style="padding:16px 18px;"><div style="font-size:9px;letter-spacing:2px;color:#8a7a60;text-transform:uppercase;margin-bottom:6px;">Est. Completion</div><div class="serif" style="font-size:22px;line-height:1;color:#1a1208;">Jul 2026</div><div style="font-size:10px;color:#b0a090;margin-top:4px;">Per schedule</div></div>
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-          <div class="card" style="padding:20px;border-color:rgba(139,105,20,0.3);"><div style="font-size:9px;color:#8B6914;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">Active Phase</div><div class="serif" style="font-size:20px;margin-bottom:10px;">🔨 Rough Structure</div><div style="font-size:11px;color:#445;padding:4px 0;border-bottom:1px solid #141820;">✓ Foundation complete</div><div style="font-size:11px;color:#445;padding:4px 0;border-bottom:1px solid #141820;">✓ Framing complete</div><div style="font-size:11px;color:#8B6914;padding:4px 0;border-bottom:1px solid #141820;">→ Install Windows & Doors</div><div style="font-size:11px;color:#8B6914;padding:4px 0;">→ Roofing & Masonry</div></div>
-          <div class="card" style="padding:20px;"><div style="font-size:9px;color:#445;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">Upcoming Actions</div><div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid #141820;"><div style="width:6px;height:6px;border-radius:50%;background:#e87c5a;flex-shrink:0;"></div><span style="font-size:11px;color:#ccc;">Confirm window delivery schedule</span></div><div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid #141820;"><div style="width:6px;height:6px;border-radius:50%;background:#e87c5a;flex-shrink:0;"></div><span style="font-size:11px;color:#ccc;">Schedule FMEP rough-in inspections</span></div><div style="display:flex;align-items:center;gap:10px;padding:7px 0;"><div style="width:6px;height:6px;border-radius:50%;background:#e87c5a;flex-shrink:0;"></div><span style="font-size:11px;color:#ccc;">Get masonry / stucco sub bids</span></div></div>
+          <div class="card" style="padding:20px;border-color:rgba(139,105,20,0.25);"><div style="font-size:9px;color:#8B6914;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">Active Phase</div><div class="serif" style="font-size:20px;margin-bottom:10px;color:#1a1208;">🔨 Rough Structure</div><div style="font-size:11px;color:#8a7a60;padding:4px 0;border-bottom:1px solid #ede5d8;">✓ Foundation complete</div><div style="font-size:11px;color:#8a7a60;padding:4px 0;border-bottom:1px solid #ede5d8;">✓ Framing complete</div><div style="font-size:11px;color:#7a5c0f;padding:4px 0;border-bottom:1px solid #ede5d8;">→ Install Windows & Doors</div><div style="font-size:11px;color:#7a5c0f;padding:4px 0;">→ Roofing & Masonry</div></div>
+          <div class="card" style="padding:20px;"><div style="font-size:9px;color:#8a7a60;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">Upcoming Actions</div><div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid #ede5d8;"><div style="width:6px;height:6px;border-radius:50%;background:#c0502a;flex-shrink:0;"></div><span style="font-size:11px;color:#2a2018;">Confirm window delivery schedule</span></div><div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid #ede5d8;"><div style="width:6px;height:6px;border-radius:50%;background:#c0502a;flex-shrink:0;"></div><span style="font-size:11px;color:#2a2018;">Schedule FMEP rough-in inspections</span></div><div style="display:flex;align-items:center;gap:10px;padding:7px 0;"><div style="width:6px;height:6px;border-radius:50%;background:#c0502a;flex-shrink:0;"></div><span style="font-size:11px;color:#2a2018;">Get masonry / stucco sub bids</span></div></div>
         </div>
       </div>
 
       <!-- PHASES TAB -->
       <div id="tc-phases" class="tab-content au">
-        <div style="margin-bottom:24px;"><div style="font-size:9px;letter-spacing:3px;color:#556;text-transform:uppercase;">Construction</div><div class="serif" style="font-size:36px;font-weight:700;line-height:1;margin-top:4px;">Phase Tracker</div></div>
-        <div class="card" style="margin-bottom:10px;overflow:hidden;" id="ph1"><div style="padding:13px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;" onclick="tp('ph1')"><span style="font-size:18px;">📋</span><div style="flex:1;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;"><span class="serif" style="font-size:16px;font-weight:700;">Preliminary</span><span class="badge bp">COMPLETE</span></div><div style="display:flex;align-items:center;gap:8px;"><div class="pbar" style="width:150px;"><div class="pfill pgreen" style="width:100%;"></div></div><span style="font-size:10px;color:#334;">100%</span></div></div><span class="arr" style="color:#223;font-size:10px;">▼</span></div><div class="pb" style="display:none;padding:0 18px 14px;border-top:1px solid #141820;font-size:11px;color:#445;margin-top:4px;">✓ Plans and permits complete.</div></div>
-        <div class="card" style="margin-bottom:10px;overflow:hidden;" id="ph2"><div style="padding:13px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;" onclick="tp('ph2')"><span style="font-size:18px;">🗺️</span><div style="flex:1;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;"><span class="serif" style="font-size:16px;font-weight:700;">Preparation</span><span class="badge bp">COMPLETE</span></div><div style="display:flex;align-items:center;gap:8px;"><div class="pbar" style="width:150px;"><div class="pfill pgreen" style="width:100%;"></div></div><span style="font-size:10px;color:#334;">100%</span></div></div><span class="arr" style="color:#223;font-size:10px;">▼</span></div><div class="pb" style="display:none;padding:0 18px 14px;border-top:1px solid #141820;font-size:11px;color:#445;margin-top:4px;">✓ Sitework and foundation complete.</div></div>
-        <div class="card" style="margin-bottom:10px;overflow:hidden;border-color:rgba(139,105,20,0.4);" id="ph3"><div style="padding:13px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;" onclick="tp('ph3')"><span style="font-size:18px;">🔨</span><div style="flex:1;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;"><span class="serif" style="font-size:16px;font-weight:700;">Rough Structure</span><span class="badge ba">ACTIVE</span></div><div style="display:flex;align-items:center;gap:8px;"><div class="pbar" style="width:150px;"><div class="pfill" style="width:40%;"></div></div><span style="font-size:10px;color:#334;">40%</span></div></div><span class="arr" style="color:#223;font-size:10px;">▲</span></div><div class="pb" style="display:block;padding:0 18px 14px;border-top:1px solid #141820;font-size:11px;color:#445;margin-top:4px;">→ Framing done. Windows, doors, roofing, masonry in progress.</div></div>
-        <div class="card" style="margin-bottom:10px;overflow:hidden;" id="ph4"><div style="padding:13px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;" onclick="tp('ph4')"><span style="font-size:18px;">⚡</span><div style="flex:1;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;"><span class="serif" style="font-size:16px;font-weight:700;">Full Enclosure</span><span class="badge bn">UPCOMING</span></div><div style="display:flex;align-items:center;gap:8px;"><div class="pbar" style="width:150px;"><div class="pfill" style="width:0%;"></div></div><span style="font-size:10px;color:#334;">0%</span></div></div><span class="arr" style="color:#223;font-size:10px;">▼</span></div><div class="pb" style="display:none;padding:0 18px 14px;border-top:1px solid #141820;font-size:11px;color:#445;margin-top:4px;">◦ Plumbing, AC, electrical, insulation, drywall.</div></div>
-        <div class="card" style="margin-bottom:10px;overflow:hidden;" id="ph5"><div style="padding:13px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;" onclick="tp('ph5')"><span style="font-size:18px;">🎨</span><div style="flex:1;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;"><span class="serif" style="font-size:16px;font-weight:700;">Interior Finish</span><span class="badge bn">UPCOMING</span></div><div style="display:flex;align-items:center;gap:8px;"><div class="pbar" style="width:150px;"><div class="pfill" style="width:0%;"></div></div><span style="font-size:10px;color:#334;">0%</span></div></div><span class="arr" style="color:#223;font-size:10px;">▼</span></div><div class="pb" style="display:none;padding:0 18px 14px;border-top:1px solid #141820;font-size:11px;color:#445;margin-top:4px;">◦ Trim, paint, cabinets, flooring, appliances.</div></div>
-        <div class="card" style="margin-bottom:10px;overflow:hidden;" id="ph6"><div style="padding:13px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;" onclick="tp('ph6')"><span style="font-size:18px;">🏠</span><div style="flex:1;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;"><span class="serif" style="font-size:16px;font-weight:700;">Completion</span><span class="badge bn">UPCOMING</span></div><div style="display:flex;align-items:center;gap:8px;"><div class="pbar" style="width:150px;"><div class="pfill" style="width:0%;"></div></div><span style="font-size:10px;color:#334;">0%</span></div></div><span class="arr" style="color:#223;font-size:10px;">▼</span></div><div class="pb" style="display:none;padding:0 18px 14px;border-top:1px solid #141820;font-size:11px;color:#445;margin-top:4px;">◦ Fencing, flatwork, landscaping, final clean.</div></div>
+        <div style="margin-bottom:24px;"><div style="font-size:9px;letter-spacing:3px;color:#8a7a60;text-transform:uppercase;">Construction</div><div class="serif" style="font-size:36px;font-weight:700;line-height:1;margin-top:4px;color:#1a1208;">Phase Tracker</div></div>
+        <div class="card" style="margin-bottom:10px;overflow:hidden;" id="ph1"><div style="padding:13px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;" onclick="tp('ph1')"><span style="font-size:18px;">📋</span><div style="flex:1;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;"><span class="serif" style="font-size:16px;font-weight:700;color:#1a1208;">Preliminary</span><span class="badge bp">COMPLETE</span></div><div style="display:flex;align-items:center;gap:8px;"><div class="pbar" style="width:150px;"><div class="pfill pgreen" style="width:100%;"></div></div><span style="font-size:10px;color:#b0a090;">100%</span></div></div><span class="arr" style="color:#c0b090;font-size:10px;">▼</span></div><div class="pb" style="display:none;padding:0 18px 14px;border-top:1px solid #ede5d8;font-size:11px;color:#8a7a60;margin-top:4px;">✓ Plans and permits complete.</div></div>
+        <div class="card" style="margin-bottom:10px;overflow:hidden;" id="ph2"><div style="padding:13px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;" onclick="tp('ph2')"><span style="font-size:18px;">🗺️</span><div style="flex:1;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;"><span class="serif" style="font-size:16px;font-weight:700;color:#1a1208;">Preparation</span><span class="badge bp">COMPLETE</span></div><div style="display:flex;align-items:center;gap:8px;"><div class="pbar" style="width:150px;"><div class="pfill pgreen" style="width:100%;"></div></div><span style="font-size:10px;color:#b0a090;">100%</span></div></div><span class="arr" style="color:#c0b090;font-size:10px;">▼</span></div><div class="pb" style="display:none;padding:0 18px 14px;border-top:1px solid #ede5d8;font-size:11px;color:#8a7a60;margin-top:4px;">✓ Sitework and foundation complete.</div></div>
+        <div class="card" style="margin-bottom:10px;overflow:hidden;border-color:rgba(139,105,20,0.35);" id="ph3"><div style="padding:13px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;" onclick="tp('ph3')"><span style="font-size:18px;">🔨</span><div style="flex:1;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;"><span class="serif" style="font-size:16px;font-weight:700;color:#1a1208;">Rough Structure</span><span class="badge ba">ACTIVE</span></div><div style="display:flex;align-items:center;gap:8px;"><div class="pbar" style="width:150px;"><div class="pfill" style="width:40%;"></div></div><span style="font-size:10px;color:#b0a090;">40%</span></div></div><span class="arr" style="color:#c0b090;font-size:10px;">▲</span></div><div class="pb" style="display:block;padding:0 18px 14px;border-top:1px solid #ede5d8;font-size:11px;color:#8a7a60;margin-top:4px;">→ Framing done. Windows, doors, roofing, masonry in progress.</div></div>
+        <div class="card" style="margin-bottom:10px;overflow:hidden;" id="ph4"><div style="padding:13px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;" onclick="tp('ph4')"><span style="font-size:18px;">⚡</span><div style="flex:1;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;"><span class="serif" style="font-size:16px;font-weight:700;color:#1a1208;">Full Enclosure</span><span class="badge bn">UPCOMING</span></div><div style="display:flex;align-items:center;gap:8px;"><div class="pbar" style="width:150px;"><div class="pfill" style="width:0%;"></div></div><span style="font-size:10px;color:#b0a090;">0%</span></div></div><span class="arr" style="color:#c0b090;font-size:10px;">▼</span></div><div class="pb" style="display:none;padding:0 18px 14px;border-top:1px solid #ede5d8;font-size:11px;color:#8a7a60;margin-top:4px;">◦ Plumbing, AC, electrical, insulation, drywall.</div></div>
+        <div class="card" style="margin-bottom:10px;overflow:hidden;" id="ph5"><div style="padding:13px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;" onclick="tp('ph5')"><span style="font-size:18px;">🎨</span><div style="flex:1;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;"><span class="serif" style="font-size:16px;font-weight:700;color:#1a1208;">Interior Finish</span><span class="badge bn">UPCOMING</span></div><div style="display:flex;align-items:center;gap:8px;"><div class="pbar" style="width:150px;"><div class="pfill" style="width:0%;"></div></div><span style="font-size:10px;color:#b0a090;">0%</span></div></div><span class="arr" style="color:#c0b090;font-size:10px;">▼</span></div><div class="pb" style="display:none;padding:0 18px 14px;border-top:1px solid #ede5d8;font-size:11px;color:#8a7a60;margin-top:4px;">◦ Trim, paint, cabinets, flooring, appliances.</div></div>
+        <div class="card" style="margin-bottom:10px;overflow:hidden;" id="ph6"><div style="padding:13px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;" onclick="tp('ph6')"><span style="font-size:18px;">🏠</span><div style="flex:1;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;"><span class="serif" style="font-size:16px;font-weight:700;color:#1a1208;">Completion</span><span class="badge bn">UPCOMING</span></div><div style="display:flex;align-items:center;gap:8px;"><div class="pbar" style="width:150px;"><div class="pfill" style="width:0%;"></div></div><span style="font-size:10px;color:#b0a090;">0%</span></div></div><span class="arr" style="color:#c0b090;font-size:10px;">▼</span></div><div class="pb" style="display:none;padding:0 18px 14px;border-top:1px solid #ede5d8;font-size:11px;color:#8a7a60;margin-top:4px;">◦ Fencing, flatwork, landscaping, final clean.</div></div>
       </div>
 
       <!-- BUDGET TAB -->
       <div id="tc-budget" class="tab-content au">
         <div style="margin-bottom:20px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:10px;">
-          <div><div style="font-size:9px;letter-spacing:3px;color:#556;text-transform:uppercase;">Financials</div><div class="serif" style="font-size:36px;font-weight:700;line-height:1;margin-top:4px;">Budget Manager</div></div>
-          <div style="display:flex;gap:8px;align-items:center;"><div style="font-size:11px;color:#445;">Click amount to edit · Click status to toggle</div><button onclick="addBudgetItem()" style="padding:7px 14px;background:rgba(139,105,20,0.15);border:1px solid rgba(139,105,20,0.3);border-radius:5px;color:#8B6914;font-size:11px;cursor:pointer;font-weight:600;">+ Add Line Item</button></div>
+          <div><div style="font-size:9px;letter-spacing:3px;color:#8a7a60;text-transform:uppercase;">Financials</div><div class="serif" style="font-size:36px;font-weight:700;line-height:1;margin-top:4px;color:#1a1208;">Budget Manager</div></div>
+          <div style="display:flex;gap:8px;align-items:center;"><div style="font-size:11px;color:#8a7a60;">Click amount to edit · Click status to toggle</div><button onclick="addBudgetItem()" style="padding:7px 14px;background:rgba(139,105,20,0.1);border:1px solid rgba(139,105,20,0.25);border-radius:5px;color:#7a5c0f;font-size:11px;cursor:pointer;font-weight:600;">+ Add Line Item</button></div>
         </div>
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px;">
-          <div class="card" style="padding:16px 20px;"><div style="font-size:9px;letter-spacing:2px;color:#445;text-transform:uppercase;margin-bottom:6px;">Total Budget</div><div class="serif" style="font-size:26px;" id="b-total">$1,069,518</div></div>
-          <div class="card" style="padding:16px 20px;"><div style="font-size:9px;letter-spacing:2px;color:#445;text-transform:uppercase;margin-bottom:6px;">Paid to Date</div><div class="serif gold" style="font-size:26px;" id="b-paid">$0</div></div>
-          <div class="card" style="padding:16px 20px;"><div style="font-size:9px;letter-spacing:2px;color:#445;text-transform:uppercase;margin-bottom:6px;">Remaining</div><div class="serif green" style="font-size:26px;" id="b-remain">$1,069,518</div></div>
+          <div class="card" style="padding:16px 20px;"><div style="font-size:9px;letter-spacing:2px;color:#8a7a60;text-transform:uppercase;margin-bottom:6px;">Total Budget</div><div class="serif" style="font-size:26px;color:#1a1208;" id="b-total">$1,069,518</div></div>
+          <div class="card" style="padding:16px 20px;"><div style="font-size:9px;letter-spacing:2px;color:#8a7a60;text-transform:uppercase;margin-bottom:6px;">Paid to Date</div><div class="serif" style="font-size:26px;color:#7a5c0f;" id="b-paid">$0</div></div>
+          <div class="card" style="padding:16px 20px;"><div style="font-size:9px;letter-spacing:2px;color:#8a7a60;text-transform:uppercase;margin-bottom:6px;">Remaining</div><div class="serif" style="font-size:26px;color:#3a7a3f;" id="b-remain">$1,069,518</div></div>
         </div>
         <div class="card" style="overflow:hidden;"><table class="btable"><thead><tr><th>Line Item</th><th>Budgeted</th><th>Status</th><th style="text-align:center;width:40px;">Del</th></tr></thead><tbody id="budget-body"></tbody></table></div>
       </div>
@@ -242,17 +246,17 @@ button,input,select,textarea{font-family:'Outfit',sans-serif;}
       <!-- SCHEDULE TAB -->
       <div id="tc-sched" class="tab-content au">
         <div style="margin-bottom:20px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:10px;">
-          <div><div style="font-size:9px;letter-spacing:3px;color:#556;text-transform:uppercase;">Timeline</div><div class="serif" style="font-size:36px;font-weight:700;line-height:1;margin-top:4px;">Build Schedule</div></div>
+          <div><div style="font-size:9px;letter-spacing:3px;color:#8a7a60;text-transform:uppercase;">Timeline</div><div class="serif" style="font-size:36px;font-weight:700;line-height:1;margin-top:4px;color:#1a1208;">Build Schedule</div></div>
           <div style="display:flex;gap:8px;align-items:center;">
             <button class="sched-view-btn active" id="vbtn-list" onclick="setView('list')">☰ List</button>
             <button class="sched-view-btn" id="vbtn-gantt" onclick="setView('gantt')">▦ Gantt</button>
-            <button onclick="addSchedRow()" style="padding:7px 14px;background:rgba(139,105,20,0.15);border:1px solid rgba(139,105,20,0.3);border-radius:5px;color:#8B6914;font-size:11px;cursor:pointer;font-weight:600;">+ Add Task</button>
+            <button onclick="addSchedRow()" style="padding:7px 14px;background:rgba(139,105,20,0.1);border:1px solid rgba(139,105,20,0.25);border-radius:5px;color:#7a5c0f;font-size:11px;cursor:pointer;font-weight:600;">+ Add Task</button>
           </div>
         </div>
         <div id="sched-list-view" class="card" style="overflow:hidden;">
-          <div style="display:grid;grid-template-columns:24px 20px 1.6fr 90px 52px 108px 78px 52px;padding:7px 10px;border-bottom:1px solid #1e2830;font-size:9px;color:#334;letter-spacing:1.5px;text-transform:uppercase;gap:5px;align-items:center;">
+          <div style="display:grid;grid-template-columns:24px 20px 1.6fr 90px 52px 108px 78px 52px;padding:7px 10px;border-bottom:1px solid #ddd3c0;background:#faf7f2;font-size:9px;color:#8a7a60;letter-spacing:1.5px;text-transform:uppercase;gap:5px;align-items:center;">
             <span></span><span style="text-align:center;">#</span><span>Task</span><span style="text-align:center;">Start</span><span style="text-align:center;">Days</span>
-            <span style="text-align:center;">Predecessor<br><span style="font-size:8px;color:#223;letter-spacing:0;text-transform:none;">5S+3, 4F-2</span></span>
+            <span style="text-align:center;">Predecessor<br><span style="font-size:8px;color:#b0a090;letter-spacing:0;text-transform:none;">5S+3, 4F-2</span></span>
             <span style="text-align:center;">Status</span><span style="text-align:center;">Del</span>
           </div>
           <div id="sched-body"></div>
@@ -260,163 +264,129 @@ button,input,select,textarea{font-family:'Outfit',sans-serif;}
         <div id="sched-gantt-view" style="display:none;">
           <div class="card" style="overflow:hidden;"><div class="gantt-wrap"><table class="gantt-table" style="border-collapse:collapse;"><thead id="gantt-head"></thead><tbody id="gantt-body"></tbody></table></div></div>
           <div style="margin-top:12px;display:flex;gap:18px;flex-wrap:wrap;">
-            <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#445;"><div style="width:14px;height:8px;background:#7bc47f;border-radius:2px;"></div>Done</div>
-            <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#445;"><div style="width:14px;height:8px;background:#8B6914;border-radius:2px;"></div>Active</div>
-            <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#445;"><div style="width:14px;height:8px;background:#1e3a5f;border-radius:2px;"></div>Pending</div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#8a7a60;"><div style="width:14px;height:8px;background:#3a7a3f;border-radius:2px;"></div>Done</div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#8a7a60;"><div style="width:14px;height:8px;background:#8B6914;border-radius:2px;"></div>Active</div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#8a7a60;"><div style="width:14px;height:8px;background:#c0d0e0;border-radius:2px;"></div>Pending</div>
           </div>
         </div>
       </div>
 
       <!-- DOCUMENTS TAB -->
       <div id="tc-docs" class="tab-content au">
-        <div style="margin-bottom:24px;"><div style="font-size:9px;letter-spacing:3px;color:#556;text-transform:uppercase;">Files & Forms</div><div class="serif" style="font-size:36px;font-weight:700;line-height:1;margin-top:4px;">Document Vault</div></div>
-        <div style="display:flex;gap:6px;margin-bottom:20px;border-bottom:1px solid #1e2830;">
-          <button id="dtab-general" onclick="setDocTab('general')" style="padding:9px 18px;font-size:11px;font-weight:600;border:none;background:none;color:#8B6914;border-bottom:2px solid #8B6914;cursor:pointer;letter-spacing:1px;">GENERAL</button>
-          <button id="dtab-construction" onclick="setDocTab('construction')" style="padding:9px 18px;font-size:11px;font-weight:600;border:none;background:none;color:#445;border-bottom:2px solid transparent;cursor:pointer;letter-spacing:1px;">CONSTRUCTION DOCS</button>
-          <button id="dtab-bids" onclick="setDocTab('bids')" style="padding:9px 18px;font-size:11px;font-weight:600;border:none;background:none;color:#445;border-bottom:2px solid transparent;cursor:pointer;letter-spacing:1px;">BIDS</button>
+        <div style="margin-bottom:24px;"><div style="font-size:9px;letter-spacing:3px;color:#8a7a60;text-transform:uppercase;">Files & Forms</div><div class="serif" style="font-size:36px;font-weight:700;line-height:1;margin-top:4px;color:#1a1208;">Document Vault</div></div>
+        <div style="display:flex;gap:6px;margin-bottom:20px;border-bottom:1px solid #ddd3c0;">
+          <button id="dtab-general" onclick="setDocTab('general')" style="padding:9px 18px;font-size:11px;font-weight:600;border:none;background:none;color:#7a5c0f;border-bottom:2px solid #8B6914;cursor:pointer;letter-spacing:1px;">GENERAL</button>
+          <button id="dtab-construction" onclick="setDocTab('construction')" style="padding:9px 18px;font-size:11px;font-weight:600;border:none;background:none;color:#8a7a60;border-bottom:2px solid transparent;cursor:pointer;letter-spacing:1px;">CONSTRUCTION DOCS</button>
+          <button id="dtab-bids" onclick="setDocTab('bids')" style="padding:9px 18px;font-size:11px;font-weight:600;border:none;background:none;color:#8a7a60;border-bottom:2px solid transparent;cursor:pointer;letter-spacing:1px;">BIDS</button>
         </div>
-        <!-- GENERAL -->
         <div id="doc-general">
-          <div class="card" style="border:2px dashed #1e2830;padding:28px;text-align:center;margin-bottom:12px;cursor:pointer;border-radius:8px;" onclick="document.getElementById('gen-upload').click()">
+          <div class="card" style="border:2px dashed #ddd3c0;padding:28px;text-align:center;margin-bottom:12px;cursor:pointer;border-radius:8px;background:#faf7f2;" onclick="document.getElementById('gen-upload').click()">
             <input type="file" id="gen-upload" multiple style="display:none;" onchange="handleUpload(this,'gen-files')">
             <div style="font-size:28px;margin-bottom:6px;">↑</div>
-            <div style="font-size:13px;color:#556;margin-bottom:4px;">Drop files here or click to upload</div>
-            <div style="font-size:11px;color:#223;">Permits, contracts, plans, photos</div>
+            <div style="font-size:13px;color:#8a7a60;margin-bottom:4px;">Drop files here or click to upload</div>
+            <div style="font-size:11px;color:#b0a090;">Permits, contracts, plans, photos</div>
           </div>
           <div id="gen-files" class="card" style="overflow:hidden;margin-bottom:16px;display:none;"></div>
-          <div style="font-size:9px;color:#334;letter-spacing:2px;margin-bottom:7px;">PERMITS ON FILE</div>
-          <div class="card" style="overflow:hidden;margin-bottom:16px;"><div class="srow"><span>✅</span><div style="flex:1;"><div style="font-size:12px;color:#bbb;">Building Permit</div><div style="font-size:10px;color:#223;">Jan 12, 2026</div></div><span class="badge bp">APPROVED</span></div><div class="srow"><span>✅</span><div style="flex:1;"><div style="font-size:12px;color:#bbb;">Electrical Permit</div><div style="font-size:10px;color:#223;">Jan 15, 2026</div></div><span class="badge bp">APPROVED</span></div><div class="srow" style="border-bottom:none;"><span>✅</span><div style="flex:1;"><div style="font-size:12px;color:#bbb;">Plumbing Permit</div><div style="font-size:10px;color:#223;">Jan 15, 2026</div></div><span class="badge bp">APPROVED</span></div></div>
-          <div style="font-size:9px;color:#334;letter-spacing:2px;margin-bottom:7px;">TEMPLATES</div>
-          <div class="card" style="overflow:hidden;"><div class="srow"><span>📄</span><div style="flex:1;font-size:12px;color:#bbb;">Subcontractor Agreement</div><span class="badge bn">TEMPLATE</span></div><div class="srow"><span>📄</span><div style="flex:1;font-size:12px;color:#bbb;">Lien Waiver</div><span class="badge bn">TEMPLATE</span></div><div class="srow" style="border-bottom:none;"><span>📄</span><div style="flex:1;font-size:12px;color:#bbb;">Owner-Builder Affidavit</div><span class="badge bn">TEMPLATE</span></div></div>
+          <div style="font-size:9px;color:#b0a090;letter-spacing:2px;margin-bottom:7px;">PERMITS ON FILE</div>
+          <div class="card" style="overflow:hidden;margin-bottom:16px;"><div class="srow"><span>✅</span><div style="flex:1;"><div style="font-size:12px;color:#2a2018;">Building Permit</div><div style="font-size:10px;color:#b0a090;">Jan 12, 2026</div></div><span class="badge bp">APPROVED</span></div><div class="srow"><span>✅</span><div style="flex:1;"><div style="font-size:12px;color:#2a2018;">Electrical Permit</div><div style="font-size:10px;color:#b0a090;">Jan 15, 2026</div></div><span class="badge bp">APPROVED</span></div><div class="srow" style="border-bottom:none;"><span>✅</span><div style="flex:1;"><div style="font-size:12px;color:#2a2018;">Plumbing Permit</div><div style="font-size:10px;color:#b0a090;">Jan 15, 2026</div></div><span class="badge bp">APPROVED</span></div></div>
+          <div style="font-size:9px;color:#b0a090;letter-spacing:2px;margin-bottom:7px;">TEMPLATES</div>
+          <div class="card" style="overflow:hidden;"><div class="srow"><span>📄</span><div style="flex:1;font-size:12px;color:#2a2018;">Subcontractor Agreement</div><span class="badge bn">TEMPLATE</span></div><div class="srow"><span>📄</span><div style="flex:1;font-size:12px;color:#2a2018;">Lien Waiver</div><span class="badge bn">TEMPLATE</span></div><div class="srow" style="border-bottom:none;"><span>📄</span><div style="flex:1;font-size:12px;color:#2a2018;">Owner-Builder Affidavit</div><span class="badge bn">TEMPLATE</span></div></div>
         </div>
-        <!-- CONSTRUCTION DOCS -->
         <div id="doc-construction" style="display:none;">
-          <div class="card" style="border:2px dashed #1e2830;padding:28px;text-align:center;margin-bottom:12px;cursor:pointer;border-radius:8px;" onclick="document.getElementById('con-upload').click()">
+          <div class="card" style="border:2px dashed #ddd3c0;padding:28px;text-align:center;margin-bottom:12px;cursor:pointer;border-radius:8px;background:#faf7f2;" onclick="document.getElementById('con-upload').click()">
             <input type="file" id="con-upload" multiple accept=".pdf,.dwg,.png,.jpg,.jpeg" style="display:none;" onchange="handleUpload(this,'con-files')">
             <div style="font-size:28px;margin-bottom:6px;">↑</div>
-            <div style="font-size:13px;color:#556;margin-bottom:4px;">Upload construction documents</div>
-            <div style="font-size:11px;color:#223;">Blueprints, structural drawings, civil plans, specs</div>
+            <div style="font-size:13px;color:#8a7a60;margin-bottom:4px;">Upload construction documents</div>
+            <div style="font-size:11px;color:#b0a090;">Blueprints, structural drawings, civil plans, specs</div>
           </div>
           <div id="con-files" class="card" style="overflow:hidden;margin-bottom:16px;display:none;"></div>
-          <div style="font-size:9px;color:#334;letter-spacing:2px;margin-bottom:7px;">UPLOADED DOCUMENTS</div>
+          <div style="font-size:9px;color:#b0a090;letter-spacing:2px;margin-bottom:7px;">UPLOADED DOCUMENTS</div>
           <div class="card" style="overflow:hidden;">
-            <div class="srow"><span>📐</span><div style="flex:1;"><div style="font-size:12px;color:#bbb;">Architectural Plans — Full Set</div><div style="font-size:10px;color:#223;">Uploaded Jan 8, 2026 · 42 pages</div></div><span class="badge bp">APPROVED</span></div>
-            <div class="srow"><span>📐</span><div style="flex:1;"><div style="font-size:12px;color:#bbb;">Structural Engineering</div><div style="font-size:10px;color:#223;">Uploaded Jan 10, 2026 · 18 pages</div></div><span class="badge bp">APPROVED</span></div>
-            <div class="srow"><span>📐</span><div style="flex:1;"><div style="font-size:12px;color:#bbb;">Civil / Site Plan</div><div style="font-size:10px;color:#223;">Uploaded Jan 10, 2026 · 6 pages</div></div><span class="badge bp">APPROVED</span></div>
-            <div class="srow" style="border-bottom:none;"><span>📐</span><div style="flex:1;"><div style="font-size:12px;color:#bbb;">MEP Drawings</div><div style="font-size:10px;color:#223;">Uploaded Jan 14, 2026 · 24 pages</div></div><span class="badge bn">PENDING REVIEW</span></div>
+            <div class="srow"><span>📐</span><div style="flex:1;"><div style="font-size:12px;color:#2a2018;">Architectural Plans — Full Set</div><div style="font-size:10px;color:#b0a090;">Uploaded Jan 8, 2026 · 42 pages</div></div><span class="badge bp">APPROVED</span></div>
+            <div class="srow"><span>📐</span><div style="flex:1;"><div style="font-size:12px;color:#2a2018;">Structural Engineering</div><div style="font-size:10px;color:#b0a090;">Uploaded Jan 10, 2026 · 18 pages</div></div><span class="badge bp">APPROVED</span></div>
+            <div class="srow"><span>📐</span><div style="flex:1;"><div style="font-size:12px;color:#2a2018;">Civil / Site Plan</div><div style="font-size:10px;color:#b0a090;">Uploaded Jan 10, 2026 · 6 pages</div></div><span class="badge bp">APPROVED</span></div>
+            <div class="srow" style="border-bottom:none;"><span>📐</span><div style="flex:1;"><div style="font-size:12px;color:#2a2018;">MEP Drawings</div><div style="font-size:10px;color:#b0a090;">Uploaded Jan 14, 2026 · 24 pages</div></div><span class="badge bn">PENDING REVIEW</span></div>
           </div>
         </div>
-        <!-- BIDS -->
         <div id="doc-bids" style="display:none;">
-          <div style="margin-bottom:16px;"><div style="font-size:11px;color:#445;">⭐ Star a bid to select it — price flows into Budget automatically</div></div>
+          <div style="margin-bottom:16px;"><div style="font-size:11px;color:#8a7a60;">⭐ Star a bid to select it — price flows into Budget automatically</div></div>
           <div id="bids-container"></div>
         </div>
       </div>
 
       <!-- CHAT TAB -->
       <div id="tc-chat" class="tab-content au">
-        <div style="margin-bottom:20px;"><div style="font-size:9px;letter-spacing:3px;color:#556;text-transform:uppercase;">Communications</div><div class="serif" style="font-size:36px;font-weight:700;line-height:1;margin-top:4px;">Chat</div></div>
-        <div style="display:flex;gap:0;margin-bottom:0;border-bottom:1px solid #1e2830;">
+        <div style="margin-bottom:20px;"><div style="font-size:9px;letter-spacing:3px;color:#8a7a60;text-transform:uppercase;">Communications</div><div class="serif" style="font-size:36px;font-weight:700;line-height:1;margin-top:4px;color:#1a1208;">Chat</div></div>
+        <div style="display:flex;gap:0;margin-bottom:0;border-bottom:1px solid #ddd3c0;">
           <button id="ctab-team" class="chat-tab-btn active" onclick="setChatTab('team')">👷 TEAM CHAT</button>
           <button id="ctab-client" class="chat-tab-btn" onclick="setChatTab('client')">🏠 CLIENT CHAT</button>
         </div>
-
         <!-- TEAM CHAT -->
-        <div id="chat-team" style="display:flex;gap:16px;height:calc(100vh - 280px);min-height:400px;margin-top:0;">
-          <!-- Members sidebar -->
+        <div id="chat-team" style="display:flex;gap:16px;height:calc(100vh - 280px);min-height:400px;margin-top:16px;">
           <div class="card" style="width:180px;flex-shrink:0;padding:14px 0;overflow-y:auto;">
-            <div style="font-size:9px;color:#334;letter-spacing:2px;padding:0 14px 10px;">TEAM MEMBERS</div>
-            <div style="padding:8px 14px;display:flex;align-items:center;gap:8px;cursor:pointer;background:rgba(139,105,20,0.08);border-left:2px solid #8B6914;">
+            <div style="font-size:9px;color:#b0a090;letter-spacing:2px;padding:0 14px 10px;">TEAM MEMBERS</div>
+            <div style="padding:8px 14px;display:flex;align-items:center;gap:8px;cursor:pointer;background:rgba(139,105,20,0.06);border-left:2px solid #8B6914;">
               <div class="chat-avatar" style="background:#8B6914;color:#fff;">RA</div>
-              <div><div style="font-size:12px;color:#e8e0d0;">Robert A.</div><div style="font-size:10px;color:#8B6914;">Builder</div></div>
+              <div><div style="font-size:12px;color:#2a2018;">Robert A.</div><div style="font-size:10px;color:#8B6914;">Builder</div></div>
             </div>
             <div style="padding:8px 14px;display:flex;align-items:center;gap:8px;cursor:pointer;">
-              <div class="chat-avatar" style="background:#1e3a5f;color:#7ba4c4;">MK</div>
-              <div><div style="font-size:12px;color:#aaa;">Mike K.</div><div style="font-size:10px;color:#445;">Foreman</div></div>
+              <div class="chat-avatar" style="background:#dde8f0;color:#4a6a8a;">MK</div>
+              <div><div style="font-size:12px;color:#4a3a28;">Mike K.</div><div style="font-size:10px;color:#8a7a60;">Foreman</div></div>
             </div>
             <div style="padding:8px 14px;display:flex;align-items:center;gap:8px;cursor:pointer;">
-              <div class="chat-avatar" style="background:#1a2818;color:#7bc47f;">JS</div>
-              <div><div style="font-size:12px;color:#aaa;">Jake S.</div><div style="font-size:10px;color:#445;">Electrician</div></div>
+              <div class="chat-avatar" style="background:#ddf0de;color:#3a7a3f;">JS</div>
+              <div><div style="font-size:12px;color:#4a3a28;">Jake S.</div><div style="font-size:10px;color:#8a7a60;">Electrician</div></div>
             </div>
             <div style="padding:8px 14px;display:flex;align-items:center;gap:8px;cursor:pointer;">
-              <div class="chat-avatar" style="background:#2a1818;color:#e87c5a;">TL</div>
-              <div><div style="font-size:12px;color:#aaa;">Tom L.</div><div style="font-size:10px;color:#445;">Plumber</div></div>
+              <div class="chat-avatar" style="background:#f0dede;color:#8a3a2a;">TL</div>
+              <div><div style="font-size:12px;color:#4a3a28;">Tom L.</div><div style="font-size:10px;color:#8a7a60;">Plumber</div></div>
             </div>
-            <div style="margin:10px 14px 0;padding-top:10px;border-top:1px solid #1e2830;">
-              <button onclick="addTeamMember()" style="width:100%;padding:6px;background:rgba(139,105,20,0.1);border:1px solid rgba(139,105,20,0.2);border-radius:5px;color:#8B6914;font-size:10px;cursor:pointer;">+ Add Member</button>
+            <div style="margin:10px 14px 0;padding-top:10px;border-top:1px solid #ede5d8;">
+              <button onclick="addTeamMember()" style="width:100%;padding:6px;background:rgba(139,105,20,0.08);border:1px solid rgba(139,105,20,0.2);border-radius:5px;color:#7a5c0f;font-size:10px;cursor:pointer;">+ Add Member</button>
             </div>
           </div>
-          <!-- Chat area -->
           <div style="flex:1;display:flex;flex-direction:column;">
             <div class="card" style="flex:1;overflow-y:auto;padding:18px;" id="team-messages">
-              <!-- Sample messages -->
-              <div class="chat-msg">
-                <div class="chat-avatar" style="background:#1e3a5f;color:#7ba4c4;font-size:11px;">MK</div>
-                <div><div class="chat-bubble other">Windows are scheduled to arrive Thursday. Need to confirm delivery window with the crew.</div><div class="chat-time other">Mike K. · 9:14 AM</div></div>
-              </div>
-              <div class="chat-msg mine">
-                <div class="chat-avatar" style="background:#8B6914;color:#fff;font-size:11px;">RA</div>
-                <div><div class="chat-bubble mine">Got it. I'll call them this morning. Also confirm the crane rental is still lined up for Friday.</div><div class="chat-time">You · 9:22 AM</div></div>
-              </div>
-              <div class="chat-msg">
-                <div class="chat-avatar" style="background:#1a2818;color:#7bc47f;font-size:11px;">JS</div>
-                <div><div class="chat-bubble other">Rough-in inspection is booked for next Tuesday at 10am. I'll need access to the panel room.</div><div class="chat-time other">Jake S. · 10:05 AM</div></div>
-              </div>
-              <div class="chat-msg mine">
-                <div class="chat-avatar" style="background:#8B6914;color:#fff;font-size:11px;">RA</div>
-                <div><div class="chat-bubble mine">No problem, I'll make sure it's cleared out. Thanks Jake.</div><div class="chat-time">You · 10:11 AM</div></div>
-              </div>
+              <div class="chat-msg"><div class="chat-avatar" style="background:#dde8f0;color:#4a6a8a;font-size:11px;">MK</div><div><div class="chat-bubble other">Windows are scheduled to arrive Thursday. Need to confirm delivery window with the crew.</div><div class="chat-time other">Mike K. · 9:14 AM</div></div></div>
+              <div class="chat-msg mine"><div class="chat-avatar" style="background:#8B6914;color:#fff;font-size:11px;">RA</div><div><div class="chat-bubble mine">Got it. I'll call them this morning. Also confirm the crane rental is still lined up for Friday.</div><div class="chat-time">You · 9:22 AM</div></div></div>
+              <div class="chat-msg"><div class="chat-avatar" style="background:#ddf0de;color:#3a7a3f;font-size:11px;">JS</div><div><div class="chat-bubble other">Rough-in inspection is booked for next Tuesday at 10am. I'll need access to the panel room.</div><div class="chat-time other">Jake S. · 10:05 AM</div></div></div>
+              <div class="chat-msg mine"><div class="chat-avatar" style="background:#8B6914;color:#fff;font-size:11px;">RA</div><div><div class="chat-bubble mine">No problem, I'll make sure it's cleared out. Thanks Jake.</div><div class="chat-time">You · 10:11 AM</div></div></div>
             </div>
             <div class="card" style="margin-top:10px;padding:10px 12px;display:flex;gap:10px;align-items:flex-end;">
-              <textarea id="team-input" placeholder="Message your team..." style="flex:1;background:none;border:none;outline:none;color:#e8e0d0;font-size:13px;resize:none;min-height:38px;max-height:100px;line-height:1.5;" rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat('team');}"></textarea>
+              <textarea id="team-input" placeholder="Message your team..." style="flex:1;background:none;border:none;outline:none;color:#2a2018;font-size:13px;resize:none;min-height:38px;max-height:100px;line-height:1.5;" rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat('team');}"></textarea>
               <button onclick="sendChat('team')" style="padding:8px 16px;background:#8B6914;border:none;border-radius:6px;color:#fff;font-size:12px;font-weight:600;cursor:pointer;flex-shrink:0;">Send ↑</button>
             </div>
           </div>
         </div>
-
         <!-- CLIENT CHAT -->
-        <div id="chat-client" style="display:none;flex;gap:16px;height:calc(100vh - 280px);min-height:400px;margin-top:0;">
-          <!-- Clients sidebar -->
+        <div id="chat-client" style="display:none;gap:16px;height:calc(100vh - 280px);min-height:400px;margin-top:16px;">
           <div style="display:flex;gap:16px;height:100%;width:100%;">
             <div class="card" style="width:180px;flex-shrink:0;padding:14px 0;overflow-y:auto;">
-              <div style="font-size:9px;color:#334;letter-spacing:2px;padding:0 14px 10px;">CLIENTS</div>
-              <div style="padding:8px 14px;display:flex;align-items:center;gap:8px;cursor:pointer;background:rgba(139,105,20,0.08);border-left:2px solid #8B6914;">
-                <div class="chat-avatar" style="background:#2a1f10;color:#d4a843;">JO</div>
-                <div><div style="font-size:12px;color:#e8e0d0;">Jones</div><div style="font-size:10px;color:#8B6914;">Client</div></div>
+              <div style="font-size:9px;color:#b0a090;letter-spacing:2px;padding:0 14px 10px;">CLIENTS</div>
+              <div style="padding:8px 14px;display:flex;align-items:center;gap:8px;cursor:pointer;background:rgba(139,105,20,0.06);border-left:2px solid #8B6914;">
+                <div class="chat-avatar" style="background:#f5ead0;color:#8B6914;">JO</div>
+                <div><div style="font-size:12px;color:#2a2018;">Jones</div><div style="font-size:10px;color:#8B6914;">Client</div></div>
               </div>
-              <div style="margin:10px 14px 0;padding-top:10px;border-top:1px solid #1e2830;">
-                <button onclick="addClient()" style="width:100%;padding:6px;background:rgba(139,105,20,0.1);border:1px solid rgba(139,105,20,0.2);border-radius:5px;color:#8B6914;font-size:10px;cursor:pointer;">+ Add Client</button>
+              <div style="margin:10px 14px 0;padding-top:10px;border-top:1px solid #ede5d8;">
+                <button onclick="addClient()" style="width:100%;padding:6px;background:rgba(139,105,20,0.08);border:1px solid rgba(139,105,20,0.2);border-radius:5px;color:#7a5c0f;font-size:10px;cursor:pointer;">+ Add Client</button>
               </div>
             </div>
-            <!-- Chat area -->
             <div style="flex:1;display:flex;flex-direction:column;">
-              <div style="padding:10px 14px;background:#0e1117;border:1px solid #1e2830;border-radius:8px 8px 0 0;display:flex;align-items:center;justify-content:space-between;">
+              <div style="padding:10px 14px;background:#faf7f2;border:1px solid #ddd3c0;border-radius:8px 8px 0 0;display:flex;align-items:center;justify-content:space-between;">
                 <div style="display:flex;align-items:center;gap:8px;">
-                  <div class="chat-avatar" style="background:#2a1f10;color:#d4a843;width:26px;height:26px;font-size:10px;">JO</div>
-                  <div><span style="font-size:13px;color:#e8e0d0;font-weight:500;">Jones Build</span><span style="font-size:10px;color:#445;margin-left:8px;"><span class="online-dot"></span>Active</span></div>
+                  <div class="chat-avatar" style="background:#f5ead0;color:#8B6914;width:26px;height:26px;font-size:10px;">JO</div>
+                  <div><span style="font-size:13px;color:#2a2018;font-weight:500;">Jones Build</span><span style="font-size:10px;color:#8a7a60;margin-left:8px;"><span class="online-dot"></span>Active</span></div>
                 </div>
-                <div style="font-size:10px;color:#334;">Client can only see this chat</div>
+                <div style="font-size:10px;color:#b0a090;">Client can only see this chat</div>
               </div>
-              <div class="card" style="flex:1;overflow-y:auto;padding:18px;border-radius:0 0 0 0;border-top:none;" id="client-messages">
-                <div class="chat-msg">
-                  <div class="chat-avatar" style="background:#2a1f10;color:#d4a843;font-size:11px;">JO</div>
-                  <div><div class="chat-bubble other">Hey Robert — any update on the roofing timeline? We're trying to plan around it.</div><div class="chat-time other">Jones · Yesterday 3:42 PM</div></div>
-                </div>
-                <div class="chat-msg mine">
-                  <div class="chat-avatar" style="background:#8B6914;color:#fff;font-size:11px;">RA</div>
-                  <div><div class="chat-bubble mine">Hi! Roofing is scheduled to start April 15th. Should take about 3 weeks. I'll send photos as we go.</div><div class="chat-time">You · Yesterday 4:10 PM</div></div>
-                </div>
-                <div class="chat-msg">
-                  <div class="chat-avatar" style="background:#2a1f10;color:#d4a843;font-size:11px;">JO</div>
-                  <div><div class="chat-bubble other">Perfect, that works great. Also — can we schedule a site visit for early May to see the framing?</div><div class="chat-time other">Jones · Yesterday 4:15 PM</div></div>
-                </div>
-                <div class="chat-msg mine">
-                  <div class="chat-avatar" style="background:#8B6914;color:#fff;font-size:11px;">RA</div>
-                  <div><div class="chat-bubble mine">Absolutely! May 3rd or 4th work well. I'll confirm once we lock in the inspection schedule.</div><div class="chat-time">You · Yesterday 4:22 PM</div></div>
-                </div>
+              <div class="card" style="flex:1;overflow-y:auto;padding:18px;border-radius:0;border-top:none;" id="client-messages">
+                <div class="chat-msg"><div class="chat-avatar" style="background:#f5ead0;color:#8B6914;font-size:11px;">JO</div><div><div class="chat-bubble other">Hey Robert — any update on the roofing timeline? We're trying to plan around it.</div><div class="chat-time other">Jones · Yesterday 3:42 PM</div></div></div>
+                <div class="chat-msg mine"><div class="chat-avatar" style="background:#8B6914;color:#fff;font-size:11px;">RA</div><div><div class="chat-bubble mine">Hi! Roofing is scheduled to start April 15th. Should take about 3 weeks. I'll send photos as we go.</div><div class="chat-time">You · Yesterday 4:10 PM</div></div></div>
+                <div class="chat-msg"><div class="chat-avatar" style="background:#f5ead0;color:#8B6914;font-size:11px;">JO</div><div><div class="chat-bubble other">Perfect, that works great. Also — can we schedule a site visit for early May to see the framing?</div><div class="chat-time other">Jones · Yesterday 4:15 PM</div></div></div>
+                <div class="chat-msg mine"><div class="chat-avatar" style="background:#8B6914;color:#fff;font-size:11px;">RA</div><div><div class="chat-bubble mine">Absolutely! May 3rd or 4th work well. I'll confirm once we lock in the inspection schedule.</div><div class="chat-time">You · Yesterday 4:22 PM</div></div></div>
               </div>
-              <div class="card" style="margin-top:0;padding:10px 12px;display:flex;gap:10px;align-items:flex-end;border-top:none;border-radius:0 0 8px 8px;">
-                <textarea id="client-input" placeholder="Message your client..." style="flex:1;background:none;border:none;outline:none;color:#e8e0d0;font-size:13px;resize:none;min-height:38px;max-height:100px;line-height:1.5;" rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat('client');}"></textarea>
+              <div class="card" style="padding:10px 12px;display:flex;gap:10px;align-items:flex-end;border-top:none;border-radius:0 0 8px 8px;">
+                <textarea id="client-input" placeholder="Message your client..." style="flex:1;background:none;border:none;outline:none;color:#2a2018;font-size:13px;resize:none;min-height:38px;max-height:100px;line-height:1.5;" rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat('client');}"></textarea>
                 <button onclick="sendChat('client')" style="padding:8px 16px;background:#8B6914;border:none;border-radius:6px;color:#fff;font-size:12px;font-weight:600;cursor:pointer;flex-shrink:0;">Send ↑</button>
               </div>
             </div>
@@ -432,14 +402,12 @@ button,input,select,textarea{font-family:'Outfit',sans-serif;}
 <script>
 const SB=supabase.createClient('https://pnhnncmvmqwubpbmixtt.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBuaG5uY212bXF3dWJwYm1peHR0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MzMxODcsImV4cCI6MjA4ODQwOTE4N30.WVNnLbdAj1Afh12IY4vEvVrpz8gTJz0nu8wW8S9tWi4');
 
-// ── JOB NAME ───────────────────────────────────────────
 let jobName='Jones Build';
 function updateAllJobNames(name){jobName=name;document.getElementById('dpn').textContent=name;document.getElementById('home-job-name').textContent=name;document.getElementById('sidebar-job-name').textContent=name+' ✎';document.title='DirtToKeys — '+name;}
-function startEditJobName(){const display=document.getElementById('job-name-display');const input=document.getElementById('job-name-input');display.style.display='none';input.style.display='block';input.value=jobName;input.focus();input.select();}
-function saveJobName(){const input=document.getElementById('job-name-input');const display=document.getElementById('job-name-display');const newName=(input.value||'').trim()||jobName;input.style.display='none';display.style.display='flex';updateAllJobNames(newName);SB.auth.getSession().then(({data:{session}})=>{if(session)SB.from('projects').update({name:newName}).eq('user_id',session.user.id);});}
+function startEditJobName(){const d=document.getElementById('job-name-display'),i=document.getElementById('job-name-input');d.style.display='none';i.style.display='block';i.value=jobName;i.focus();i.select();}
+function saveJobName(){const i=document.getElementById('job-name-input'),d=document.getElementById('job-name-display');const n=(i.value||'').trim()||jobName;i.style.display='none';d.style.display='flex';updateAllJobNames(n);SB.auth.getSession().then(({data:{session}})=>{if(session)SB.from('projects').update({name:n}).eq('user_id',session.user.id);});}
 function cancelEditJobName(){document.getElementById('job-name-input').style.display='none';document.getElementById('job-name-display').style.display='flex';}
 
-// ── BUDGET DATA ────────────────────────────────────────
 const BUDGET=[
   {phase:'Preliminary',items:[{name:'Plans/Design',amt:21000,paid:true,bids:[]},{name:'Permits/Soft Costs',amt:7790,paid:true,bids:[]}]},
   {phase:'Preparation',items:[{name:'Sitework',amt:4200,paid:true,bids:[]},{name:'Foundation',amt:121300,paid:true,bids:[]}]},
@@ -456,70 +424,38 @@ const BUDGET=[
 ];
 
 const SCHEDULE=[
-  {task:'Plans/Design',date:'Jan 2026',startDay:0,dur:14,status:'done',pred:''},
-  {task:'Permits/Soft Costs',date:'Jan 2026',startDay:7,dur:21,status:'done',pred:''},
-  {task:'Sitework',date:'Jan 2026',startDay:14,dur:10,status:'done',pred:''},
-  {task:'Foundation',date:'Jan-Feb 2026',startDay:24,dur:28,status:'done',pred:''},
-  {task:'Steel',date:'Feb 2026',startDay:45,dur:7,status:'done',pred:''},
-  {task:'Framing Material',date:'Feb 2026',startDay:45,dur:14,status:'done',pred:''},
-  {task:'Framing Labor',date:'Feb-Mar 2026',startDay:52,dur:28,status:'done',pred:''},
-  {task:'Windows & Exterior Doors',date:'Mar 2026',startDay:80,dur:14,status:'active',pred:'7F+0'},
-  {task:'Front Door',date:'Mar 2026',startDay:80,dur:7,status:'active',pred:'7F+0'},
-  {task:'Garage Doors',date:'Mar 2026',startDay:80,dur:7,status:'active',pred:'7F+0'},
-  {task:'Fireplace',date:'Apr 2026',startDay:100,dur:7,status:'pending',pred:'7F+20'},
-  {task:'Roofing',date:'Apr 2026',startDay:95,dur:21,status:'pending',pred:'7F+15'},
-  {task:'Masonry',date:'Apr-May 2026',startDay:100,dur:35,status:'pending',pred:'7F+20'},
-  {task:'Utility Connections',date:'May 2026',startDay:130,dur:14,status:'pending',pred:'12F+15'},
-  {task:'Plumbing',date:'May 2026',startDay:130,dur:21,status:'pending',pred:'13F+0'},
-  {task:'AC',date:'May 2026',startDay:130,dur:21,status:'pending',pred:'13F+0'},
-  {task:'Electrical',date:'May 2026',startDay:130,dur:21,status:'pending',pred:'13F+0'},
-  {task:'Security',date:'May 2026',startDay:144,dur:7,status:'pending',pred:'16S+14'},
-  {task:'Insulation',date:'Jun 2026',startDay:155,dur:10,status:'pending',pred:'15F+4'},
-  {task:'Drywall',date:'Jun 2026',startDay:162,dur:14,status:'pending',pred:'19F+0'},
-  {task:'Interior Trim & Doors',date:'Jun 2026',startDay:170,dur:14,status:'pending',pred:'20F+0'},
-  {task:'Tape, Float, & Texture',date:'Jun 2026',startDay:176,dur:10,status:'pending',pred:'21S+6'},
-  {task:'Painting',date:'Jun 2026',startDay:183,dur:14,status:'pending',pred:'22F+0'},
-  {task:'Cabinets',date:'Jun 2026',startDay:183,dur:14,status:'pending',pred:'22F+0'},
-  {task:'Countertops',date:'Jun-Jul 2026',startDay:197,dur:10,status:'pending',pred:'24F+0'},
-  {task:'Tile',date:'Jun-Jul 2026',startDay:190,dur:21,status:'pending',pred:'22F+0'},
-  {task:'Shower Doors, Mirrors',date:'Jul 2026',startDay:204,dur:7,status:'pending',pred:'26F+0'},
-  {task:'Hardware',date:'Jul 2026',startDay:204,dur:7,status:'pending',pred:'25F+0'},
-  {task:'Appliances',date:'Jul 2026',startDay:204,dur:7,status:'pending',pred:'25F+0'},
-  {task:'Electrical Fixtures',date:'Jul 2026',startDay:204,dur:7,status:'pending',pred:'23F+0'},
-  {task:'Flooring',date:'Jul 2026',startDay:197,dur:14,status:'pending',pred:'22F+0'},
-  {task:'Fencing',date:'Jul 2026',startDay:204,dur:14,status:'pending',pred:''},
-  {task:'Flatwork',date:'Jul 2026',startDay:197,dur:14,status:'pending',pred:''},
-  {task:'Landscaping',date:'Jul 2026',startDay:204,dur:14,status:'pending',pred:'33F+0'},
-  {task:'Common Labor and Clean',date:'Jul 2026',startDay:211,dur:7,status:'pending',pred:''},
+  {task:'Plans/Design',date:'Jan 2026',startDay:0,dur:14,status:'done',pred:''},{task:'Permits/Soft Costs',date:'Jan 2026',startDay:7,dur:21,status:'done',pred:''},{task:'Sitework',date:'Jan 2026',startDay:14,dur:10,status:'done',pred:''},{task:'Foundation',date:'Jan-Feb 2026',startDay:24,dur:28,status:'done',pred:''},{task:'Steel',date:'Feb 2026',startDay:45,dur:7,status:'done',pred:''},{task:'Framing Material',date:'Feb 2026',startDay:45,dur:14,status:'done',pred:''},{task:'Framing Labor',date:'Feb-Mar 2026',startDay:52,dur:28,status:'done',pred:''},
+  {task:'Windows & Exterior Doors',date:'Mar 2026',startDay:80,dur:14,status:'active',pred:'7F+0'},{task:'Front Door',date:'Mar 2026',startDay:80,dur:7,status:'active',pred:'7F+0'},{task:'Garage Doors',date:'Mar 2026',startDay:80,dur:7,status:'active',pred:'7F+0'},
+  {task:'Fireplace',date:'Apr 2026',startDay:100,dur:7,status:'pending',pred:'7F+20'},{task:'Roofing',date:'Apr 2026',startDay:95,dur:21,status:'pending',pred:'7F+15'},{task:'Masonry',date:'Apr-May 2026',startDay:100,dur:35,status:'pending',pred:'7F+20'},{task:'Utility Connections',date:'May 2026',startDay:130,dur:14,status:'pending',pred:'12F+15'},
+  {task:'Plumbing',date:'May 2026',startDay:130,dur:21,status:'pending',pred:'13F+0'},{task:'AC',date:'May 2026',startDay:130,dur:21,status:'pending',pred:'13F+0'},{task:'Electrical',date:'May 2026',startDay:130,dur:21,status:'pending',pred:'13F+0'},{task:'Security',date:'May 2026',startDay:144,dur:7,status:'pending',pred:'16S+14'},
+  {task:'Insulation',date:'Jun 2026',startDay:155,dur:10,status:'pending',pred:'15F+4'},{task:'Drywall',date:'Jun 2026',startDay:162,dur:14,status:'pending',pred:'19F+0'},{task:'Interior Trim & Doors',date:'Jun 2026',startDay:170,dur:14,status:'pending',pred:'20F+0'},{task:'Tape, Float, & Texture',date:'Jun 2026',startDay:176,dur:10,status:'pending',pred:'21S+6'},
+  {task:'Painting',date:'Jun 2026',startDay:183,dur:14,status:'pending',pred:'22F+0'},{task:'Cabinets',date:'Jun 2026',startDay:183,dur:14,status:'pending',pred:'22F+0'},{task:'Countertops',date:'Jun-Jul 2026',startDay:197,dur:10,status:'pending',pred:'24F+0'},{task:'Tile',date:'Jun-Jul 2026',startDay:190,dur:21,status:'pending',pred:'22F+0'},
+  {task:'Shower Doors, Mirrors',date:'Jul 2026',startDay:204,dur:7,status:'pending',pred:'26F+0'},{task:'Hardware',date:'Jul 2026',startDay:204,dur:7,status:'pending',pred:'25F+0'},{task:'Appliances',date:'Jul 2026',startDay:204,dur:7,status:'pending',pred:'25F+0'},{task:'Electrical Fixtures',date:'Jul 2026',startDay:204,dur:7,status:'pending',pred:'23F+0'},
+  {task:'Flooring',date:'Jul 2026',startDay:197,dur:14,status:'pending',pred:'22F+0'},{task:'Fencing',date:'Jul 2026',startDay:204,dur:14,status:'pending',pred:''},{task:'Flatwork',date:'Jul 2026',startDay:197,dur:14,status:'pending',pred:''},{task:'Landscaping',date:'Jul 2026',startDay:204,dur:14,status:'pending',pred:'33F+0'},{task:'Common Labor and Clean',date:'Jul 2026',startDay:211,dur:7,status:'pending',pred:''},
 ];
 
 const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul'];
 let currentView='list';
 
-// ── PREDECESSOR ────────────────────────────────────────
 function parsePred(pred){if(!pred||!pred.trim())return null;const m=pred.trim().match(/^(\d+)([SF])([\+\-]\d+)$/i);if(!m)return null;return{row:parseInt(m[1])-1,type:m[2].toUpperCase(),offset:parseInt(m[3])};}
 function effectiveStart(i,depth=0){if(depth>20)return SCHEDULE[i].startDay;const row=SCHEDULE[i];const p=parsePred(row.pred);if(!p||p.row<0||p.row>=SCHEDULE.length||p.row===i)return row.startDay;const ref=SCHEDULE[p.row];const refStart=effectiveStart(p.row,depth+1);return p.type==='S'?refStart+p.offset:refStart+ref.dur+p.offset;}
 function computeMaxDay(){let max=0;SCHEDULE.forEach((_,i)=>{const e=effectiveStart(i)+SCHEDULE[i].dur;if(e>max)max=e;});return Math.max(max,212);}
 function fmt(n){return'$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
 
-// ── BUDGET ─────────────────────────────────────────────
 function renderBudget(){
-  const tbody=document.getElementById('budget-body');tbody.innerHTML='';
-  let gt=0,gp=0;
+  const tbody=document.getElementById('budget-body');tbody.innerHTML='';let gt=0,gp=0;
   BUDGET.forEach((sec,si)=>{
-    let pt=0,pp=0;
-    const hr=document.createElement('tr');hr.className='phase-header';hr.innerHTML=`<td colspan="4">${sec.phase}</td>`;tbody.appendChild(hr);
+    let pt=0,pp=0;const hr=document.createElement('tr');hr.className='phase-header';hr.innerHTML=`<td colspan="4">${sec.phase}</td>`;tbody.appendChild(hr);
     sec.items.forEach((item,ii)=>{
       pt+=item.amt;if(item.paid)pp+=item.amt;gt+=item.amt;if(item.paid)gp+=item.amt;
-      const selBid=item.bids&&item.bids.find(b=>b.selected);
-      const bidTag=selBid?`<span style="font-size:9px;color:#8B6914;margin-left:6px;">⭐ ${selBid.company}</span>`:'';
+      const selBid=item.bids&&item.bids.find(b=>b.selected);const bidTag=selBid?`<span style="font-size:9px;color:#8B6914;margin-left:6px;">⭐ ${selBid.company}</span>`:'';
       const tr=document.createElement('tr');tr.className='btr';
-      tr.innerHTML=`<td style="color:#aaa;"><input style="background:none;border:none;color:#aaa;font-size:12px;width:100%;padding:1px 2px;" value="${item.name}" onchange="BUDGET[${si}].items[${ii}].name=this.value;renderBids();">${bidTag}</td><td><input class="amt-input" value="${item.amt===0?'—':fmt(item.amt)}" onchange="updateAmt(${si},${ii},this.value)" onblur="renderBudget()" style="color:${item.amt===0?'#334':'#e8e0d0'}"></td><td style="text-align:right;"><button class="toggle-paid ${item.paid?'is-paid':'is-pending'}" onclick="togglePaid(${si},${ii})">${item.paid?'PAID':'PENDING'}</button></td><td style="text-align:center;"><button onclick="deleteBudgetItem(${si},${ii})" style="background:none;border:none;color:#223;cursor:pointer;font-size:13px;padding:2px 6px;">✕</button></td>`;
+      tr.innerHTML=`<td style="color:#4a3a28;"><input style="background:none;border:none;color:#4a3a28;font-size:12px;width:100%;padding:1px 2px;" value="${item.name}" onchange="BUDGET[${si}].items[${ii}].name=this.value;renderBids();">${bidTag}</td><td><input class="amt-input" value="${item.amt===0?'—':fmt(item.amt)}" onchange="updateAmt(${si},${ii},this.value)" onblur="renderBudget()" style="color:${item.amt===0?'#c0b090':'#2a2018'}"></td><td style="text-align:right;"><button class="toggle-paid ${item.paid?'is-paid':'is-pending'}" onclick="togglePaid(${si},${ii})">${item.paid?'PAID':'PENDING'}</button></td><td style="text-align:center;"><button onclick="deleteBudgetItem(${si},${ii})" style="background:none;border:none;color:#c0b090;cursor:pointer;font-size:13px;padding:2px 6px;">✕</button></td>`;
       tbody.appendChild(tr);
     });
-    const sr=document.createElement('tr');sr.className='phase-total';sr.innerHTML=`<td style="color:#8B6914;font-size:9px;letter-spacing:1px;">SUBTOTAL — ${sec.phase}</td><td style="text-align:right;color:#e8e0d0;">${fmt(pt)}</td><td style="text-align:right;color:#7bc47f;font-size:10px;">${fmt(pp)} paid</td><td></td>`;tbody.appendChild(sr);
+    const sr=document.createElement('tr');sr.className='phase-total';sr.innerHTML=`<td style="color:#7a5c0f;font-size:9px;letter-spacing:1px;">SUBTOTAL — ${sec.phase}</td><td style="text-align:right;color:#2a2018;">${fmt(pt)}</td><td style="text-align:right;color:#3a7a3f;font-size:10px;">${fmt(pp)} paid</td><td></td>`;tbody.appendChild(sr);
   });
-  const gr=document.createElement('tr');gr.className='grand-total';gr.innerHTML=`<td style="color:#8B6914;">CONSTRUCTION COSTS</td><td style="text-align:right;color:#f0ebe0;">${fmt(gt)}</td><td style="text-align:right;color:#7bc47f;">${fmt(gp)} paid</td><td></td>`;tbody.appendChild(gr);
+  const gr=document.createElement('tr');gr.className='grand-total';gr.innerHTML=`<td style="color:#7a5c0f;">CONSTRUCTION COSTS</td><td style="text-align:right;color:#1a1208;">${fmt(gt)}</td><td style="text-align:right;color:#3a7a3f;">${fmt(gp)} paid</td><td></td>`;tbody.appendChild(gr);
   const rem=gt-gp;
   ['b-total','dash-total'].forEach(id=>document.getElementById(id).textContent=fmt(gt));
   ['b-paid','dash-spent'].forEach(id=>document.getElementById(id).textContent=fmt(gp));
@@ -531,21 +467,18 @@ function togglePaid(si,ii){BUDGET[si].items[ii].paid=!BUDGET[si].items[ii].paid;
 function deleteBudgetItem(si,ii){BUDGET[si].items.splice(ii,1);renderBudget();renderBids();}
 function addBudgetItem(){
   const phases=BUDGET.map((s,i)=>`<option value="${i}">${s.phase}</option>`).join('');
-  document.body.insertAdjacentHTML('beforeend',`<div class="modal-overlay" id="bmodal"><div class="card" style="padding:28px;width:380px;border-radius:10px;"><div class="serif" style="font-size:20px;margin-bottom:16px;">Add Budget Line Item</div><label class="lbl">Phase</label><select id="bm-phase" style="width:100%;background:#0e1117;border:1px solid #1e2830;border-radius:6px;padding:9px 12px;font-size:13px;color:#e8e0d0;margin-bottom:12px;">${phases}</select><label class="lbl">Item Name</label><input id="bm-name" class="input" placeholder="e.g. Gutters" style="margin-bottom:12px;"><label class="lbl">Amount ($)</label><input id="bm-amt" class="input" type="number" placeholder="0" style="margin-bottom:16px;"><div style="display:flex;gap:10px;"><button class="btn btn-gold" style="flex:1;padding:10px;" onclick="confirmAddBudget()">Add Item</button><button onclick="document.getElementById('bmodal').remove()" style="flex:1;padding:10px;background:none;border:1px solid #1e2830;border-radius:6px;color:#445;cursor:pointer;">Cancel</button></div></div></div>`);
+  document.body.insertAdjacentHTML('beforeend',`<div class="modal-overlay" id="bmodal"><div class="card" style="padding:28px;width:380px;border-radius:10px;"><div class="serif" style="font-size:20px;margin-bottom:16px;color:#1a1208;">Add Budget Line Item</div><label class="lbl">Phase</label><select id="bm-phase" style="width:100%;background:#faf7f2;border:1px solid #ddd3c0;border-radius:6px;padding:9px 12px;font-size:13px;color:#2a2018;margin-bottom:12px;">${phases}</select><label class="lbl">Item Name</label><input id="bm-name" class="input" placeholder="e.g. Gutters" style="margin-bottom:12px;"><label class="lbl">Amount ($)</label><input id="bm-amt" class="input" type="number" placeholder="0" style="margin-bottom:16px;"><div style="display:flex;gap:10px;"><button class="btn btn-gold" style="flex:1;padding:10px;" onclick="confirmAddBudget()">Add Item</button><button onclick="document.getElementById('bmodal').remove()" style="flex:1;padding:10px;background:none;border:1px solid #ddd3c0;border-radius:6px;color:#8a7a60;cursor:pointer;">Cancel</button></div></div></div>`);
   document.getElementById('bm-name').focus();
 }
 function confirmAddBudget(){const si=parseInt(document.getElementById('bm-phase').value);const name=document.getElementById('bm-name').value||'New Item';const amt=parseFloat(document.getElementById('bm-amt').value)||0;BUDGET[si].items.push({name,amt,paid:false,bids:[]});document.getElementById('bmodal').remove();renderBudget();renderBids();}
 
-// ── BIDS ───────────────────────────────────────────────
 function renderBids(){
   const container=document.getElementById('bids-container');if(!container)return;container.innerHTML='';
   BUDGET.forEach((sec,si)=>{
     const ph=document.createElement('div');ph.style.cssText='font-size:10px;letter-spacing:3px;color:#8B6914;text-transform:uppercase;padding:14px 0 6px;margin-top:8px;';ph.textContent=sec.phase;container.appendChild(ph);
     sec.items.forEach((item,ii)=>{
-      const selBid=item.bids&&item.bids.find(b=>b.selected);
-      const section=document.createElement('div');section.className='bid-section';
-      const isOpen=item.bids&&item.bids.length>0;
-      section.innerHTML=`<div class="bid-section-header" onclick="toggleBidSection(this)"><div style="display:flex;align-items:center;gap:12px;"><span style="font-size:13px;color:#e8e0d0;font-weight:500;">${item.name}</span>${selBid?`<span style="font-size:10px;background:rgba(139,105,20,0.15);color:#8B6914;padding:2px 8px;border-radius:3px;">⭐ ${selBid.company} — ${fmt(selBid.amt)}</span>`:'<span style="font-size:10px;color:#334;">No bid selected</span>'}</div><div style="display:flex;align-items:center;gap:12px;"><span style="font-size:11px;color:#7bc47f;font-family:'DM Mono',monospace;">${fmt(item.amt)}</span><button onclick="event.stopPropagation();addBid(${si},${ii})" style="padding:4px 10px;background:rgba(139,105,20,0.15);border:1px solid rgba(139,105,20,0.3);border-radius:4px;color:#8B6914;font-size:10px;cursor:pointer;font-weight:600;">+ Add Bid</button><span style="color:#334;font-size:12px;" class="bid-arr">${isOpen?'▲':'▼'}</span></div></div><div class="bid-rows" style="display:${isOpen?'block':'none'};">${(!item.bids||item.bids.length===0)?'<div style="padding:12px 16px;font-size:11px;color:#334;text-align:center;">No bids yet — click + Add Bid to start</div>':''}${(item.bids||[]).map((bid,bi)=>`<div class="bid-row${bid.selected?' selected':''}" id="bidrow-${si}-${ii}-${bi}"><button class="star-btn${bid.selected?' selected':''}" onclick="selectBid(${si},${ii},${bi})" title="Select this bid">★</button><input class="bid-input" value="${bid.company}" placeholder="Company name" onchange="BUDGET[${si}].items[${ii}].bids[${bi}].company=this.value;renderBudget();"><input class="bid-input" value="${bid.bidNum}" placeholder="Bid #" onchange="BUDGET[${si}].items[${ii}].bids[${bi}].bidNum=this.value;" style="color:#556;"><input class="bid-amt-input" value="${bid.amt>0?fmt(bid.amt):''}" placeholder="$0.00" onchange="updateBidAmt(${si},${ii},${bi},this.value);"><label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:11px;color:#334;"><input type="file" style="display:none;" onchange="BUDGET[${si}].items[${ii}].bids[${bi}].file=this.files[0]?.name||null;this.parentElement.querySelector('span').textContent=this.files[0]?.name||'Upload PDF';"><span style="padding:3px 8px;background:#0e1117;border:1px solid #1e2830;border-radius:4px;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px;">${bid.file||'Upload PDF'}</span></label><button onclick="deleteBid(${si},${ii},${bi})" style="background:none;border:none;color:#223;cursor:pointer;font-size:13px;padding:2px;">✕</button></div>`).join('')}</div>`;
+      const selBid=item.bids&&item.bids.find(b=>b.selected);const section=document.createElement('div');section.className='bid-section';const isOpen=item.bids&&item.bids.length>0;
+      section.innerHTML=`<div class="bid-section-header" onclick="toggleBidSection(this)"><div style="display:flex;align-items:center;gap:12px;"><span style="font-size:13px;color:#2a2018;font-weight:500;">${item.name}</span>${selBid?`<span style="font-size:10px;background:rgba(139,105,20,0.1);color:#7a5c0f;padding:2px 8px;border-radius:3px;">⭐ ${selBid.company} — ${fmt(selBid.amt)}</span>`:'<span style="font-size:10px;color:#b0a090;">No bid selected</span>'}</div><div style="display:flex;align-items:center;gap:12px;"><span style="font-size:11px;color:#3a7a3f;font-family:\'DM Mono\',monospace;">${fmt(item.amt)}</span><button onclick="event.stopPropagation();addBid(${si},${ii})" style="padding:4px 10px;background:rgba(139,105,20,0.1);border:1px solid rgba(139,105,20,0.25);border-radius:4px;color:#7a5c0f;font-size:10px;cursor:pointer;font-weight:600;">+ Add Bid</button><span style="color:#c0b090;font-size:12px;" class="bid-arr">${isOpen?'▲':'▼'}</span></div></div><div class="bid-rows" style="display:${isOpen?'block':'none'};">${(!item.bids||item.bids.length===0)?'<div style="padding:12px 16px;font-size:11px;color:#b0a090;text-align:center;">No bids yet — click + Add Bid to start</div>':''}${(item.bids||[]).map((bid,bi)=>`<div class="bid-row${bid.selected?' selected':''}" id="bidrow-${si}-${ii}-${bi}"><button class="star-btn${bid.selected?' selected':''}" onclick="selectBid(${si},${ii},${bi})" title="Select this bid">★</button><input class="bid-input" value="${bid.company}" placeholder="Company name" onchange="BUDGET[${si}].items[${ii}].bids[${bi}].company=this.value;renderBudget();"><input class="bid-input" value="${bid.bidNum}" placeholder="Bid #" onchange="BUDGET[${si}].items[${ii}].bids[${bi}].bidNum=this.value;" style="color:#8a7a60;"><input class="bid-amt-input" value="${bid.amt>0?fmt(bid.amt):''}" placeholder="$0.00" onchange="updateBidAmt(${si},${ii},${bi},this.value);"><label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:11px;color:#8a7a60;"><input type="file" style="display:none;" onchange="(function(el){const f=el.files[0];if(!f)return;BUDGET[${si}].items[${ii}].bids[${bi}].file=f.name;BUDGET[${si}].items[${ii}].bids[${bi}].fileURL=URL.createObjectURL(f);const span=el.parentElement.querySelector('span');span.innerHTML='<a href=\\''+BUDGET[${si}].items[${ii}].bids[${bi}].fileURL+'\\' target=\\'_blank\\' style=\\'color:#8B6914;text-decoration:none;\\'>'+f.name+'</a>';})(this)"><span style="padding:3px 8px;background:#faf7f2;border:1px solid #ddd3c0;border-radius:4px;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px;">${bid.file?`<a href="${bid.fileURL||'#'}" target="_blank" style="color:#8B6914;text-decoration:none;">${bid.file}</a>`:'Upload PDF'}</span></label><button onclick="deleteBid(${si},${ii},${bi})" style="background:none;border:none;color:#c0b090;cursor:pointer;font-size:13px;padding:2px;">✕</button></div>`).join('')}</div>`;
       container.appendChild(section);
     });
   });
@@ -556,25 +489,19 @@ function updateBidAmt(si,ii,bi,val){const n=parseFloat(val.replace(/[$,\s]/g,'')
 function addBid(si,ii){BUDGET[si].items[ii].bids.push({company:'',bidNum:'',amt:0,file:null,selected:false});renderBids();}
 function deleteBid(si,ii,bi){BUDGET[si].items[ii].bids.splice(bi,1);renderBids();renderBudget();}
 
-// ── UPLOAD HANDLER ─────────────────────────────────────
 function handleUpload(input,listId){
-  const list=document.getElementById(listId);
-  list.style.display='block';
+  const list=document.getElementById(listId);list.style.display='block';
   Array.from(input.files).forEach(file=>{
-    const row=document.createElement('div');row.className='srow';
-    const ext=file.name.split('.').pop().toLowerCase();
-    const icon=ext==='pdf'?'📄':['png','jpg','jpeg','gif'].includes(ext)?'🖼️':ext==='dwg'?'📐':'📎';
+    const objectURL=URL.createObjectURL(file);const row=document.createElement('div');row.className='srow';
+    const ext=file.name.split('.').pop().toLowerCase();const icon=ext==='pdf'?'📄':['png','jpg','jpeg','gif'].includes(ext)?'🖼️':ext==='dwg'?'📐':'📎';
     const size=file.size>1048576?(file.size/1048576).toFixed(1)+' MB':(file.size/1024).toFixed(0)+' KB';
-    row.innerHTML=`<span>${icon}</span><div style="flex:1;"><div style="font-size:12px;color:#bbb;">${file.name}</div><div style="font-size:10px;color:#223;">${size} · Just uploaded</div></div><span class="badge bp">UPLOADED</span>`;
+    row.innerHTML=`<span>${icon}</span><div style="flex:1;"><a href="${objectURL}" target="_blank" style="font-size:12px;color:#7a5c0f;text-decoration:none;font-weight:500;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">${file.name}</a><div style="font-size:10px;color:#b0a090;">${size} · Just uploaded · <span style="color:#8a7a60;">click to open</span></div></div><span class="badge bp">UPLOADED</span>`;
     list.appendChild(row);
-  });
-  input.value='';
+  });input.value='';
 }
 
-// ── DOC TABS ───────────────────────────────────────────
-function setDocTab(t){['general','construction','bids'].forEach(id=>{document.getElementById('doc-'+id).style.display=id===t?'block':'none';const btn=document.getElementById('dtab-'+id);btn.style.color=id===t?'#8B6914':'#445';btn.style.borderBottom=id===t?'2px solid #8B6914':'2px solid transparent';});if(t==='bids')renderBids();}
+function setDocTab(t){['general','construction','bids'].forEach(id=>{document.getElementById('doc-'+id).style.display=id===t?'block':'none';const btn=document.getElementById('dtab-'+id);btn.style.color=id===t?'#7a5c0f':'#8a7a60';btn.style.borderBottom=id===t?'2px solid #8B6914':'2px solid transparent';});if(t==='bids')renderBids();}
 
-// ── CHAT ───────────────────────────────────────────────
 function setChatTab(t){
   document.getElementById('chat-team').style.display=t==='team'?'flex':'none';
   document.getElementById('chat-client').style.display=t==='client'?'flex':'none';
@@ -582,72 +509,57 @@ function setChatTab(t){
   document.getElementById('ctab-client').className='chat-tab-btn'+(t==='client'?' active':'');
 }
 function sendChat(channel){
-  const input=document.getElementById(channel+'-input');
-  const msg=input.value.trim();if(!msg)return;
-  const container=document.getElementById(channel+'-messages');
-  const now=new Date();const time=now.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});
+  const input=document.getElementById(channel+'-input');const msg=input.value.trim();if(!msg)return;
+  const container=document.getElementById(channel+'-messages');const now=new Date();const time=now.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});
   const div=document.createElement('div');div.className='chat-msg mine';
   div.innerHTML=`<div class="chat-avatar" style="background:#8B6914;color:#fff;font-size:11px;">RA</div><div><div class="chat-bubble mine">${msg.replace(/</g,'&lt;')}</div><div class="chat-time">You · ${time}</div></div>`;
-  container.appendChild(div);
-  container.scrollTop=container.scrollHeight;
-  input.value='';input.style.height='auto';
+  container.appendChild(div);container.scrollTop=container.scrollHeight;input.value='';input.style.height='auto';
 }
 function addTeamMember(){
-  document.body.insertAdjacentHTML('beforeend',`<div class="modal-overlay" id="tmmodal"><div class="card" style="padding:28px;width:360px;border-radius:10px;"><div class="serif" style="font-size:20px;margin-bottom:16px;">Add Team Member</div><label class="lbl">Name</label><input id="tm-name" class="input" placeholder="e.g. Sarah M."><label class="lbl">Role</label><input id="tm-role" class="input" placeholder="e.g. Framer"><div style="display:flex;gap:10px;margin-top:4px;"><button class="btn btn-gold" style="flex:1;padding:10px;" onclick="confirmAddTeamMember()">Add</button><button onclick="document.getElementById('tmmodal').remove()" style="flex:1;padding:10px;background:none;border:1px solid #1e2830;border-radius:6px;color:#445;cursor:pointer;">Cancel</button></div></div></div>`);
+  document.body.insertAdjacentHTML('beforeend',`<div class="modal-overlay" id="tmmodal"><div class="card" style="padding:28px;width:360px;border-radius:10px;"><div class="serif" style="font-size:20px;margin-bottom:16px;color:#1a1208;">Add Team Member</div><label class="lbl">Name</label><input id="tm-name" class="input" placeholder="e.g. Sarah M."><label class="lbl">Role</label><input id="tm-role" class="input" placeholder="e.g. Framer"><div style="display:flex;gap:10px;margin-top:4px;"><button class="btn btn-gold" style="flex:1;padding:10px;" onclick="confirmAddTeamMember()">Add</button><button onclick="document.getElementById('tmmodal').remove()" style="flex:1;padding:10px;background:none;border:1px solid #ddd3c0;border-radius:6px;color:#8a7a60;cursor:pointer;">Cancel</button></div></div></div>`);
   document.getElementById('tm-name').focus();
 }
 function confirmAddTeamMember(){
-  const name=document.getElementById('tm-name').value||'New Member';
-  const role=document.getElementById('tm-role').value||'Team';
-  const initials=name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
-  const colors=['#1e3a5f','#1a2818','#2a1818','#2a1f10','#1a1030'];
-  const tcolors=['#7ba4c4','#7bc47f','#e87c5a','#d4a843','#b088f0'];
-  const ci=Math.floor(Math.random()*colors.length);
-  const sidebar=document.querySelector('#chat-team .card');
-  const btn=sidebar.querySelector('button');
+  const name=document.getElementById('tm-name').value||'New Member';const role=document.getElementById('tm-role').value||'Team';const initials=name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+  const colors=['#dde8f0','#ddf0de','#f0dede','#f5ead0','#ede5f5'];const tcolors=['#4a6a8a','#3a7a3f','#8a3a2a','#8B6914','#6a4a8a'];
+  const ci=Math.floor(Math.random()*colors.length);const sidebar=document.querySelector('#chat-team .card');const btn=sidebar.querySelector('button');
   const div=document.createElement('div');div.style.cssText='padding:8px 14px;display:flex;align-items:center;gap:8px;cursor:pointer;';
-  div.innerHTML=`<div class="chat-avatar" style="background:${colors[ci]};color:${tcolors[ci]};font-size:11px;">${initials}</div><div><div style="font-size:12px;color:#aaa;">${name}</div><div style="font-size:10px;color:#445;">${role}</div></div>`;
-  sidebar.insertBefore(div,btn.parentElement);
-  document.getElementById('tmmodal').remove();
+  div.innerHTML=`<div class="chat-avatar" style="background:${colors[ci]};color:${tcolors[ci]};font-size:11px;">${initials}</div><div><div style="font-size:12px;color:#4a3a28;">${name}</div><div style="font-size:10px;color:#8a7a60;">${role}</div></div>`;
+  sidebar.insertBefore(div,btn.parentElement);document.getElementById('tmmodal').remove();
 }
 function addClient(){
-  document.body.insertAdjacentHTML('beforeend',`<div class="modal-overlay" id="clmodal"><div class="card" style="padding:28px;width:360px;border-radius:10px;"><div class="serif" style="font-size:20px;margin-bottom:16px;">Add Client</div><label class="lbl">Client Name</label><input id="cl-name" class="input" placeholder="e.g. Smith Family"><label class="lbl">Project / Build Name</label><input id="cl-proj" class="input" placeholder="e.g. Smith Build"><div style="display:flex;gap:10px;margin-top:4px;"><button class="btn btn-gold" style="flex:1;padding:10px;" onclick="confirmAddClient()">Add</button><button onclick="document.getElementById('clmodal').remove()" style="flex:1;padding:10px;background:none;border:1px solid #1e2830;border-radius:6px;color:#445;cursor:pointer;">Cancel</button></div></div></div>`);
+  document.body.insertAdjacentHTML('beforeend',`<div class="modal-overlay" id="clmodal"><div class="card" style="padding:28px;width:360px;border-radius:10px;"><div class="serif" style="font-size:20px;margin-bottom:16px;color:#1a1208;">Add Client</div><label class="lbl">Client Name</label><input id="cl-name" class="input" placeholder="e.g. Smith Family"><label class="lbl">Project / Build Name</label><input id="cl-proj" class="input" placeholder="e.g. Smith Build"><div style="display:flex;gap:10px;margin-top:4px;"><button class="btn btn-gold" style="flex:1;padding:10px;" onclick="confirmAddClient()">Add</button><button onclick="document.getElementById('clmodal').remove()" style="flex:1;padding:10px;background:none;border:1px solid #ddd3c0;border-radius:6px;color:#8a7a60;cursor:pointer;">Cancel</button></div></div></div>`);
   document.getElementById('cl-name').focus();
 }
 function confirmAddClient(){
-  const name=document.getElementById('cl-name').value||'New Client';
-  const proj=document.getElementById('cl-proj').value||name;
-  const initials=name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
-  const sidebar=document.querySelector('#chat-client .card');
-  const btn=sidebar.querySelector('button');
+  const name=document.getElementById('cl-name').value||'New Client';const proj=document.getElementById('cl-proj').value||name;const initials=name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+  const sidebar=document.querySelector('#chat-client .card');const btn=sidebar.querySelector('button');
   const div=document.createElement('div');div.style.cssText='padding:8px 14px;display:flex;align-items:center;gap:8px;cursor:pointer;';
-  div.innerHTML=`<div class="chat-avatar" style="background:#2a1f10;color:#d4a843;font-size:11px;">${initials}</div><div><div style="font-size:12px;color:#aaa;">${name}</div><div style="font-size:10px;color:#445;">Client</div></div>`;
-  sidebar.insertBefore(div,btn.parentElement);
-  document.getElementById('clmodal').remove();
+  div.innerHTML=`<div class="chat-avatar" style="background:#f5ead0;color:#8B6914;font-size:11px;">${initials}</div><div><div style="font-size:12px;color:#4a3a28;">${name}</div><div style="font-size:10px;color:#8a7a60;">Client</div></div>`;
+  sidebar.insertBefore(div,btn.parentElement);document.getElementById('clmodal').remove();
 }
 
-// ── SCHEDULE ───────────────────────────────────────────
 function moveTask(i,dir){const j=i+dir;if(j<0||j>=SCHEDULE.length)return;[SCHEDULE[i],SCHEDULE[j]]=[SCHEDULE[j],SCHEDULE[i]];renderSched();if(currentView==='gantt')renderGantt();}
 function renderSched(){
   const body=document.getElementById('sched-body');body.innerHTML='';
-  const sColors={done:'#7bc47f',active:'#8B6914',pending:'#556'};const sLabels={done:'DONE',active:'ACTIVE',pending:'PENDING'};const sBg={done:'rgba(123,196,127,0.1)',active:'rgba(139,105,20,0.15)',pending:'rgba(30,40,48,0.8)'};
+  const sColors={done:'#3a7a3f',active:'#7a5c0f',pending:'#8a7a60'};const sLabels={done:'DONE',active:'ACTIVE',pending:'PENDING'};const sBg={done:'rgba(58,122,63,0.1)',active:'rgba(139,105,20,0.1)',pending:'rgba(180,165,140,0.15)'};
   SCHEDULE.forEach((row,i)=>{
-    const effStart=effectiveStart(i);const predOk=!row.pred||parsePred(row.pred);const predColor=row.pred?(predOk?'#7ba4c4':'#e87c5a'):'#223';
+    const effStart=effectiveStart(i);const predOk=!row.pred||parsePred(row.pred);const predColor=row.pred?(predOk?'#4a6a8a':'#c0502a'):'#c0b090';
     const div=document.createElement('div');div.className='sched-row';
-    div.innerHTML=`<div style="display:flex;flex-direction:column;gap:0;"><button class="move-btn" onclick="moveTask(${i},-1)" title="Move up" ${i===0?'style="opacity:0.2;pointer-events:none;"':''}>▲</button><button class="move-btn" onclick="moveTask(${i},1)" title="Move down" ${i===SCHEDULE.length-1?'style="opacity:0.2;pointer-events:none;"':''}>▼</button></div><span style="font-size:10px;color:#334;text-align:center;">${i+1}</span><input class="sched-input" value="${row.task}" onchange="SCHEDULE[${i}].task=this.value;if(currentView==='gantt')renderGantt();" style="color:${row.status==='done'?'#334':'#bbb'};text-decoration:${row.status==='done'?'line-through':'none'}"><input class="date-input" value="${row.date}" onchange="SCHEDULE[${i}].date=this.value"><input class="dur-input" value="${row.dur}" title="Duration in days" onchange="SCHEDULE[${i}].dur=parseInt(this.value)||1;renderSched();if(currentView==='gantt')renderGantt();"><div><input class="pred-input" value="${row.pred}" placeholder="5S+3" title="5S+3 = 3 days after START of row 5&#10;4F-2 = 2 days before FINISH of row 4" style="color:${predColor}" onchange="SCHEDULE[${i}].pred=this.value.trim();renderSched();if(currentView==='gantt')renderGantt();">${row.pred&&effStart!==row.startDay?`<div style="font-size:9px;color:#445;margin-top:1px;">→ day ${effStart}</div>`:''}</div><div style="text-align:center;"><button onclick="cycleStatus(${i})" style="font-size:9px;padding:3px 7px;border-radius:3px;cursor:pointer;border:none;font-weight:600;letter-spacing:1px;background:${sBg[row.status]};color:${sColors[row.status]}">${sLabels[row.status]}</button></div><div style="text-align:center;"><button onclick="deleteSchedRow(${i})" style="background:none;border:none;color:#223;cursor:pointer;font-size:13px;padding:2px 4px;">✕</button></div>`;
+    div.innerHTML=`<div style="display:flex;flex-direction:column;gap:0;"><button class="move-btn" onclick="moveTask(${i},-1)" ${i===0?'style="opacity:0.2;pointer-events:none;"':''}>▲</button><button class="move-btn" onclick="moveTask(${i},1)" ${i===SCHEDULE.length-1?'style="opacity:0.2;pointer-events:none;"':''}>▼</button></div><span style="font-size:10px;color:#b0a090;text-align:center;">${i+1}</span><input class="sched-input" value="${row.task}" onchange="SCHEDULE[${i}].task=this.value;if(currentView==='gantt')renderGantt();" style="color:${row.status==='done'?'#b0a090':'#2a2018'};text-decoration:${row.status==='done'?'line-through':'none'}"><input class="date-input" value="${row.date}" onchange="SCHEDULE[${i}].date=this.value"><input class="dur-input" value="${row.dur}" onchange="SCHEDULE[${i}].dur=parseInt(this.value)||1;renderSched();if(currentView==='gantt')renderGantt();"><div><input class="pred-input" value="${row.pred}" placeholder="5S+3" style="color:${predColor}" onchange="SCHEDULE[${i}].pred=this.value.trim();renderSched();if(currentView==='gantt')renderGantt();">${row.pred&&effStart!==row.startDay?`<div style="font-size:9px;color:#b0a090;margin-top:1px;">→ day ${effStart}</div>`:''}</div><div style="text-align:center;"><button onclick="cycleStatus(${i})" style="font-size:9px;padding:3px 7px;border-radius:3px;cursor:pointer;border:none;font-weight:600;letter-spacing:1px;background:${sBg[row.status]};color:${sColors[row.status]}">${sLabels[row.status]}</button></div><div style="text-align:center;"><button onclick="deleteSchedRow(${i})" style="background:none;border:none;color:#c0b090;cursor:pointer;font-size:13px;padding:2px 4px;">✕</button></div>`;
     body.appendChild(div);
   });
 }
 function renderGantt(){
   const head=document.getElementById('gantt-head');const body=document.getElementById('gantt-body');const totalDays=computeMaxDay();
-  let headHtml='<tr><th style="min-width:30px;padding:8px 4px;text-align:center;font-size:9px;color:#334;border-bottom:2px solid #1e2830;"></th><th style="min-width:190px;padding:8px 12px;text-align:left;font-size:9px;color:#334;letter-spacing:2px;border-bottom:2px solid #1e2830;">TASK</th>';
+  let headHtml='<tr><th style="min-width:30px;padding:8px 4px;text-align:center;font-size:9px;color:#8a7a60;border-bottom:2px solid #ddd3c0;background:#faf7f2;"></th><th style="min-width:190px;padding:8px 12px;text-align:left;font-size:9px;color:#8a7a60;letter-spacing:2px;border-bottom:2px solid #ddd3c0;background:#faf7f2;">TASK</th>';
   MONTHS.forEach(m=>{headHtml+=`<th class="gantt-header-cell" style="width:${100/MONTHS.length}%;">${m}</th>`;});headHtml+='</tr>';head.innerHTML=headHtml;
   let bodyHtml='';
   SCHEDULE.forEach((row,i)=>{
-    const labelClass=row.status==='done'?'done':row.status==='active'?'active':'';const barColor=row.status==='done'?'#7bc47f':row.status==='active'?'#8B6914':'#1e3a5f';
+    const labelClass=row.status==='done'?'done':row.status==='active'?'active':'';const barColor=row.status==='done'?'#3a7a3f':row.status==='active'?'#8B6914':'#c0d0e0';
     const effStart=effectiveStart(i);const leftPct=(effStart/totalDays)*100;const widthPct=(row.dur/totalDays)*100;
-    const predLabel=parsePred(row.pred)?`<span style="font-size:8px;color:#7ba4c4;margin-left:3px;">←${row.pred}</span>`:'';
-    bodyHtml+=`<tr><td style="padding:4px;border-bottom:1px solid #0e1117;vertical-align:middle;"><div style="display:flex;flex-direction:column;gap:1px;"><button onclick="moveTask(${i},-1)" style="background:none;border:none;color:${i===0?'#1e2830':'#334'};cursor:${i===0?'default':'pointer'};font-size:9px;padding:0;line-height:1;">▲</button><button onclick="moveTask(${i},1)" style="background:none;border:none;color:${i===SCHEDULE.length-1?'#1e2830':'#334'};cursor:${i===SCHEDULE.length-1?'default':'pointer'};font-size:9px;padding:0;line-height:1;">▼</button></div></td><td class="gantt-label ${labelClass}"><span style="color:#334;font-size:9px;margin-right:4px;">${i+1}</span>${row.task}${predLabel}<span style="color:#445;font-size:9px;margin-left:4px;">${row.dur}d</span></td><td colspan="${MONTHS.length}" style="padding:5px 8px;border-bottom:1px solid #0e1117;"><div style="position:relative;height:22px;background:rgba(30,40,48,0.3);border-radius:3px;"><div style="position:absolute;left:${leftPct}%;width:${widthPct}%;height:16px;top:3px;background:${barColor};border-radius:3px;opacity:0.85;min-width:4px;"></div></div></td></tr>`;
+    const predLabel=parsePred(row.pred)?`<span style="font-size:8px;color:#4a6a8a;margin-left:3px;">←${row.pred}</span>`:'';
+    bodyHtml+=`<tr style="background:#fff;"><td style="padding:4px;border-bottom:1px solid #f0e8d8;vertical-align:middle;"><div style="display:flex;flex-direction:column;gap:1px;"><button onclick="moveTask(${i},-1)" style="background:none;border:none;color:${i===0?'#e8e0d0':'#c0b090'};cursor:${i===0?'default':'pointer'};font-size:9px;padding:0;line-height:1;">▲</button><button onclick="moveTask(${i},1)" style="background:none;border:none;color:${i===SCHEDULE.length-1?'#e8e0d0':'#c0b090'};cursor:${i===SCHEDULE.length-1?'default':'pointer'};font-size:9px;padding:0;line-height:1;">▼</button></div></td><td class="gantt-label ${labelClass}"><span style="color:#b0a090;font-size:9px;margin-right:4px;">${i+1}</span>${row.task}${predLabel}<span style="color:#b0a090;font-size:9px;margin-left:4px;">${row.dur}d</span></td><td colspan="${MONTHS.length}" style="padding:5px 8px;border-bottom:1px solid #f0e8d8;"><div style="position:relative;height:22px;background:#f0e8d8;border-radius:3px;"><div style="position:absolute;left:${leftPct}%;width:${widthPct}%;height:16px;top:3px;background:${barColor};border-radius:3px;opacity:0.85;min-width:4px;"></div></div></td></tr>`;
   });body.innerHTML=bodyHtml;
 }
 function setView(v){currentView=v;document.getElementById('sched-list-view').style.display=v==='list'?'block':'none';document.getElementById('sched-gantt-view').style.display=v==='gantt'?'block':'none';document.getElementById('vbtn-list').className='sched-view-btn'+(v==='list'?' active':'');document.getElementById('vbtn-gantt').className='sched-view-btn'+(v==='gantt'?' active':'');if(v==='gantt')renderGantt();}
@@ -655,14 +567,12 @@ function cycleStatus(i){const o=['pending','active','done'];SCHEDULE[i].status=o
 function deleteSchedRow(i){SCHEDULE.splice(i,1);renderSched();if(currentView==='gantt')renderGantt();}
 function addSchedRow(){SCHEDULE.push({task:'New Task',date:'',startDay:200,dur:14,status:'pending',pred:''});renderSched();if(currentView==='gantt')renderGantt();document.getElementById('sched-body').lastChild.querySelectorAll('input')[1].focus();}
 
-// ── NAV ────────────────────────────────────────────────
 function go(p){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById('pg-'+p).classList.add('active');window.scrollTo(0,0);}
 function st(t){document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tab-content').forEach(x=>x.classList.remove('active'));document.getElementById('tb-'+t).classList.add('active');document.getElementById('tc-'+t).classList.add('active');}
 function tp(id){const el=document.getElementById(id);const pb=el.querySelector('.pb');const ar=el.querySelector('.arr');if(pb.style.display==='block'){pb.style.display='none';ar.textContent='▼';}else{pb.style.display='block';ar.textContent='▲';}}
 
-// ── AUTH ───────────────────────────────────────────────
 async function doLogin(){const e=document.getElementById('lem').value,p=document.getElementById('lpw').value,err=document.getElementById('lerr');err.style.display='none';const{error}=await SB.auth.signInWithPassword({email:e,password:p});if(error){err.textContent=error.message;err.style.display='block';}else{renderBudget();renderSched();go('dash');}}
-async function doSignup(){const btn=document.getElementById('signup-btn');btn.disabled=true;btn.textContent='Creating account...';const n=document.getElementById('snm').value,pr=document.getElementById('spr').value;const e=document.getElementById('sem').value,p=document.getElementById('spw').value;const err=document.getElementById('serr');err.style.display='none';const{data,error}=await SB.auth.signUp({email:e,password:p,options:{data:{full_name:n,project_name:pr}}});btn.disabled=false;btn.textContent='Start Free Trial →';if(error){err.textContent=error.message;err.style.display='block';}else{if(data.user)await SB.from('projects').insert({user_id:data.user.id,name:pr||'My Build',status:'active'}).select();if(pr)updateAllJobNames(pr);renderBudget();renderSched();go('dash');}}
+async function doSignup(){const btn=document.getElementById('signup-btn');btn.disabled=true;btn.textContent='Creating account...';const n=document.getElementById('snm').value,pr=document.getElementById('spr').value,e=document.getElementById('sem').value,p=document.getElementById('spw').value;const err=document.getElementById('serr');err.style.display='none';const{data,error}=await SB.auth.signUp({email:e,password:p,options:{data:{full_name:n,project_name:pr}}});btn.disabled=false;btn.textContent='Start Free Trial →';if(error){err.textContent=error.message;err.style.display='block';}else{if(data.user)await SB.from('projects').insert({user_id:data.user.id,name:pr||'My Build',status:'active'}).select();if(pr)updateAllJobNames(pr);renderBudget();renderSched();go('dash');}}
 async function doSignOut(){await SB.auth.signOut();go('land');}
 
 renderBudget();renderSched();
