@@ -9,7 +9,7 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Outfit',sans-serif;background:#0a0d08;color:#e8e0d0;min-height:100vh;}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:#0e1117}::-webkit-scrollbar-thumb{background:#8B6914;border-radius:2px}
-button,input{font-family:'Outfit',sans-serif;}
+button,input,select{font-family:'Outfit',sans-serif;}
 .page{display:none;min-height:100vh;}
 .page.active{display:block;}
 .serif{font-family:'Cormorant Garamond',serif;}
@@ -53,30 +53,44 @@ button,input{font-family:'Outfit',sans-serif;}
 .grand-total td{background:rgba(139,105,20,0.1);font-size:13px;font-weight:700;border-top:2px solid rgba(139,105,20,0.3);padding:14px 12px;}
 .amt-input{background:none;border:none;color:#e8e0d0;font-family:'DM Mono',monospace;font-size:12px;text-align:right;width:90px;padding:2px 4px;border-radius:3px;}
 .amt-input:focus{background:#1a2010;outline:1px solid #8B6914;color:#fff;}
-.toggle-paid{font-size:9px;padding:3px 8px;border-radius:3px;cursor:pointer;border:none;font-family:'Outfit',sans-serif;font-weight:600;letter-spacing:1px;}
+.toggle-paid{font-size:9px;padding:3px 8px;border-radius:3px;cursor:pointer;border:none;font-weight:600;letter-spacing:1px;}
 .is-paid{background:rgba(123,196,127,0.12);color:#7bc47f;}
 .is-pending{background:rgba(30,40,48,0.9);color:#445;}
 /* Schedule */
-.sched-row{display:grid;grid-template-columns:30px 1.6fr 90px 55px 110px 80px 60px;align-items:center;padding:8px 12px;border-bottom:1px solid #0e1117;gap:6px;font-size:12px;}
+.sched-row{display:grid;grid-template-columns:24px 20px 1.6fr 90px 52px 108px 78px 52px;align-items:center;padding:7px 10px;border-bottom:1px solid #0e1117;gap:5px;font-size:12px;}
 .sched-row:hover{background:rgba(139,105,20,0.03);}
-.sched-input{background:none;border:none;color:#aaa;font-family:'Outfit',sans-serif;font-size:12px;width:100%;padding:2px 4px;border-radius:3px;}
+.sched-input{background:none;border:none;color:#aaa;font-size:12px;width:100%;padding:2px 4px;border-radius:3px;}
 .sched-input:focus{background:#1a2010;outline:1px solid #8B6914;color:#fff;}
-.date-input{background:none;border:none;color:#556;font-family:'Outfit',sans-serif;font-size:11px;width:100%;padding:2px 4px;border-radius:3px;text-align:center;}
+.date-input{background:none;border:none;color:#556;font-size:11px;width:100%;padding:2px 4px;border-radius:3px;text-align:center;}
 .date-input:focus{background:#1a2010;outline:1px solid #8B6914;color:#fff;}
 .dur-input{background:none;border:none;color:#8B6914;font-family:'DM Mono',monospace;font-size:11px;width:100%;padding:2px 4px;border-radius:3px;text-align:center;}
 .dur-input:focus{background:#1a2010;outline:1px solid #8B6914;color:#fff;}
 .pred-input{background:none;border:none;color:#7ba4c4;font-family:'DM Mono',monospace;font-size:10px;width:100%;padding:2px 4px;border-radius:3px;text-align:center;}
 .pred-input:focus{background:#0e1a2a;outline:1px solid #7ba4c4;color:#fff;}
+.move-btn{background:none;border:none;color:#334;cursor:pointer;padding:1px 3px;font-size:11px;line-height:1;display:block;width:100%;text-align:center;}
+.move-btn:hover{color:#8B6914;}
 /* Gantt */
 .gantt-wrap{overflow-x:auto;margin-top:8px;}
 .gantt-table{min-width:900px;width:100%;}
-.gantt-label{font-size:11px;color:#aaa;padding:8px 12px;white-space:nowrap;min-width:180px;max-width:220px;overflow:hidden;text-overflow:ellipsis;border-bottom:1px solid #0e1117;vertical-align:middle;}
+.gantt-label{font-size:11px;color:#aaa;padding:6px 10px;white-space:nowrap;min-width:180px;max-width:220px;overflow:hidden;text-overflow:ellipsis;border-bottom:1px solid #0e1117;vertical-align:middle;}
 .gantt-label.done{color:#334;text-decoration:line-through;}
 .gantt-label.active{color:#e8e0d0;}
 .gantt-header-cell{font-size:9px;letter-spacing:2px;color:#334;text-transform:uppercase;text-align:center;padding:8px 2px;border-bottom:2px solid #1e2830;}
 .sched-view-btn{padding:7px 16px;font-size:11px;border-radius:5px;cursor:pointer;border:1px solid #1e2830;background:none;color:#445;font-weight:600;}
 .sched-view-btn.active{background:rgba(139,105,20,0.15);border-color:rgba(139,105,20,0.3);color:#8B6914;}
-.pred-tooltip{font-size:9px;color:#445;margin-top:2px;}
+/* Bids */
+.bid-section{border:1px solid #1e2830;border-radius:8px;margin-bottom:14px;overflow:hidden;}
+.bid-section-header{background:#0e1117;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;}
+.bid-row{display:grid;grid-template-columns:28px 1fr 110px 130px 1fr 36px;align-items:center;padding:8px 14px;border-top:1px solid #0e1117;gap:8px;font-size:12px;transition:background 0.15s;}
+.bid-row.selected{background:rgba(139,105,20,0.08);border-left:3px solid #8B6914;}
+.bid-row:not(.selected){border-left:3px solid transparent;}
+.star-btn{background:none;border:none;cursor:pointer;font-size:16px;padding:0;line-height:1;color:#334;transition:color 0.15s;}
+.star-btn.selected{color:#8B6914;}
+.bid-input{background:none;border:none;color:#aaa;font-size:12px;width:100%;padding:2px 4px;border-radius:3px;}
+.bid-input:focus{background:#1a2010;outline:1px solid #8B6914;color:#fff;}
+.bid-amt-input{background:none;border:none;color:#7bc47f;font-family:'DM Mono',monospace;font-size:12px;width:100%;padding:2px 4px;border-radius:3px;text-align:right;}
+.bid-amt-input:focus{background:#1a2010;outline:1px solid #8B6914;color:#fff;}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:999;display:flex;align-items:center;justify-content:center;}
 </style>
 </head>
 <body>
@@ -94,8 +108,8 @@ button,input{font-family:'Outfit',sans-serif;}
     <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;"><button class="btn btn-gold" style="font-size:14px;padding:14px 36px;" onclick="go('signup')">Start Building Free →</button><button class="btn btn-outline" style="font-size:14px;padding:14px 36px;" onclick="go('login')">Sign In</button></div>
     <div style="margin-top:18px;font-size:12px;color:#334;">No credit card required · Free 14-day trial</div>
   </div>
-  <div style="padding:70px 48px;border-top:1px solid #1a2010;"><div style="max-width:1000px;margin:0 auto;"><div style="text-align:center;margin-bottom:52px;"><div style="font-size:10px;letter-spacing:4px;color:#8B6914;margin-bottom:10px;text-transform:uppercase;">Everything You Need</div><h2 class="serif" style="font-size:38px;font-weight:700;color:#f0ebe0;">Built by a homebuilder.<br>Designed for you.</h2></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;"><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">◈</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">Phase-by-Phase Tracker</div><div style="font-size:12px;color:#445;line-height:1.6;">Follow your build from land prep to certificate of occupancy.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">◎</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">Budget Manager</div><div style="font-size:12px;color:#445;line-height:1.6;">Track every dollar. Edit amounts. Toggle paid/pending instantly.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">▦</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">Gantt Schedule</div><div style="font-size:12px;color:#445;line-height:1.6;">Visual Gantt chart with predecessors, editable tasks and durations.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">❑</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">Document Vault</div><div style="font-size:12px;color:#445;line-height:1.6;">Store permits, contracts, and plans in one place.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">✦</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">AI Plan Takeoff</div><div style="font-size:12px;color:#445;line-height:1.6;">Upload plans and AI generates a material quantity list.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">⌂</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">Build Dashboard</div><div style="font-size:12px;color:#445;line-height:1.6;">Your entire project at a glance.</div></div></div></div></div>
-  <div style="padding:70px 48px;border-top:1px solid #1a2010;"><div style="max-width:520px;margin:0 auto;text-align:center;"><h2 class="serif" style="font-size:38px;font-weight:700;color:#f0ebe0;margin-bottom:40px;">One plan. Everything included.</h2><div class="card" style="padding:44px 36px;border-color:rgba(139,105,20,0.35);"><div style="font-size:11px;letter-spacing:3px;color:#8B6914;margin-bottom:14px;">BUILDER PLAN</div><div style="display:flex;align-items:flex-end;justify-content:center;gap:4px;margin-bottom:6px;"><span class="serif" style="font-size:68px;font-weight:700;color:#f0ebe0;line-height:1;">$197</span><span style="font-size:13px;color:#445;margin-bottom:10px;">/month</span></div><div style="font-size:12px;color:#445;margin-bottom:28px;">Cancel anytime · 14-day free trial</div><div style="display:flex;flex-direction:column;gap:10px;margin-bottom:32px;text-align:left;"><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#aaa;"><span class="gold">✓</span> Full build dashboard & phase tracker</div><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#aaa;"><span class="gold">✓</span> Editable budget with paid/pending toggle</div><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#aaa;"><span class="gold">✓</span> Gantt chart with predecessor scheduling</div><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#aaa;"><span class="gold">✓</span> Document vault — unlimited uploads</div><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#aaa;"><span class="gold">✓</span> AI-powered plan takeoff</div></div><button class="btn btn-gold" style="width:100%;padding:14px;font-size:14px;" onclick="go('signup')">Start Free Trial →</button></div></div></div>
+  <div style="padding:70px 48px;border-top:1px solid #1a2010;"><div style="max-width:1000px;margin:0 auto;"><div style="text-align:center;margin-bottom:52px;"><div style="font-size:10px;letter-spacing:4px;color:#8B6914;margin-bottom:10px;text-transform:uppercase;">Everything You Need</div><h2 class="serif" style="font-size:38px;font-weight:700;color:#f0ebe0;">Built by a homebuilder.<br>Designed for you.</h2></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;"><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">◈</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">Phase-by-Phase Tracker</div><div style="font-size:12px;color:#445;line-height:1.6;">Follow your build from land prep to certificate of occupancy.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">◎</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">Budget Manager</div><div style="font-size:12px;color:#445;line-height:1.6;">Track every dollar. Edit amounts. Toggle paid/pending instantly.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">▦</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">Gantt Schedule</div><div style="font-size:12px;color:#445;line-height:1.6;">Visual Gantt chart with predecessors and drag-to-reorder tasks.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">❑</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">Bid Manager</div><div style="font-size:12px;color:#445;line-height:1.6;">Track bids per line item. Star to select — price flows into budget automatically.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">✦</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">AI Plan Takeoff</div><div style="font-size:12px;color:#445;line-height:1.6;">Upload plans and AI generates a material quantity list.</div></div><div class="card" style="padding:24px 20px;"><div style="font-size:20px;margin-bottom:12px;color:#8B6914;">⌂</div><div style="font-size:14px;font-weight:600;margin-bottom:6px;">Build Dashboard</div><div style="font-size:12px;color:#445;line-height:1.6;">Your entire project at a glance.</div></div></div></div></div>
+  <div style="padding:70px 48px;border-top:1px solid #1a2010;"><div style="max-width:520px;margin:0 auto;text-align:center;"><h2 class="serif" style="font-size:38px;font-weight:700;color:#f0ebe0;margin-bottom:40px;">One plan. Everything included.</h2><div class="card" style="padding:44px 36px;border-color:rgba(139,105,20,0.35);"><div style="font-size:11px;letter-spacing:3px;color:#8B6914;margin-bottom:14px;">BUILDER PLAN</div><div style="display:flex;align-items:flex-end;justify-content:center;gap:4px;margin-bottom:6px;"><span class="serif" style="font-size:68px;font-weight:700;color:#f0ebe0;line-height:1;">$197</span><span style="font-size:13px;color:#445;margin-bottom:10px;">/month</span></div><div style="font-size:12px;color:#445;margin-bottom:28px;">Cancel anytime · 14-day free trial</div><div style="display:flex;flex-direction:column;gap:10px;margin-bottom:32px;text-align:left;"><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#aaa;"><span class="gold">✓</span> Full build dashboard & phase tracker</div><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#aaa;"><span class="gold">✓</span> Editable budget with paid/pending toggle</div><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#aaa;"><span class="gold">✓</span> Gantt chart with predecessor scheduling</div><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#aaa;"><span class="gold">✓</span> Bid manager — star to push price to budget</div><div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#aaa;"><span class="gold">✓</span> AI-powered plan takeoff</div></div><button class="btn btn-gold" style="width:100%;padding:14px;font-size:14px;" onclick="go('signup')">Start Free Trial →</button></div></div></div>
   <footer style="padding:32px 48px;border-top:1px solid #1a2010;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;"><span class="logo" style="font-size:18px;"><span class="gold">Dirt</span>toKeys</span><span style="font-size:11px;color:#223;">© 2026 DirtToKeys. Built for owner-builders.</span></footer>
 </div>
 
@@ -209,29 +223,20 @@ button,input{font-family:'Outfit',sans-serif;}
             <button onclick="addSchedRow()" style="padding:7px 14px;background:rgba(139,105,20,0.15);border:1px solid rgba(139,105,20,0.3);border-radius:5px;color:#8B6914;font-size:11px;cursor:pointer;font-weight:600;">+ Add Task</button>
           </div>
         </div>
-
-        <!-- LIST VIEW -->
         <div id="sched-list-view" class="card" style="overflow:hidden;">
-          <div style="display:grid;grid-template-columns:30px 1.6fr 90px 55px 110px 80px 60px;padding:8px 12px;border-bottom:1px solid #1e2830;font-size:9px;color:#334;letter-spacing:1.5px;text-transform:uppercase;gap:6px;align-items:center;">
-            <span style="text-align:center;">#</span>
-            <span>Task</span>
-            <span style="text-align:center;">Start Date</span>
-            <span style="text-align:center;">Days</span>
-            <span style="text-align:center;">Predecessor<br><span style="font-size:8px;color:#223;letter-spacing:0;">e.g. 5S+3, 4F-2</span></span>
-            <span style="text-align:center;">Status</span>
-            <span style="text-align:center;">Del</span>
+          <div style="display:grid;grid-template-columns:24px 20px 1.6fr 90px 52px 108px 78px 52px;padding:7px 10px;border-bottom:1px solid #1e2830;font-size:9px;color:#334;letter-spacing:1.5px;text-transform:uppercase;gap:5px;align-items:center;">
+            <span></span><span style="text-align:center;">#</span><span>Task</span><span style="text-align:center;">Start</span><span style="text-align:center;">Days</span>
+            <span style="text-align:center;">Predecessor<br><span style="font-size:8px;color:#223;letter-spacing:0;text-transform:none;">5S+3, 4F-2</span></span>
+            <span style="text-align:center;">Status</span><span style="text-align:center;">Del</span>
           </div>
           <div id="sched-body"></div>
         </div>
-
-        <!-- GANTT VIEW -->
         <div id="sched-gantt-view" style="display:none;">
           <div class="card" style="overflow:hidden;"><div class="gantt-wrap"><table class="gantt-table" style="border-collapse:collapse;"><thead id="gantt-head"></thead><tbody id="gantt-body"></tbody></table></div></div>
           <div style="margin-top:12px;display:flex;gap:18px;flex-wrap:wrap;">
             <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#445;"><div style="width:14px;height:8px;background:#7bc47f;border-radius:2px;"></div>Done</div>
             <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#445;"><div style="width:14px;height:8px;background:#8B6914;border-radius:2px;"></div>Active</div>
             <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#445;"><div style="width:14px;height:8px;background:#1e3a5f;border-radius:2px;"></div>Pending</div>
-            <div style="font-size:10px;color:#334;margin-left:8px;">Predecessor offsets shown as dashed lines in Gantt</div>
           </div>
         </div>
       </div>
@@ -239,11 +244,42 @@ button,input{font-family:'Outfit',sans-serif;}
       <!-- DOCUMENTS TAB -->
       <div id="tc-docs" class="tab-content au">
         <div style="margin-bottom:24px;"><div style="font-size:9px;letter-spacing:3px;color:#556;text-transform:uppercase;">Files & Forms</div><div class="serif" style="font-size:36px;font-weight:700;line-height:1;margin-top:4px;">Document Vault</div></div>
-        <div class="card" style="border:2px dashed #1e2830;padding:28px;text-align:center;margin-bottom:20px;cursor:pointer;border-radius:8px;"><div style="font-size:28px;margin-bottom:6px;">↑</div><div style="font-size:13px;color:#556;margin-bottom:4px;">Drop files here or click to upload</div><div style="font-size:11px;color:#223;">Permits, contracts, plans, photos</div></div>
-        <div style="font-size:9px;color:#334;letter-spacing:2px;margin-bottom:7px;">PERMITS ON FILE</div>
-        <div class="card" style="overflow:hidden;margin-bottom:16px;"><div class="srow"><span>✅</span><div style="flex:1;"><div style="font-size:12px;color:#bbb;">Building Permit</div><div style="font-size:10px;color:#223;">Jan 12, 2026</div></div><span class="badge bp">APPROVED</span></div><div class="srow"><span>✅</span><div style="flex:1;"><div style="font-size:12px;color:#bbb;">Electrical Permit</div><div style="font-size:10px;color:#223;">Jan 15, 2026</div></div><span class="badge bp">APPROVED</span></div><div class="srow" style="border-bottom:none;"><span>✅</span><div style="flex:1;"><div style="font-size:12px;color:#bbb;">Plumbing Permit</div><div style="font-size:10px;color:#223;">Jan 15, 2026</div></div><span class="badge bp">APPROVED</span></div></div>
-        <div style="font-size:9px;color:#334;letter-spacing:2px;margin-bottom:7px;">TEMPLATES</div>
-        <div class="card" style="overflow:hidden;"><div class="srow"><span>📄</span><div style="flex:1;font-size:12px;color:#bbb;">Subcontractor Agreement</div><span class="badge bn">TEMPLATE</span></div><div class="srow"><span>📄</span><div style="flex:1;font-size:12px;color:#bbb;">Lien Waiver</div><span class="badge bn">TEMPLATE</span></div><div class="srow" style="border-bottom:none;"><span>📄</span><div style="flex:1;font-size:12px;color:#bbb;">Owner-Builder Affidavit</div><span class="badge bn">TEMPLATE</span></div></div>
+
+        <!-- Doc sub-tabs -->
+        <div style="display:flex;gap:6px;margin-bottom:20px;border-bottom:1px solid #1e2830;padding-bottom:0;">
+          <button id="dtab-general" onclick="setDocTab('general')" style="padding:9px 18px;font-size:11px;font-weight:600;border:none;background:none;color:#8B6914;border-bottom:2px solid #8B6914;cursor:pointer;letter-spacing:1px;">GENERAL</button>
+          <button id="dtab-construction" onclick="setDocTab('construction')" style="padding:9px 18px;font-size:11px;font-weight:600;border:none;background:none;color:#445;border-bottom:2px solid transparent;cursor:pointer;letter-spacing:1px;">CONSTRUCTION DOCS</button>
+          <button id="dtab-bids" onclick="setDocTab('bids')" style="padding:9px 18px;font-size:11px;font-weight:600;border:none;background:none;color:#445;border-bottom:2px solid transparent;cursor:pointer;letter-spacing:1px;">BIDS</button>
+        </div>
+
+        <!-- GENERAL -->
+        <div id="doc-general">
+          <div class="card" style="border:2px dashed #1e2830;padding:28px;text-align:center;margin-bottom:20px;cursor:pointer;border-radius:8px;"><div style="font-size:28px;margin-bottom:6px;">↑</div><div style="font-size:13px;color:#556;margin-bottom:4px;">Drop files here or click to upload</div><div style="font-size:11px;color:#223;">Permits, contracts, plans, photos</div></div>
+          <div style="font-size:9px;color:#334;letter-spacing:2px;margin-bottom:7px;">PERMITS ON FILE</div>
+          <div class="card" style="overflow:hidden;margin-bottom:16px;"><div class="srow"><span>✅</span><div style="flex:1;"><div style="font-size:12px;color:#bbb;">Building Permit</div><div style="font-size:10px;color:#223;">Jan 12, 2026</div></div><span class="badge bp">APPROVED</span></div><div class="srow"><span>✅</span><div style="flex:1;"><div style="font-size:12px;color:#bbb;">Electrical Permit</div><div style="font-size:10px;color:#223;">Jan 15, 2026</div></div><span class="badge bp">APPROVED</span></div><div class="srow" style="border-bottom:none;"><span>✅</span><div style="flex:1;"><div style="font-size:12px;color:#bbb;">Plumbing Permit</div><div style="font-size:10px;color:#223;">Jan 15, 2026</div></div><span class="badge bp">APPROVED</span></div></div>
+          <div style="font-size:9px;color:#334;letter-spacing:2px;margin-bottom:7px;">TEMPLATES</div>
+          <div class="card" style="overflow:hidden;"><div class="srow"><span>📄</span><div style="flex:1;font-size:12px;color:#bbb;">Subcontractor Agreement</div><span class="badge bn">TEMPLATE</span></div><div class="srow"><span>📄</span><div style="flex:1;font-size:12px;color:#bbb;">Lien Waiver</div><span class="badge bn">TEMPLATE</span></div><div class="srow" style="border-bottom:none;"><span>📄</span><div style="flex:1;font-size:12px;color:#bbb;">Owner-Builder Affidavit</div><span class="badge bn">TEMPLATE</span></div></div>
+        </div>
+
+        <!-- CONSTRUCTION DOCS -->
+        <div id="doc-construction" style="display:none;">
+          <div class="card" style="border:2px dashed #1e2830;padding:28px;text-align:center;margin-bottom:20px;cursor:pointer;border-radius:8px;"><div style="font-size:28px;margin-bottom:6px;">↑</div><div style="font-size:13px;color:#556;margin-bottom:4px;">Upload construction documents</div><div style="font-size:11px;color:#223;">Blueprints, structural drawings, civil plans, specs</div></div>
+          <div style="font-size:9px;color:#334;letter-spacing:2px;margin-bottom:7px;">UPLOADED DOCUMENTS</div>
+          <div class="card" style="overflow:hidden;">
+            <div class="srow"><span>📐</span><div style="flex:1;"><div style="font-size:12px;color:#bbb;">Architectural Plans — Full Set</div><div style="font-size:10px;color:#223;">Uploaded Jan 8, 2026 · 42 pages</div></div><span class="badge bp">APPROVED</span></div>
+            <div class="srow"><span>📐</span><div style="flex:1;"><div style="font-size:12px;color:#bbb;">Structural Engineering</div><div style="font-size:10px;color:#223;">Uploaded Jan 10, 2026 · 18 pages</div></div><span class="badge bp">APPROVED</span></div>
+            <div class="srow"><span>📐</span><div style="flex:1;"><div style="font-size:12px;color:#bbb;">Civil / Site Plan</div><div style="font-size:10px;color:#223;">Uploaded Jan 10, 2026 · 6 pages</div></div><span class="badge bp">APPROVED</span></div>
+            <div class="srow" style="border-bottom:none;"><span>📐</span><div style="flex:1;"><div style="font-size:12px;color:#bbb;">MEP Drawings</div><div style="font-size:10px;color:#223;">Uploaded Jan 14, 2026 · 24 pages</div></div><span class="badge bn">PENDING REVIEW</span></div>
+          </div>
+        </div>
+
+        <!-- BIDS -->
+        <div id="doc-bids" style="display:none;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+            <div style="font-size:11px;color:#445;">⭐ Star a bid to select it — price flows into Budget automatically</div>
+          </div>
+          <div id="bids-container"></div>
+        </div>
       </div>
 
       <!-- AI TAB -->
@@ -262,17 +298,64 @@ button,input{font-family:'Outfit',sans-serif;}
 <script>
 const SB=supabase.createClient('https://pnhnncmvmqwubpbmixtt.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBuaG5uY212bXF3dWJwYm1peHR0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MzMxODcsImV4cCI6MjA4ODQwOTE4N30.WVNnLbdAj1Afh12IY4vEvVrpz8gTJz0nu8wW8S9tWi4');
 
+// BUDGET DATA — each item has a bids array for the Bids tab
 const BUDGET=[
-  {phase:'Preliminary',items:[{name:'Plans/Design',amt:21000,paid:true},{name:'Permits/Soft Costs',amt:7790,paid:true}]},
-  {phase:'Preparation',items:[{name:'Sitework',amt:4200,paid:true},{name:'Foundation',amt:121300,paid:true}]},
-  {phase:'Rough Structure',items:[{name:'Steel',amt:0,paid:false},{name:'Framing Material',amt:130260,paid:true},{name:'Framing Labor',amt:40560,paid:true},{name:'Windows & Exterior Doors',amt:35000,paid:false},{name:'Front Door',amt:7000,paid:false},{name:'Garage Doors',amt:5000,paid:false},{name:'Fireplace',amt:7000,paid:false},{name:'Roofing',amt:73440,paid:false},{name:'Masonry',amt:95468.24,paid:false},{name:'Utility Connections',amt:15000,paid:false}]},
-  {phase:'Full Enclosure',items:[{name:'Plumbing',amt:41500,paid:false},{name:'AC',amt:45000,paid:false},{name:'Electrical',amt:37825.40,paid:false},{name:'Security',amt:3000,paid:false},{name:'Insulation',amt:17000,paid:false},{name:'Drywall',amt:13978,paid:false}]},
-  {phase:'Interior Finish',items:[{name:'Interior Trim & Doors',amt:34656,paid:false},{name:'Tape, Float, & Texture',amt:10000,paid:false},{name:'Painting',amt:40560,paid:false},{name:'Cabinets',amt:45000,paid:false},{name:'Countertops',amt:20000,paid:false},{name:'Tile',amt:30000,paid:false},{name:'Shower Doors, Mirrors',amt:5100,paid:false},{name:'Hardware',amt:5000,paid:false},{name:'Appliances',amt:42000,paid:false},{name:'Electrical Fixtures',amt:10000,paid:false},{name:'Flooring',amt:62000,paid:false},{name:'Carpet',amt:0,paid:false}]},
-  {phase:'Completion',items:[{name:'Fencing',amt:0,paid:false},{name:'Flatwork',amt:30000,paid:false},{name:'Landscaping',amt:0,paid:false},{name:'Common Labor and Clean',amt:13880,paid:false}]}
+  {phase:'Preliminary',items:[
+    {name:'Plans/Design',amt:21000,paid:true,bids:[]},
+    {name:'Permits/Soft Costs',amt:7790,paid:true,bids:[]}
+  ]},
+  {phase:'Preparation',items:[
+    {name:'Sitework',amt:4200,paid:true,bids:[]},
+    {name:'Foundation',amt:121300,paid:true,bids:[]}
+  ]},
+  {phase:'Rough Structure',items:[
+    {name:'Steel',amt:0,paid:false,bids:[]},
+    {name:'Framing Material',amt:130260,paid:true,bids:[]},
+    {name:'Framing Labor',amt:40560,paid:true,bids:[]},
+    {name:'Windows & Exterior Doors',amt:35000,paid:false,bids:[
+      {company:'Pella Windows',bidNum:'PW-2026-014',amt:34200,file:null,selected:false},
+      {company:'Andersen Windows',bidNum:'AW-8821',amt:36500,file:null,selected:false}
+    ]},
+    {name:'Front Door',amt:7000,paid:false,bids:[]},
+    {name:'Garage Doors',amt:5000,paid:false,bids:[]},
+    {name:'Fireplace',amt:7000,paid:false,bids:[]},
+    {name:'Roofing',amt:73440,paid:false,bids:[
+      {company:'Texas Roofing Co',bidNum:'TRC-441',amt:71000,file:null,selected:false},
+      {company:'Lone Star Roofing',bidNum:'LSR-2026-88',amt:73440,file:null,selected:true}
+    ]},
+    {name:'Masonry',amt:95468.24,paid:false,bids:[]},
+    {name:'Utility Connections',amt:15000,paid:false,bids:[]}
+  ]},
+  {phase:'Full Enclosure',items:[
+    {name:'Plumbing',amt:41500,paid:false,bids:[]},
+    {name:'AC',amt:45000,paid:false,bids:[]},
+    {name:'Electrical',amt:37825.40,paid:false,bids:[]},
+    {name:'Security',amt:3000,paid:false,bids:[]},
+    {name:'Insulation',amt:17000,paid:false,bids:[]},
+    {name:'Drywall',amt:13978,paid:false,bids:[]}
+  ]},
+  {phase:'Interior Finish',items:[
+    {name:'Interior Trim & Doors',amt:34656,paid:false,bids:[]},
+    {name:'Tape, Float, & Texture',amt:10000,paid:false,bids:[]},
+    {name:'Painting',amt:40560,paid:false,bids:[]},
+    {name:'Cabinets',amt:45000,paid:false,bids:[]},
+    {name:'Countertops',amt:20000,paid:false,bids:[]},
+    {name:'Tile',amt:30000,paid:false,bids:[]},
+    {name:'Shower Doors, Mirrors',amt:5100,paid:false,bids:[]},
+    {name:'Hardware',amt:5000,paid:false,bids:[]},
+    {name:'Appliances',amt:42000,paid:false,bids:[]},
+    {name:'Electrical Fixtures',amt:10000,paid:false,bids:[]},
+    {name:'Flooring',amt:62000,paid:false,bids:[]},
+    {name:'Carpet',amt:0,paid:false,bids:[]}
+  ]},
+  {phase:'Completion',items:[
+    {name:'Fencing',amt:0,paid:false,bids:[]},
+    {name:'Flatwork',amt:30000,paid:false,bids:[]},
+    {name:'Landscaping',amt:0,paid:false,bids:[]},
+    {name:'Common Labor and Clean',amt:13880,paid:false,bids:[]}
+  ]}
 ];
 
-// pred format: "5S+3" = row 5 Start + 3 days, "4F-2" = row 4 Finish - 2 days
-// startDay is the computed/manual start; pred overrides it when set
 const SCHEDULE=[
   {task:'Plans/Design',date:'Jan 2026',startDay:0,dur:14,status:'done',pred:''},
   {task:'Permits/Soft Costs',date:'Jan 2026',startDay:7,dur:21,status:'done',pred:''},
@@ -314,36 +397,28 @@ const SCHEDULE=[
 const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul'];
 let currentView='list';
 
-// Parse predecessor: "5S+3" -> {row:4(0-indexed), type:'S', offset:3}
-// "4F-2" -> {row:3, type:'F', offset:-2}
+// ── PREDECESSOR LOGIC ──────────────────────────────────
 function parsePred(pred){
-  if(!pred||!pred.trim()) return null;
+  if(!pred||!pred.trim())return null;
   const m=pred.trim().match(/^(\d+)([SF])([\+\-]\d+)$/i);
-  if(!m) return null;
-  return {row:parseInt(m[1])-1, type:m[2].toUpperCase(), offset:parseInt(m[3])};
+  if(!m)return null;
+  return{row:parseInt(m[1])-1,type:m[2].toUpperCase(),offset:parseInt(m[3])};
 }
-
-// Compute effective startDay for a row, considering predecessor
-function effectiveStart(i){
+function effectiveStart(i,depth=0){
+  if(depth>20)return SCHEDULE[i].startDay;
   const row=SCHEDULE[i];
   const p=parsePred(row.pred);
-  if(!p || p.row<0 || p.row>=SCHEDULE.length || p.row===i) return row.startDay;
+  if(!p||p.row<0||p.row>=SCHEDULE.length||p.row===i)return row.startDay;
   const ref=SCHEDULE[p.row];
-  const refStart=effectiveStart(p.row); // recursive, handles chains
-  if(p.type==='S') return refStart + p.offset;
-  if(p.type==='F') return refStart + ref.dur + p.offset;
-  return row.startDay;
+  const refStart=effectiveStart(p.row,depth+1);
+  return p.type==='S'?refStart+p.offset:refStart+ref.dur+p.offset;
 }
+function computeMaxDay(){let max=0;SCHEDULE.forEach((_,i)=>{const e=effectiveStart(i)+SCHEDULE[i].dur;if(e>max)max=e;});return Math.max(max,212);}
 
-function computeMaxDay(){
-  let max=0;
-  SCHEDULE.forEach((_,i)=>{const s=effectiveStart(i);const e=s+SCHEDULE[i].dur;if(e>max)max=e;});
-  return Math.max(max,212);
-}
+// ── UTILS ──────────────────────────────────────────────
+function fmt(n){return'$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
 
-function fmt(n){return '$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
-
-// ── BUDGET ──────────────────────────────────────────────
+// ── BUDGET ─────────────────────────────────────────────
 function renderBudget(){
   const tbody=document.getElementById('budget-body');tbody.innerHTML='';
   let gt=0,gp=0;
@@ -353,9 +428,11 @@ function renderBudget(){
     hr.innerHTML=`<td colspan="4">${sec.phase}</td>`;tbody.appendChild(hr);
     sec.items.forEach((item,ii)=>{
       pt+=item.amt;if(item.paid)pp+=item.amt;gt+=item.amt;if(item.paid)gp+=item.amt;
+      const selBid=item.bids.find(b=>b.selected);
+      const bidTag=selBid?`<span style="font-size:9px;color:#8B6914;margin-left:6px;">⭐ ${selBid.company}</span>`:'';
       const tr=document.createElement('tr');tr.className='btr';
       tr.innerHTML=`
-        <td style="color:#aaa;"><input style="background:none;border:none;color:#aaa;font-family:'Outfit',sans-serif;font-size:12px;width:100%;padding:1px 2px;" value="${item.name}" onchange="BUDGET[${si}].items[${ii}].name=this.value"></td>
+        <td style="color:#aaa;"><input style="background:none;border:none;color:#aaa;font-size:12px;width:100%;padding:1px 2px;" value="${item.name}" onchange="BUDGET[${si}].items[${ii}].name=this.value;renderBids();">${bidTag}</td>
         <td><input class="amt-input" value="${item.amt===0?'—':fmt(item.amt)}" onchange="updateAmt(${si},${ii},this.value)" onblur="renderBudget()" style="color:${item.amt===0?'#334':'#e8e0d0'}"></td>
         <td style="text-align:right;"><button class="toggle-paid ${item.paid?'is-paid':'is-pending'}" onclick="togglePaid(${si},${ii})">${item.paid?'PAID':'PENDING'}</button></td>
         <td style="text-align:center;"><button onclick="deleteBudgetItem(${si},${ii})" style="background:none;border:none;color:#223;cursor:pointer;font-size:13px;padding:2px 6px;">✕</button></td>`;
@@ -376,38 +453,116 @@ function renderBudget(){
 }
 function updateAmt(si,ii,val){const n=parseFloat(val.replace(/[$,\s—]/g,''));BUDGET[si].items[ii].amt=isNaN(n)?0:n;}
 function togglePaid(si,ii){BUDGET[si].items[ii].paid=!BUDGET[si].items[ii].paid;renderBudget();}
-function deleteBudgetItem(si,ii){BUDGET[si].items.splice(ii,1);renderBudget();}
+function deleteBudgetItem(si,ii){BUDGET[si].items.splice(ii,1);renderBudget();renderBids();}
 function addBudgetItem(){
-  // Show a small modal to pick phase
   const phases=BUDGET.map((s,i)=>`<option value="${i}">${s.phase}</option>`).join('');
-  const html=`<div id="bmodal" style="position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:999;display:flex;align-items:center;justify-content:center;">
-    <div class="card" style="padding:28px;width:380px;border-radius:10px;">
-      <div class="serif" style="font-size:20px;margin-bottom:16px;">Add Budget Line Item</div>
-      <label class="lbl">Phase</label>
-      <select id="bm-phase" style="width:100%;background:#0e1117;border:1px solid #1e2830;border-radius:6px;padding:9px 12px;font-size:13px;color:#e8e0d0;margin-bottom:12px;">${phases}</select>
-      <label class="lbl">Item Name</label>
-      <input id="bm-name" class="input" placeholder="e.g. Gutters" style="margin-bottom:12px;">
-      <label class="lbl">Amount ($)</label>
-      <input id="bm-amt" class="input" type="number" placeholder="0" style="margin-bottom:16px;">
-      <div style="display:flex;gap:10px;">
-        <button class="btn btn-gold" style="flex:1;padding:10px;" onclick="confirmAddBudget()">Add Item</button>
-        <button onclick="document.getElementById('bmodal').remove()" style="flex:1;padding:10px;background:none;border:1px solid #1e2830;border-radius:6px;color:#445;cursor:pointer;">Cancel</button>
-      </div>
-    </div>
-  </div>`;
-  document.body.insertAdjacentHTML('beforeend',html);
+  document.body.insertAdjacentHTML('beforeend',`<div class="modal-overlay" id="bmodal"><div class="card" style="padding:28px;width:380px;border-radius:10px;"><div class="serif" style="font-size:20px;margin-bottom:16px;">Add Budget Line Item</div><label class="lbl">Phase</label><select id="bm-phase" style="width:100%;background:#0e1117;border:1px solid #1e2830;border-radius:6px;padding:9px 12px;font-size:13px;color:#e8e0d0;margin-bottom:12px;">${phases}</select><label class="lbl">Item Name</label><input id="bm-name" class="input" placeholder="e.g. Gutters" style="margin-bottom:12px;"><label class="lbl">Amount ($)</label><input id="bm-amt" class="input" type="number" placeholder="0" style="margin-bottom:16px;"><div style="display:flex;gap:10px;"><button class="btn btn-gold" style="flex:1;padding:10px;" onclick="confirmAddBudget()">Add Item</button><button onclick="document.getElementById('bmodal').remove()" style="flex:1;padding:10px;background:none;border:1px solid #1e2830;border-radius:6px;color:#445;cursor:pointer;">Cancel</button></div></div></div>`);
   document.getElementById('bm-name').focus();
 }
 function confirmAddBudget(){
   const si=parseInt(document.getElementById('bm-phase').value);
   const name=document.getElementById('bm-name').value||'New Item';
   const amt=parseFloat(document.getElementById('bm-amt').value)||0;
-  BUDGET[si].items.push({name,amt,paid:false});
+  BUDGET[si].items.push({name,amt,paid:false,bids:[]});
   document.getElementById('bmodal').remove();
-  renderBudget();
+  renderBudget();renderBids();
 }
 
-// ── SCHEDULE ─────────────────────────────────────────────
+// ── BIDS ───────────────────────────────────────────────
+function renderBids(){
+  const container=document.getElementById('bids-container');
+  if(!container)return;
+  container.innerHTML='';
+  BUDGET.forEach((sec,si)=>{
+    // Phase header
+    const ph=document.createElement('div');
+    ph.style.cssText='font-size:10px;letter-spacing:3px;color:#8B6914;text-transform:uppercase;padding:14px 0 6px;margin-top:8px;';
+    ph.textContent=sec.phase;
+    container.appendChild(ph);
+    sec.items.forEach((item,ii)=>{
+      const selBid=item.bids.find(b=>b.selected);
+      const section=document.createElement('div');
+      section.className='bid-section';
+      const isOpen=item.bids.length>0;
+      section.innerHTML=`
+        <div class="bid-section-header" onclick="toggleBidSection(this)">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span style="font-size:13px;color:#e8e0d0;font-weight:500;">${item.name}</span>
+            ${selBid?`<span style="font-size:10px;background:rgba(139,105,20,0.15);color:#8B6914;padding:2px 8px;border-radius:3px;">⭐ ${selBid.company} — ${fmt(selBid.amt)}</span>`:'<span style="font-size:10px;color:#334;">No bid selected</span>'}
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span style="font-size:11px;color:#7bc47f;font-family:'DM Mono',monospace;">${fmt(item.amt)}</span>
+            <button onclick="event.stopPropagation();addBid(${si},${ii})" style="padding:4px 10px;background:rgba(139,105,20,0.15);border:1px solid rgba(139,105,20,0.3);border-radius:4px;color:#8B6914;font-size:10px;cursor:pointer;font-weight:600;">+ Add Bid</button>
+            <span style="color:#334;font-size:12px;" class="bid-arr">${isOpen?'▲':'▼'}</span>
+          </div>
+        </div>
+        <div class="bid-rows" style="display:${isOpen?'block':'none'};">
+          ${item.bids.length===0?'<div style="padding:12px 16px;font-size:11px;color:#334;text-align:center;">No bids yet — click + Add Bid to start</div>':''}
+          ${item.bids.map((bid,bi)=>`
+            <div class="bid-row${bid.selected?' selected':''}" id="bidrow-${si}-${ii}-${bi}">
+              <button class="star-btn${bid.selected?' selected':''}" onclick="selectBid(${si},${ii},${bi})" title="Select this bid — pushes price to budget">★</button>
+              <input class="bid-input" value="${bid.company}" placeholder="Company name" onchange="BUDGET[${si}].items[${ii}].bids[${bi}].company=this.value;renderBudget();">
+              <input class="bid-input" value="${bid.bidNum}" placeholder="Bid #" onchange="BUDGET[${si}].items[${ii}].bids[${bi}].bidNum=this.value;" style="color:#556;">
+              <input class="bid-amt-input" value="${bid.amt>0?fmt(bid.amt):''}" placeholder="$0.00" onchange="updateBidAmt(${si},${ii},${bi},this.value);">
+              <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:11px;color:#334;">
+                <input type="file" style="display:none;" onchange="BUDGET[${si}].items[${ii}].bids[${bi}].file=this.files[0]?.name||null;this.parentElement.querySelector('span').textContent=this.files[0]?.name||'Upload PDF';">
+                <span style="padding:3px 8px;background:#0e1117;border:1px solid #1e2830;border-radius:4px;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px;">${bid.file||'Upload PDF'}</span>
+              </label>
+              <button onclick="deleteBid(${si},${ii},${bi})" style="background:none;border:none;color:#223;cursor:pointer;font-size:13px;padding:2px;">✕</button>
+            </div>`).join('')}
+        </div>`;
+      container.appendChild(section);
+    });
+  });
+}
+
+function toggleBidSection(header){
+  const rows=header.nextElementSibling;
+  const arr=header.querySelector('.bid-arr');
+  const open=rows.style.display==='block';
+  rows.style.display=open?'none':'block';
+  arr.textContent=open?'▼':'▲';
+}
+function selectBid(si,ii,bi){
+  // Deselect all bids for this item
+  BUDGET[si].items[ii].bids.forEach(b=>b.selected=false);
+  BUDGET[si].items[ii].bids[bi].selected=true;
+  // Push price to budget
+  BUDGET[si].items[ii].amt=BUDGET[si].items[ii].bids[bi].amt;
+  renderBudget();
+  renderBids();
+}
+function updateBidAmt(si,ii,bi,val){
+  const n=parseFloat(val.replace(/[$,\s]/g,''));
+  BUDGET[si].items[ii].bids[bi].amt=isNaN(n)?0:n;
+  // If this bid is selected, update budget too
+  if(BUDGET[si].items[ii].bids[bi].selected){BUDGET[si].items[ii].amt=BUDGET[si].items[ii].bids[bi].amt;renderBudget();}
+}
+function addBid(si,ii){
+  BUDGET[si].items[ii].bids.push({company:'',bidNum:'',amt:0,file:null,selected:false});
+  renderBids();
+}
+function deleteBid(si,ii,bi){BUDGET[si].items[ii].bids.splice(bi,1);renderBids();renderBudget();}
+
+// ── DOC TABS ───────────────────────────────────────────
+function setDocTab(t){
+  ['general','construction','bids'].forEach(id=>{
+    document.getElementById('doc-'+id).style.display=id===t?'block':'none';
+    const btn=document.getElementById('dtab-'+id);
+    btn.style.color=id===t?'#8B6914':'#445';
+    btn.style.borderBottom=id===t?'2px solid #8B6914':'2px solid transparent';
+  });
+  if(t==='bids')renderBids();
+}
+
+// ── SCHEDULE ───────────────────────────────────────────
+function moveTask(i,dir){
+  const j=i+dir;
+  if(j<0||j>=SCHEDULE.length)return;
+  [SCHEDULE[i],SCHEDULE[j]]=[SCHEDULE[j],SCHEDULE[i]];
+  renderSched();if(currentView==='gantt')renderGantt();
+}
+
 function renderSched(){
   const body=document.getElementById('sched-body');body.innerHTML='';
   const sColors={done:'#7bc47f',active:'#8B6914',pending:'#556'};
@@ -419,15 +574,20 @@ function renderSched(){
     const predColor=row.pred?(predOk?'#7ba4c4':'#e87c5a'):'#223';
     const div=document.createElement('div');div.className='sched-row';
     div.innerHTML=`
+      <div style="display:flex;flex-direction:column;gap:0;">
+        <button class="move-btn" onclick="moveTask(${i},-1)" title="Move up" ${i===0?'style="opacity:0.2;pointer-events:none;"':''}>▲</button>
+        <button class="move-btn" onclick="moveTask(${i},1)" title="Move down" ${i===SCHEDULE.length-1?'style="opacity:0.2;pointer-events:none;"':''}>▼</button>
+      </div>
       <span style="font-size:10px;color:#334;text-align:center;">${i+1}</span>
       <input class="sched-input" value="${row.task}" onchange="SCHEDULE[${i}].task=this.value;if(currentView==='gantt')renderGantt();" style="color:${row.status==='done'?'#334':'#bbb'};text-decoration:${row.status==='done'?'line-through':'none'}">
       <input class="date-input" value="${row.date}" onchange="SCHEDULE[${i}].date=this.value">
       <input class="dur-input" value="${row.dur}" title="Duration in days" onchange="SCHEDULE[${i}].dur=parseInt(this.value)||1;renderSched();if(currentView==='gantt')renderGantt();">
-      <div><input class="pred-input" value="${row.pred}" placeholder="e.g. 5S+3" title="Predecessor: [row#][S/F][+/-days]&#10;S=Start, F=Finish&#10;e.g. 5S+3 = 3 days after start of row 5&#10;e.g. 4F-2 = 2 days before finish of row 4" style="color:${predColor}" onchange="SCHEDULE[${i}].pred=this.value.trim();renderSched();if(currentView==='gantt')renderGantt();">
-      ${row.pred&&effStart!==row.startDay?`<div class="pred-tooltip">→ day ${effStart}</div>`:''}
+      <div>
+        <input class="pred-input" value="${row.pred}" placeholder="5S+3" title="Predecessor format:&#10;5S+3 = 3 days after START of row 5&#10;4F-2 = 2 days before FINISH of row 4" style="color:${predColor}" onchange="SCHEDULE[${i}].pred=this.value.trim();renderSched();if(currentView==='gantt')renderGantt();">
+        ${row.pred&&effStart!==row.startDay?`<div style="font-size:9px;color:#445;margin-top:1px;">→ day ${effStart}</div>`:''}
       </div>
-      <div style="text-align:center;"><button onclick="cycleStatus(${i})" style="font-size:9px;padding:3px 8px;border-radius:3px;cursor:pointer;border:none;font-weight:600;letter-spacing:1px;background:${sBg[row.status]};color:${sColors[row.status]}">${sLabels[row.status]}</button></div>
-      <div style="text-align:center;"><button onclick="deleteSchedRow(${i})" style="background:none;border:none;color:#223;cursor:pointer;font-size:14px;padding:2px 6px;">✕</button></div>`;
+      <div style="text-align:center;"><button onclick="cycleStatus(${i})" style="font-size:9px;padding:3px 7px;border-radius:3px;cursor:pointer;border:none;font-weight:600;letter-spacing:1px;background:${sBg[row.status]};color:${sColors[row.status]}">${sLabels[row.status]}</button></div>
+      <div style="text-align:center;"><button onclick="deleteSchedRow(${i})" style="background:none;border:none;color:#223;cursor:pointer;font-size:13px;padding:2px 4px;">✕</button></div>`;
     body.appendChild(div);
   });
 }
@@ -436,7 +596,7 @@ function renderGantt(){
   const head=document.getElementById('gantt-head');
   const body=document.getElementById('gantt-body');
   const totalDays=computeMaxDay();
-  let headHtml='<tr><th style="min-width:190px;padding:8px 12px;text-align:left;font-size:9px;color:#334;letter-spacing:2px;border-bottom:2px solid #1e2830;">TASK</th>';
+  let headHtml='<tr><th style="min-width:30px;padding:8px 4px;text-align:center;font-size:9px;color:#334;border-bottom:2px solid #1e2830;"></th><th style="min-width:190px;padding:8px 12px;text-align:left;font-size:9px;color:#334;letter-spacing:2px;border-bottom:2px solid #1e2830;">TASK</th>';
   MONTHS.forEach(m=>{headHtml+=`<th class="gantt-header-cell" style="width:${100/MONTHS.length}%;">${m}</th>`;});
   headHtml+='</tr>';head.innerHTML=headHtml;
   let bodyHtml='';
@@ -446,10 +606,14 @@ function renderGantt(){
     const effStart=effectiveStart(i);
     const leftPct=(effStart/totalDays)*100;
     const widthPct=(row.dur/totalDays)*100;
-    // Show predecessor offset as a small label
-    const predParsed=parsePred(row.pred);
-    const predLabel=predParsed?`<span style="font-size:8px;color:#7ba4c4;margin-left:4px;">←${row.pred}</span>`:'';
+    const predLabel=parsePred(row.pred)?`<span style="font-size:8px;color:#7ba4c4;margin-left:3px;">←${row.pred}</span>`:'';
     bodyHtml+=`<tr>
+      <td style="padding:4px;border-bottom:1px solid #0e1117;vertical-align:middle;">
+        <div style="display:flex;flex-direction:column;gap:1px;">
+          <button onclick="moveTask(${i},-1)" style="background:none;border:none;color:${i===0?'#1e2830':'#334'};cursor:${i===0?'default':'pointer'};font-size:9px;padding:0;line-height:1;" title="Move up">▲</button>
+          <button onclick="moveTask(${i},1)" style="background:none;border:none;color:${i===SCHEDULE.length-1?'#1e2830':'#334'};cursor:${i===SCHEDULE.length-1?'default':'pointer'};font-size:9px;padding:0;line-height:1;" title="Move down">▼</button>
+        </div>
+      </td>
       <td class="gantt-label ${labelClass}"><span style="color:#334;font-size:9px;margin-right:4px;">${i+1}</span>${row.task}${predLabel}<span style="color:#445;font-size:9px;margin-left:4px;">${row.dur}d</span></td>
       <td colspan="${MONTHS.length}" style="padding:5px 8px;border-bottom:1px solid #0e1117;">
         <div style="position:relative;height:22px;background:rgba(30,40,48,0.3);border-radius:3px;">
@@ -477,12 +641,12 @@ function addSchedRow(){
   document.getElementById('sched-body').lastChild.querySelectorAll('input')[1].focus();
 }
 
-// ── NAV ──────────────────────────────────────────────────
+// ── NAV ────────────────────────────────────────────────
 function go(p){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById('pg-'+p).classList.add('active');window.scrollTo(0,0);}
 function st(t){document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tab-content').forEach(x=>x.classList.remove('active'));document.getElementById('tb-'+t).classList.add('active');document.getElementById('tc-'+t).classList.add('active');}
 function tp(id){const el=document.getElementById(id);const pb=el.querySelector('.pb');const ar=el.querySelector('.arr');if(pb.style.display==='block'){pb.style.display='none';ar.textContent='▼';}else{pb.style.display='block';ar.textContent='▲';}}
 
-// ── AUTH ─────────────────────────────────────────────────
+// ── AUTH ───────────────────────────────────────────────
 async function doLogin(){const e=document.getElementById('lem').value,p=document.getElementById('lpw').value,err=document.getElementById('lerr');err.style.display='none';const{error}=await SB.auth.signInWithPassword({email:e,password:p});if(error){err.textContent=error.message;err.style.display='block';}else{renderBudget();renderSched();go('dash');}}
 async function doSignup(){const btn=document.getElementById('signup-btn');btn.disabled=true;btn.textContent='Creating account...';const n=document.getElementById('snm').value,pr=document.getElementById('spr').value;const e=document.getElementById('sem').value,p=document.getElementById('spw').value;const err=document.getElementById('serr');err.style.display='none';const{data,error}=await SB.auth.signUp({email:e,password:p,options:{data:{full_name:n,project_name:pr}}});btn.disabled=false;btn.textContent='Start Free Trial →';if(error){err.textContent=error.message;err.style.display='block';}else{if(data.user)await SB.from('projects').insert({user_id:data.user.id,name:pr||'My Build',status:'active'}).select();if(pr)document.getElementById('dpn').textContent=pr;renderBudget();renderSched();go('dash');}}
 async function doSignOut(){await SB.auth.signOut();go('land');}
